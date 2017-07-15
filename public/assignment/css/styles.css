@@ -18,3 +18,22 @@ body {
 .wvs .plus_link {
     color: white;
 }
+
+.wvs .wvs-split-view-left {
+    position: absolute;
+    top: 60px;
+    bottom: 0px;
+    z-index: 1;
+    overflow-y: scroll;
+}
+
+@media (min-width: 1200px) {
+    .wvs .wvs-split-view-right {
+        width: 75%;
+        position: absolute;
+        right: 0px;
+        overflow-y: scroll;
+        top: 60px;
+        bottom: 0px;
+    }
+}
