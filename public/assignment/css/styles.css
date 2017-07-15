@@ -7,12 +7,15 @@ body {
 }
 
 .wvs .navbar-default {
-    background-color: #5061a0;
-    border-color: #262d4c;
+    background-color: #428bca;
+    border-color: #7eacd4;
 }
 
 .wvs .navbar-default .navbar-brand {
     color: white;
+    font-weight: bold;
+    padding: 15px 0;
+    margin-left: 0;
 }
 
 .wvs .plus_link {
@@ -36,4 +39,9 @@ body {
         top: 60px;
         bottom: 0px;
     }
+}
+
+.wvs-nav-icon {
+    padding: 15px 0px;
+    color: white;
 }
