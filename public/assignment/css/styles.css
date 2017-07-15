@@ -1,4 +1,4 @@
-input {
+input, textarea {
     margin-bottom: 5px;
 }
 
@@ -12,5 +12,9 @@ body {
 }
 
 .wvs .navbar-default .navbar-brand {
+    color: white;
+}
+
+.wvs .plus_link {
     color: white;
 }
