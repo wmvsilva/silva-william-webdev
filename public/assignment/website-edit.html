@@ -26,7 +26,7 @@
                     <a href="website-list.html">
                         <span class="visible-xs glyphicon glyphicon-chevron-left pull-left wvs-nav-icon wvs-left-arrow"></span>
                     </a>
-                    <span class="navbar-brand">New Website</span>
+                    <span class="navbar-brand">Edit Website</span>
                     <a href="website-list.html">
                         <span class="pull-right glyphicon glyphicon-ok wvs-nav-icon"></span>
                     </a>
@@ -99,18 +99,23 @@
             </div>
             <div class="col-xs-12 col-sm-9 wvs-split-view-right">
 
-                <label for="name">Name</label>
+                <label for="name">Website Name</label>
                 <input name="name"
+                       value="Blogger"
                        placeholder="Name"
                        class="form-control"
                        id="name" />
 
-                <label for="description">Description</label>
+                <label for="description">Website Description</label>
                 <textarea name="description"
                           rows="5"
                           placeholder="Description"
                           class="form-control"
-                          id="description"></textarea>
+                          id="description">Blogger is a blog-publishing service that allows multi-user blogs with time-stamped entries. It was developed by Pyra Labs, which was bought by Google in 2003. Generally, the blogs are hosted by Google at a subdomain of blogspot.com. Blogs can also be hosted in the registered custom domain of the blogger (like www.example.com). A user can have up to 100 blogs per account.</textarea>
+
+                <a class="btn btn-default btn-danger btn-block"
+                   href="website-list.html"
+                   role="button">Delete</a>
             </div>
         </div>
 
