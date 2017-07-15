@@ -5,3 +5,12 @@ input {
 body {
     padding-top: 60px;
 }
+
+.wvs .navbar-default {
+    background-color: #5061a0;
+    border-color: #262d4c;
+}
+
+.wvs .navbar-default .navbar-brand {
+    color: white;
+}
