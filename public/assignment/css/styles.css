@@ -7,6 +7,10 @@ body {
     padding-bottom: 60px;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 .wvs .navbar-default {
     background-color: #428bca;
     border-color: #7eacd4;
