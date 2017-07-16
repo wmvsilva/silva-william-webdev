@@ -71,20 +71,20 @@ body {
     }
 }
 
-.wvs-pages .navbar-default {
+.wvs-pages .navbar-default, .wvs-widget .navbar-default {
     background-color: #f8f8f8;
     border-color: #f4f4f4;
 }
 
-.wvs-pages .navbar-default .navbar-brand {
+.wvs-pages .navbar-default .navbar-brand, .wvs-widget .navbar-default .navbar-brand {
     color: #555555;
 }
 
-.wvs-pages .wvs-nav-icon {
+.wvs-pages .wvs-nav-icon, .wvs-widget .wvs-nav-icon {
     color: #333;
 }
 
-.wvs-pages .wvs-profile-icon {
+.wvs-pages .wvs-profile-icon, .wvs-widget .wvs-profile-icon {
     color: #428bca;
 }
 
@@ -92,10 +92,36 @@ body {
     border: none;
 }
 
-.wvs-pages .wvs-left-arrow {
+.wvs-pages .wvs-left-arrow, .wvs-widget .wvs-left-arrow {
     margin-right: 15px;
 }
 
 .wvs-pages label {
     font-weight: normal;
+}
+
+.wvs-widget-list-item {
+    position: relative;
+}
+
+.wvs-widget-option {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: white;
+    border-bottom-left-radius: 4px;
+    padding-bottom: 2px;
+    padding-left: 3px;
+}
+
+.wvs-widget-option .wvs-gear {
+    color: #428bca;
+}
+
+.wvs-widget img, .wvs-widget iframe {
+    width: 100%;
+}
+
+.wvs-widget .wvs-play-icon {
+    padding-right: 10px;
 }
