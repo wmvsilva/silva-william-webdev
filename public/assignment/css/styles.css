@@ -95,3 +95,7 @@ body {
 .wvs-pages .wvs-left-arrow {
     margin-right: 15px;
 }
+
+.wvs-pages label {
+    font-weight: normal;
+}
