@@ -70,3 +70,28 @@ body {
         padding-right: 0;
     }
 }
+
+.wvs-pages .navbar-default {
+    background-color: #f8f8f8;
+    border-color: #f4f4f4;
+}
+
+.wvs-pages .navbar-default .navbar-brand {
+    color: #555555;
+}
+
+.wvs-pages .wvs-nav-icon {
+    color: #333;
+}
+
+.wvs-pages .wvs-profile-icon {
+    color: #428bca;
+}
+
+.wvs-pages .list-group-item {
+    border: none;
+}
+
+.wvs-pages .wvs-left-arrow {
+    margin-right: 15px;
+}
