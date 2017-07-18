@@ -57,10 +57,6 @@ a:hover {
     color: white;
 }
 
-.wvs-websites .wvs-left-arrow {
-    margin-right: 15px;
-}
-
 .website-settings-icon {
     color: #428bca;
 }
@@ -96,7 +92,7 @@ a:hover {
     border: none;
 }
 
-.wvs-pages .wvs-left-arrow, .wvs-widget .wvs-left-arrow {
+.wvs-pages .wvs-left-arrow, .wvs-widget .wvs-left-arrow, .wvs-websites .wvs-left-arrow {
     margin-right: 15px;
 }
 
