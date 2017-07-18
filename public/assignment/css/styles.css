@@ -41,7 +41,7 @@ a:hover {
     padding-bottom: 60px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
     .wvs .wvs-split-view-right {
         width: 75%;
         position: absolute;
@@ -128,4 +128,8 @@ a:hover {
 
 .wvs-widget .wvs-play-icon {
     padding-right: 10px;
+}
+
+.black {
+    color: black;
 }
