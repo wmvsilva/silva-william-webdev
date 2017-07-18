@@ -1,10 +1,10 @@
-input, textarea {
-    margin-bottom: 5px;
-}
-
 body {
     padding-top: 60px;
     padding-bottom: 60px;
+}
+
+input, textarea {
+    margin-bottom: 5px;
 }
 
 a:hover {
@@ -23,15 +23,28 @@ a:hover {
     margin-left: 0;
 }
 
-.wvs .plus_link {
+.wvs-plus-link {
     color: white;
 }
 
-.wvs .wvs-split-view-left {
+.wvs-nav-icon {
+    padding: 15px 0;
+    color: white;
+}
+
+.wvs-settings-icon {
+    color: #428bca;
+}
+
+.wvs-black {
+    color: black;
+}
+
+.wvs-split-view-left {
     position: absolute;
     top: 50px;
     padding-top: 10px;
-    bottom: 0px;
+    bottom: 0;
     z-index: 1;
     overflow-y: scroll;
     border-right: #7eacd4 1px solid;
@@ -42,30 +55,21 @@ a:hover {
 }
 
 @media (min-width: 992px) {
-    .wvs .wvs-split-view-right {
+    .wvs-split-view-right {
         width: 75%;
         position: absolute;
-        right: 0px;
+        right: 0;
         overflow-y: scroll;
         top: 60px;
-        bottom: 0px;
+        bottom: 0;
     }
-}
-
-.wvs-nav-icon {
-    padding: 15px 0px;
-    color: white;
-}
-
-.website-settings-icon {
-    color: #428bca;
 }
 
 .wvs-websites .list-group-item {
     border: none;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 992px) {
     .wvs-websites .list-group-item .col-xs-2 {
         padding-right: 0;
     }
@@ -124,8 +128,4 @@ a:hover {
 
 .wvs-widget .wvs-play-icon {
     padding-right: 10px;
-}
-
-.black {
-    color: black;
 }
