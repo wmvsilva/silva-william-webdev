@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>Edit Website</title>
+    <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="wvs wvs-websites">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-3 hidden-xs hidden-sm">
+                    <a href="website-list.html">
+                        <span class="glyphicon glyphicon-chevron-left pull-left wvs-nav-icon wvs-left-arrow"></span>
+                    </a>
+                    <span class="navbar-brand">Websites</span>
+                    <a href="website-new.html">
+                        <span class="glyphicon glyphicon-plus wvs-nav-icon pull-right"></span>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-md-9">
+                    <a href="website-list.html">
+                        <span class="visible-xs visible-sm glyphicon glyphicon-chevron-left pull-left wvs-nav-icon wvs-left-arrow"></span>
+                    </a>
+                    <span class="navbar-brand">Edit Website</span>
+                    <a href="website-list.html">
+                        <span class="glyphicon glyphicon-ok wvs-nav-icon pull-right"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-xs-3 hidden-xs hidden-sm wvs-split-view-left">
+
+                <ul class="list-group">
+
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <a href="page-list.html">Address Book App</a>
+                            </div>
+                            <div class="col-xs-2">
+                                <a href="website-edit.html" class="wvs-plus-link">
+                                    <span class="glyphicon glyphicon-cog pull-right wvs-settings-icon"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <a href="page-list.html">Blogger</a>
+                            </div>
+                            <div class="col-xs-2">
+                                <a href="website-edit.html" class="wvs-plus-link">
+                                    <span class="glyphicon glyphicon-cog pull-right wvs-settings-icon"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <a href="page-list.html">Blogging App</a>
+                            </div>
+                            <div class="col-xs-2">
+                                <a href="website-edit.html" class="wvs-plus-link">
+                                    <span class="glyphicon glyphicon-cog pull-right wvs-settings-icon"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <a href="page-list.html">Script Testing App</a>
+                            </div>
+                            <div class="col-xs-2">
+                                <a href="website-edit.html" class="wvs-plus-link">
+                                    <span class="glyphicon glyphicon-cog pull-right wvs-settings-icon"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-xs-12 col-md-9 wvs-split-view-right">
+                <label for="name">Website Name</label>
+                <input name="name"
+                       value="Blogger"
+                       placeholder="Name"
+                       type="text"
+                       class="form-control"
+                       id="name"/>
+
+                <label for="description">Website Description</label>
+                <textarea name="description"
+                          rows="5"
+                          placeholder="Description"
+                          class="form-control"
+                          id="description">Blogger is a blog-publishing service that allows multi-user blogs with time-stamped entries. It was developed by Pyra Labs, which was bought by Google in 2003. Generally, the blogs are hosted by Google at a subdomain of blogspot.com. Blogs can also be hosted in the registered custom domain of the blogger (like www.example.com). A user can have up to 100 blogs per account.</textarea>
+
+                <a class="btn btn-default btn-danger btn-block"
+                   href="website-list.html"
+                   role="button">Delete</a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <a href="profile.html">
+                <span class="pull-right glyphicon glyphicon-user wvs-nav-icon"></span>
+            </a>
+        </div>
+    </nav>
+
+</div>
+</body>
+</html>
