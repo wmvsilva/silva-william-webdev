@@ -13,24 +13,30 @@
 <div class="container-fluid">
 
     <div ng-controller="loginController">
-        
+
+        <div ng-show="welcomeUser" class="alert alert-info">
+            Welcome back {{welcomeUser.username}}
+        </div>
+
         <h2>Login</h2>
 
         <input name="username"
-               ng-model="username"
+               ng-model="user.username"
                placeholder="username"
                type="text"
                class="form-control"
                id="username"/>
 
         <input name="password"
+               ng-model="user.password"
                placeholder="password"
                type="password"
                class="form-control"
                id="password"/>
 
         <a class="btn btn-default btn-primary btn-block"
-           href="profile.html"
+
+           ng-click="login(user)"
            role="button">Login</a>
 
         <a class="btn btn-default btn-success btn-block"
