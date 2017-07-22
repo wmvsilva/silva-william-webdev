@@ -6,6 +6,10 @@
             Welcome back {{welcomeUser.username}}
         </div>
 
+        <div ng-show="errorMessage" class="alert alert-danger">
+            {{errorMessage}}
+        </div>
+
         <h2>Login</h2>
 
         <input name="username"
@@ -23,7 +27,6 @@
                id="password"/>
 
         <a class="btn btn-default btn-primary btn-block"
-
            ng-click="login(user)"
            role="button">Login</a>
 
