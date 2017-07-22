@@ -7,13 +7,13 @@
     function configuration($routeProvider) {
         $routeProvider
             .when("/login", {
-                templateUrl: "user/templates/login.html"
+                templateUrl: "user/templates/login.view.client.html"
             })
             .when("/register", {
-                templateUrl: "user/templates/register.html"
+                templateUrl: "user/templates/register.view.client.html"
             })
             .when("/profile/:userId", {
-                templateUrl: "user/templates/profile.html"
+                templateUrl: "user/templates/profile.view.client.html"
             });
     }
 })();
