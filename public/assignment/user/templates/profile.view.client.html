@@ -1,4 +1,4 @@
-<div class="wvs wvs-profile" ng-controller="profileController">
+<div class="wvs wvs-profile">
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <span class="navbar-brand">Profile</span>
@@ -12,7 +12,7 @@
 
         <label for="username">Username</label>
         <input name="username"
-               ng-model="user.username"
+               ng-model="model.user.username"
                placeholder="username"
                type="text"
                class="form-control"
@@ -28,7 +28,7 @@
 
         <label for="firstName">First Name</label>
         <input name="firstName"
-               ng-model="user.firstName"
+               ng-model="model.user.firstName"
                placeholder="Alice"
                type="text"
                class="form-control"
@@ -36,26 +36,26 @@
 
         <label for="lastName">Last Name</label>
         <input name="lastName"
-               ng-model="user.lastName"
+               ng-model="model.user.lastName"
                placeholder="Wonderland"
                type="text"
                class="form-control"
                id="lastName"/>
 
         <a class="btn btn-default btn-primary btn-block"
-           href="website-list.html"
+           href="#"
            role="button">Websites</a>
 
         <a class="btn btn-default btn-danger btn-block"
-           href="login.html"
+           href="#!/login"
            role="button">Logout</a>
 
         <a class="btn btn-default btn-danger btn-block"
-           ng-click="unregister()"
+           ng-click="model.unregister()"
            role="button">Unregister</a>
 
         <a class="btn btn-default btn-primary btn-block"
-           ng-click="updateUser()"
+           ng-click="model.updateUser()"
            role="button">Update</a>
     </div>
 
