@@ -1,6 +1,21 @@
-var app = angular.module("WamApp", []);
+var app = angular.module("WamApp", ["ngRoute"]);
 
 app.controller("loginController", loginController);
+
+app.config(configuration);
+
+function configuration($routeProvider) {
+    $routeProvider
+        .when("/login", {
+            templateUrl: "login.html"
+        })
+        .when("/register", {
+            templateUrl: "register.html"
+        })
+        .when("/profile", {
+            templateUrl: "profile.html"
+        });
+}
 
 function loginController($scope) {
     // JSON = JavaScript Object Notation
