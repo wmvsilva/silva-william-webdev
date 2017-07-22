@@ -20,6 +20,10 @@
                 templateUrl: "user/templates/profile.view.client.html",
                 controller: "profileController",
                 controllerAs: "model"
+            })
+        // website routes
+            .when("/user/:userId/website", {
+                templateUrl: "website/templates/website-list.html"
             });
     }
 })();
