@@ -3,21 +3,7 @@
     angular
         .module("WamApp")
         .controller("loginController", loginController)
-        .controller("profileController", profileController)
-        .config(configuration);
-
-    function configuration($routeProvider) {
-        $routeProvider
-            .when("/login", {
-                templateUrl: "login.html"
-            })
-            .when("/register", {
-                templateUrl: "register.html"
-            })
-            .when("/profile/:userId", {
-                templateUrl: "profile.html"
-            });
-    }
+        .controller("profileController", profileController);
 
     var users = [
         {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder"},
