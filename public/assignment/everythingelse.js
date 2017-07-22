@@ -1,10 +1,10 @@
 (function() {
-    var app = angular.module("WamApp");
 
-    app.controller("loginController", loginController);
-    app.controller("profileController", profileController);
-
-    app.config(configuration);
+    angular
+        .module("WamApp")
+        .controller("loginController", loginController)
+        .controller("profileController", profileController)
+        .config(configuration);
 
     function configuration($routeProvider) {
         $routeProvider
