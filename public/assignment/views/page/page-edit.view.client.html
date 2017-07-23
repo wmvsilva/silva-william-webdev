@@ -1,11 +1,11 @@
 <div class="wvs wvs-pages">
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
-            <a href="#!/user/123/website/123/page">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page">
                 <span class="glyphicon glyphicon-chevron-left pull-left wvs-nav-icon wvs-left-arrow"></span>
             </a>
             <span class="navbar-brand">Edit Page</span>
-            <a href="#!/user/123/website/123/page">
+            <a ng-click="model.updatePage(model.pageId, model.page)">
                 <span class="glyphicon glyphicon-ok pull-right wvs-nav-icon"></span>
             </a>
         </div>
@@ -13,8 +13,13 @@
 
     <div class="container-fluid">
 
+        <div ng-show="model.error" class="alert alert-danger">
+            {{model.error}}
+        </div>
+
         <label for="name">Name</label>
         <input name="name"
+               ng-model="model.page.name"
                placeholder="Page Name"
                type="text"
                value="Blog Post"
@@ -23,19 +28,20 @@
 
         <label for="title">Title</label>
         <input name="title"
+               ng-model="model.page.title"
                placeholder="Page Title"
                type="text"
                class="form-control"
                id="title"/>
 
         <a class="btn btn-default btn-danger btn-block"
-           href="#!/user/123/website/123/page"
+           ng-click="model.deletePage(model.pageId)"
            role="button">Delete</a>
     </div>
 
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container-fluid">
-            <a href="#!/user/123">
+            <a href="#!/user/{{model.userId}}">
                 <span class="glyphicon glyphicon-user pull-right wvs-nav-icon wvs-profile-icon"></span>
             </a>
         </div>
