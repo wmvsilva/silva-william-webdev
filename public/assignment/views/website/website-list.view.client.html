@@ -18,10 +18,10 @@
             <li ng-repeat="website in model.websites" class="list-group-item">
                 <div class="row">
                     <div class="col-xs-10">
-                        <a href="page-list.html">{{website.name}}</a>
+                        <a href="#!/user/{{model.userId}}/website/{{website._id}}/page">{{website.name}}</a>
                     </div>
                     <div class="col-xs-2">
-                        <a href="website-edit.html" class="wvs-plus-link">
+                        <a href="#!/user/{{model.userId}}/website/{{website._id}}" class="wvs-plus-link">
                             <span class="glyphicon glyphicon-cog pull-right wvs-settings-icon"></span>
                         </a>
                     </div>
