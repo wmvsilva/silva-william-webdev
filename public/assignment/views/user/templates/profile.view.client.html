@@ -2,13 +2,21 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <span class="navbar-brand">Profile</span>
-            <a href="profile.html">
-                <span class="glyphicon glyphicon-ok pull-right wvs-nav-icon"></span>
+            <a ng-click="model.updateUser(model.user._id, model.user)">
+                <span ng-click="model.updateUser(model.user._id, model.user)" class="glyphicon glyphicon-ok pull-right wvs-nav-icon"></span>
             </a>
         </div>
     </nav>
 
     <div class="container-fluid">
+
+        <div ng-show="model.updateMessage" class="alert alert-info">
+            {{model.updateMessage }}
+        </div>
+
+        <div ng-show="model.error" class="alert alert-danger">
+            {{model.error }}
+        </div>
 
         <label for="username">Username</label>
         <input name="username"
@@ -17,14 +25,6 @@
                type="text"
                class="form-control"
                id="username"/>
-
-        <label for="email">Email</label>
-        <input name="email"
-               type="email"
-               value="jannunzi@gmail.com"
-               placeholder="alice@wonderland.com"
-               class="form-control"
-               id="email"/>
 
         <label for="firstName">First Name</label>
         <input name="firstName"
@@ -49,19 +49,11 @@
         <a class="btn btn-default btn-danger btn-block"
            href="#!/login"
            role="button">Logout</a>
-
-        <a class="btn btn-default btn-danger btn-block"
-           ng-click="model.unregister()"
-           role="button">Unregister</a>
-
-        <a class="btn btn-default btn-primary btn-block"
-           ng-click="model.updateUser()"
-           role="button">Update</a>
     </div>
 
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container-fluid">
-            <a href="profile.html">
+            <a href="#!/user/{{model.user._id}}">
                 <span class="pull-right glyphicon glyphicon-user wvs-nav-icon"></span>
             </a>
         </div>

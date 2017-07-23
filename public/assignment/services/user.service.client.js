@@ -13,11 +13,12 @@
         ];
 
         var api = {
-            "findUserByUsername": findUserByUsername,
-            "findUserByUsernameAndPassword": findUserByUsernameAndPassword,
+            "createUser": createUser,
             "findUserById": findUserById,
-            "registerUser": registerUser,
-            "updateUser": updateUser
+            "findUserByUsername": findUserByUsername,
+            "findUserByCredentials": findUserByCredentials,
+            "updateUser": updateUser,
+            "deleteUser": deleteUser
         };
         return api;
 

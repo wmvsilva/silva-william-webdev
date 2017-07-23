@@ -2,26 +2,29 @@
 
     angular
         .module("WebAppMaker")
-        .controller("profileController", profileController);
+        .controller("ProfileController", ProfileController);
 
-    function profileController($routeParams, userService) {
+    function ProfileController($location, $routeParams, UserService) {
         var model = this;
-        var userId = $routeParams["userId"];
+        var userId = $routeParams["uid"];
 
         model.updateUser = updateUser;
-        model.unregister = unregister;
 
         function init() {
-            model.user = userService.findUserById(userId);
+            model.user = jQuery.extend(true, {}, UserService.findUserById(userId));
         }
         init();
 
-        function updateUser(user) {
-            userService.updateUser(user._id, user);
-        }
-
-        function unregister() {
-
+        function updateUser(userId, user) {
+            model.error = null;
+            model.updateMessage = null;
+            var foundUser = UserService.findUserByUsername(user.username);
+            if (foundUser && foundUser._id !== user._id) {
+                model.error = "User with that username already exists";
+                return;
+            }
+            UserService.updateUser(userId, jQuery.extend(true, {}, user));
+            model.updateMessage = "User was updated";
         }
     }
 })();
