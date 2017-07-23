@@ -1,7 +1,7 @@
 (function() {
 
     angular
-        .module("WamApp")
+        .module("WebAppMaker")
         .controller("profileController", profileController);
 
     function profileController($routeParams, userService) {

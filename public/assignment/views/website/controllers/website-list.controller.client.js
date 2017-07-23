@@ -1,6 +1,6 @@
 (function() {
     angular
-        .module("WamApp")
+        .module("WebAppMaker")
         .controller("websiteListController", websiteListController);
 
     function websiteListController($routeParams, websiteService) {

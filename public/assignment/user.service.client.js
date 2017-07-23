@@ -1,6 +1,6 @@
 (function() {
     angular
-        .module("WamApp")
+        .module("WebAppMaker")
         .factory("userService", userService);
 
     function userService() {

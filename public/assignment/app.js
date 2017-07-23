@@ -1,4 +1,4 @@
 (function() {
     angular
-        .module("WamApp", ["ngRoute"]);
+        .module("WebAppMaker", []);
 })();

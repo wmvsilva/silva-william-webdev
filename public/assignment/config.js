@@ -1,7 +1,7 @@
 (function() {
 
     angular
-        .module("WamApp")
+        .module("WebAppMaker")
         .config(configuration);
 
     function configuration($routeProvider) {

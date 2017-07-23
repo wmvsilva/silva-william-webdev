@@ -1,7 +1,7 @@
 (function() {
 
     angular
-        .module("WamApp")
+        .module("WebAppMaker")
         .controller("loginController", loginController);
 
     function loginController($location, userService) {

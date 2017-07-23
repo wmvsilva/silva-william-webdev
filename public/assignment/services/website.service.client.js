@@ -1,6 +1,6 @@
 (function() {
     angular
-        .module("WamApp")
+        .module("WebAppMaker")
         .service("websiteService", websiteService);
 
     function websiteService() {
