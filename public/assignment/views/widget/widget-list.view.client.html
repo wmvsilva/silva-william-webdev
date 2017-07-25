@@ -1,98 +1,34 @@
 <div class="wvs wvs-widget">
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
-            <a href="page-list.html">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page">
                 <span class="glyphicon glyphicon-chevron-left pull-left wvs-nav-icon wvs-left-arrow"></span>
             </a>
             <span class="navbar-brand">Widgets</span>
-            <a href="widget-choose.html">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
                 <span class="glyphicon glyphicon-plus pull-right wvs-nav-icon"></span>
             </a>
         </div>
     </nav>
 
     <div class="container-fluid">
-        <div class="wvs-widget-list-item">
-            <h1>GIZMODO</h1>
-            <div class="wvs-widget-option">
-                <a href="widget-heading.html">
-                    <span class="glyphicon glyphicon-cog wvs-gear"></span>
-                </a>
-                <a href="#">
-                    <span class="glyphicon glyphicon-align-justify wvs-black"></span>
-                </a>
+        <div ng-repeat="widget in model.widgets" class="wvs-widget-list-item">
+            <div ng-switch="widget.widgetType">
+                <div ng-switch-when="HEADING">
+                    <div ng-include src="'views/widget/widget-heading.view.client.html'"></div>
+                </div>
+                <div ng-switch-when="IMAGE">
+                    <div ng-include src="'views/widget/widget-image.view.client.html'"></div>
+                </div>
+                <div ng-switch-when="YOUTUBE">
+                    <div ng-include src="'views/widget/widget-youtube.view.client.html'"></div>
+                </div>
+                <div ng-switch-when="HTML">
+                    <div ng-bind-html=model.trustAsHtml(widget.text)></div>
+                </div>
             </div>
-        </div>
-
-        <div class="wvs-widget-list-item">
-            <h4>US Senate Reaches Compromise on Emergency Zika Funding</h4>
             <div class="wvs-widget-option">
-                <a href="widget-heading.html">
-                    <span class="glyphicon glyphicon-cog wvs-gear"></span>
-                </a>
-                <a href="#">
-                    <span class="glyphicon glyphicon-align-justify wvs-black"></span>
-                </a>
-            </div>
-        </div>
-
-        <div class="wvs-widget-list-item">
-            <img src="img/zika.png"/>
-            <div class="wvs-widget-option">
-                <a href="widget-image.html">
-                    <span class="glyphicon glyphicon-cog wvs-gear"></span>
-                </a>
-                <a href="#">
-                    <span class="glyphicon glyphicon-align-justify wvs-black"></span>
-                </a>
-            </div>
-        </div>
-
-        <div class="wvs-widget-list-item">
-            In February, the <a href="http://gizmodo.com/white-house-wants-1-8-billion-to-fight-zika-1757772335">White
-            House formally asked Congress for $1.8 billion</a> dollars to help combat the Zika virus this summer. Now,
-            the Senate has worked out a bipartisan deal will allocate $1.1 billion in emergency funding.
-            <div class="wvs-widget-option">
-                <a href="#">
-                    <span class="glyphicon glyphicon-cog wvs-gear"></span>
-                </a>
-                <a href="#">
-                    <span class="glyphicon glyphicon-align-justify wvs-black"></span>
-                </a>
-            </div>
-        </div>
-
-        <div class="wvs-widget-list-item">
-            <h4>Man in Wingsuit Flies Straight Through a Ring of Fire</h4>
-            <div class="wvs-widget-option">
-                <a href="widget-heading.html">
-                    <span class="glyphicon glyphicon-cog wvs-gear"></span>
-                </a>
-                <a href="#">
-                    <span class="glyphicon glyphicon-align-justify wvs-black"></span>
-                </a>
-            </div>
-        </div>
-
-        <div class="wvs-widget-list-item">
-            <iframe src="https://www.youtube.com/embed/uLWLashCXHE" frameborder="0" allowfullscreen></iframe>
-            <div class="wvs-widget-option">
-                <a href="widget-youtube.html">
-                    <span class="glyphicon glyphicon-cog wvs-gear"></span>
-                </a>
-                <a href="#">
-                    <span class="glyphicon glyphicon-align-justify wvs-black"></span>
-                </a>
-            </div>
-        </div>
-
-        <div class="wvs-widget-list-item">
-            Flying in a wingsuit? That’s just not enough anymore. Anyone could do that (I would never do that). You have
-            to make it more extreme, like by hitting a target while you’re cutting through the air at crazy speeds. Or
-            by making that target a small ring that you have to somehow fly through. Or by lighting that ring on fire.
-            Or by... actually, that should be extreme enough for now.
-            <div class="wvs-widget-option">
-                <a href="#">
+                <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                     <span class="glyphicon glyphicon-cog wvs-gear"></span>
                 </a>
                 <a href="#">
@@ -111,7 +47,7 @@
             <a href="#">
                 <span class="glyphicon glyphicon glyphicon-eye-open wvs-black"></span>
             </a>
-            <a href="profile.html">
+            <a href="#!/user/{{model.userId}}">
                 <span class="glyphicon glyphicon-user pull-right wvs-nav-icon wvs-profile-icon"></span>
             </a>
         </div>

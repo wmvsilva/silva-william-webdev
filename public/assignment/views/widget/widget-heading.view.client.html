@@ -1,52 +1,8 @@
-<div class="wvs wvs-pages">
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <a href="widget-list.html">
-                <span class="glyphicon glyphicon-chevron-left pull-left wvs-nav-icon wvs-left-arrow"></span>
-            </a>
-            <span class="navbar-brand">Widget Edit</span>
-            <a href="widget-list.html">
-                <span class="glyphicon glyphicon-ok pull-right wvs-nav-icon"></span>
-            </a>
-        </div>
-    </nav>
-
-    <div class="container-fluid">
-
-        <label for="name">Name</label>
-        <input name="name"
-               placeholder="Header Name"
-               type="text"
-               class="form-control"
-               id="name"/>
-
-        <label for="text">Text</label>
-        <input name="text"
-               placeholder="Header Text"
-               type="text"
-               value="US Senate Reaches Compromise on Emergency Zika Funding"
-               class="form-control"
-               id="text"/>
-
-        <label for="size">Size</label>
-        <input name="size"
-               type="number"
-               placeholder="Header Size"
-               value="3"
-               class="form-control"
-               id="size"/>
-
-        <a class="btn btn-default btn-danger btn-block"
-           href="widget-list.html"
-           role="button">Delete</a>
-    </div>
-
-    <nav class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container-fluid">
-            <a href="profile.html">
-                <span class="glyphicon glyphicon-user pull-right wvs-nav-icon wvs-profile-icon"></span>
-            </a>
-        </div>
-    </nav>
-
+<div ng-switch="widget.size">
+    <h1 ng-switch-when="1">{{widget.text}}</h1>
+    <h2 ng-switch-when="2">{{widget.text}}</h2>
+    <h3 ng-switch-when="3">{{widget.text}}</h3>
+    <h4 ng-switch-when="4">{{widget.text}}</h4>
+    <h5 ng-switch-when="5">{{widget.text}}</h5>
+    <h6 ng-switch-when="6">{{widget.text}}</h6>
 </div>

@@ -1,0 +1,61 @@
+<div class="wvs wvs-pages">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+                <span class="glyphicon glyphicon-chevron-left pull-left wvs-nav-icon wvs-left-arrow"></span>
+            </a>
+            <span class="navbar-brand">Widget Edit</span>
+            <a ng-click="model.updateWidget(model.widgetId, model.widget)">
+                <span class="pull-right glyphicon glyphicon-ok wvs-nav-icon"></span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+
+        <label for="name">Name</label>
+        <input name="name"
+               ng-model="model.widget.name"
+               placeholder="YouTube Name"
+               type="text"
+               class="form-control"
+               id="name"/>
+
+        <label for="text">Text</label>
+        <input name="text"
+               ng-model="model.widget.text"
+               placeholder="YouTube Text"
+               type="text"
+               class="form-control"
+               id="text"/>
+
+        <label for="url">URL</label>
+        <input name="url"
+               ng-model="model.widget.url"
+               placeholder="Youtube URL"
+               type="url"
+               class="form-control"
+               id="url"/>
+
+        <label for="width">Width</label>
+        <input name="width"
+               ng-model="model.widget.width"
+               placeholder="YouTube Width"
+               type="text"
+               class="form-control"
+               id="width"/>
+
+        <a class="btn btn-default btn-danger btn-block"
+           ng-click="model.deleteWidget(model.widgetId)"
+           role="button">Delete</a>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <a href="#!/user/{{model.userId}}">
+                <span class="glyphicon glyphicon-user pull-right wvs-nav-icon wvs-profile-icon"></span>
+            </a>
+        </div>
+    </nav>
+
+</div>

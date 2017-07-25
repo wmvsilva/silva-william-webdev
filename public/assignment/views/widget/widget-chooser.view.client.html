@@ -1,7 +1,7 @@
 <div class="wvs wvs-pages">
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
-            <a href="widget-list.html">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                 <span class="glyphicon glyphicon-chevron-left pull-left wvs-nav-icon wvs-left-arrow"></span>
             </a>
             <span class="navbar-brand">Choose Widget</span>
@@ -12,7 +12,7 @@
         <ul class="list-group">
 
             <li class="list-group-item">
-                <a href="widget-heading.html">Header</a>
+                <a ng-click="model.createWidget(model.pageId, 'HEADING')">Header</a>
             </li>
 
             <li class="list-group-item">
@@ -36,11 +36,11 @@
             </li>
 
             <li class="list-group-item">
-                <a href="widget-image.html">Image</a>
+                <a ng-click="model.createWidget(model.pageId, 'IMAGE')">Image</a>
             </li>
 
             <li class="list-group-item">
-                <a href="widget-youtube.html">YouTube</a>
+                <a ng-click="model.createWidget(model.pageId, 'YOUTUBE')">YouTube</a>
             </li>
 
             <li class="list-group-item">
@@ -56,7 +56,7 @@
 
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container-fluid">
-            <a href="profile.html">
+            <a href="#!/user/{{model.userId}}">
                 <span class="glyphicon glyphicon-user pull-right wvs-nav-icon wvs-profile-icon"></span>
             </a>
         </div>

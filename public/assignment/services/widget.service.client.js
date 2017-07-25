@@ -30,7 +30,7 @@
             widget._id = (new Date()).getTime() + "";
             widget.pageId = pageId;
             widgets.push(widget);
-            return widgets;
+            return widget;
         }
 
         function findWidgetsByPageId(pageId) {
