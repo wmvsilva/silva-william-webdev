@@ -25,7 +25,6 @@
                     return;
                 }
             } else if (jQuery.inArray(widget.widgetType, ["IMAGE", "YOUTUBE"]) !== -1) {
-                console.log(widget);
                 if (!widget.url) {
                     model.error = "Please enter a valid widget url";
                     return;
