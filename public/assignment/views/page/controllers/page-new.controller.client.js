@@ -6,11 +6,11 @@
     function NewPageController($routeParams, PageService, $location) {
         var model = this;
 
-        model.userId = $routeParams["uid"];
-        model.websiteId = $routeParams["wid"];
         model.createPage = createPage;
 
         function init() {
+            model.userId = $routeParams["uid"];
+            model.websiteId = $routeParams["wid"];
         }
         init();
 

@@ -10,7 +10,6 @@
         model.login = login;
 
         function init() {
-
         }
         init();
 

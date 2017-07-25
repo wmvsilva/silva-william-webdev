@@ -6,15 +6,14 @@
     function EditWidgetController($routeParams, WidgetService, $location) {
         var model = this;
 
-        model.userId = $routeParams["uid"];
-        model.websiteId = $routeParams["wid"];
-        model.pageId = $routeParams["pid"];
-        model.widgetId = $routeParams["wgid"];
-
         model.updateWidget = updateWidget;
         model.deleteWidget = deleteWidget;
 
         function init() {
+            model.userId = $routeParams["uid"];
+            model.websiteId = $routeParams["wid"];
+            model.pageId = $routeParams["pid"];
+            model.widgetId = $routeParams["wgid"];
             model.widget = jQuery.extend(true, {}, WidgetService.findWidgetById(model.widgetId));
         }
         init();

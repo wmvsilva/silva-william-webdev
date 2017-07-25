@@ -6,12 +6,12 @@
     function EditWebsiteController($routeParams, WebsiteService, $location) {
         var model = this;
 
-        model.userId = $routeParams["uid"];
-        model.websiteId = $routeParams["wid"];
         model.updateWebsite = updateWebsite;
         model.deleteWebsite = deleteWebsite;
 
         function init() {
+            model.userId = $routeParams["uid"];
+            model.websiteId = $routeParams["wid"];
             model.websites = jQuery.extend(true, {}, WebsiteService.findWebsitesByUser(model.userId));
             model.website = jQuery.extend(true, {}, WebsiteService.findWebsitesById(model.websiteId));
         }

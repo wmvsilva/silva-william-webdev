@@ -6,13 +6,12 @@
     function NewWidgetController($routeParams, WidgetService, $location) {
         var model = this;
 
-        model.userId = $routeParams["uid"];
-        model.websiteId = $routeParams["wid"];
-        model.pageId = $routeParams["pid"];
-
         model.createWidget = createWidget;
 
         function init() {
+            model.userId = $routeParams["uid"];
+            model.websiteId = $routeParams["wid"];
+            model.pageId = $routeParams["pid"];
         }
         init();
 

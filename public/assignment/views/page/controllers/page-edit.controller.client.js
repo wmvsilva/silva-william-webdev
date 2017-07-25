@@ -6,13 +6,13 @@
     function EditPageController($routeParams, PageService, $location) {
         var model = this;
 
-        model.userId = $routeParams["uid"];
-        model.websiteId = $routeParams["wid"];
-        model.pageId = $routeParams["pid"];
         model.updatePage = updatePage;
         model.deletePage = deletePage;
 
         function init() {
+            model.userId = $routeParams["uid"];
+            model.websiteId = $routeParams["wid"];
+            model.pageId = $routeParams["pid"];
             model.page = jQuery.extend(true, {}, PageService.findPageById(model.pageId));
         }
         init();

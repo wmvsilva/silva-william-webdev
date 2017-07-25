@@ -6,9 +6,8 @@
     function WebsiteListController($routeParams, WebsiteService) {
         var model = this;
 
-        model.userId = $routeParams["uid"];
-
         function init() {
+            model.userId = $routeParams["uid"];
             model.websites = jQuery.extend(true, {}, WebsiteService.findWebsitesByUser(model.userId));
         }
         init();

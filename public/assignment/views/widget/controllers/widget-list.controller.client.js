@@ -6,15 +6,14 @@
     function WidgetListController($routeParams, WidgetService, $sce) {
         var model = this;
 
-        model.userId = $routeParams["uid"];
-        model.websiteId = $routeParams["wid"];
-        model.pageId = $routeParams["pid"];
-
         model.getEmbeddedUrl = getEmbeddedUrl;
         model.trustUrl = trustUrl;
         model.trustAsHtml = trustAsHtml;
 
         function init() {
+            model.userId = $routeParams["uid"];
+            model.websiteId = $routeParams["wid"];
+            model.pageId = $routeParams["pid"];
             model.widgets = jQuery.extend(true, {}, WidgetService.findWidgetsByPageId(model.pageId));
         }
         init();
