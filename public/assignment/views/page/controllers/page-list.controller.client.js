@@ -1,4 +1,4 @@
-(function() {
+(function () {
     angular
         .module("WebAppMaker")
         .controller("PageListController", PageListController);
@@ -11,6 +11,7 @@
             model.websiteId = $routeParams["wid"];
             model.pages = jQuery.extend(true, {}, PageService.findPageByWebsiteId(model.websiteId));
         }
+
         init();
     }
 })();

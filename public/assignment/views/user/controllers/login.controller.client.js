@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
     angular
         .module("WebAppMaker")
@@ -11,6 +11,7 @@
 
         function init() {
         }
+
         init();
 
         function login(user) {

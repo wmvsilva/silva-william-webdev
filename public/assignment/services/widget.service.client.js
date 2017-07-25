@@ -1,4 +1,4 @@
-(function() {
+(function () {
     angular
         .module("WebAppMaker")
         .factory("WidgetService", WidgetService);
@@ -6,20 +6,34 @@
     function WidgetService() {
 
         var widgets = [
-            { "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO",
-                "name": "Gizmodo Header"},
-            { "_id": "234", "widgetType": "HEADING", "pageId": "321", "size": 4, "text": "Lorem ipsum",
-                "name": "Lorem Header"},
-            { "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%",
-                "url": "http://lorempixel.com/400/200/", "name": "Random Picture", "text": "Ipsum"},
-            { "_id": "456", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>",
-                "name": "Lorem Paragraph"},
-            { "_id": "567", "widgetType": "HEADING", "pageId": "321", "size": 4, "text": "Lorem ipsum",
-                "name": "Lorem Header"},
-            { "_id": "678", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%",
-                "url": "https://youtu.be/AM2Ivdi9c4E", "name": "Boat Video", "text": "Boats!" },
-            { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>",
-                "name": "Lorem Paragraph" }
+            {
+                "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO",
+                "name": "Gizmodo Header"
+            },
+            {
+                "_id": "234", "widgetType": "HEADING", "pageId": "321", "size": 4, "text": "Lorem ipsum",
+                "name": "Lorem Header"
+            },
+            {
+                "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%",
+                "url": "http://lorempixel.com/400/200/", "name": "Random Picture", "text": "Ipsum"
+            },
+            {
+                "_id": "456", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>",
+                "name": "Lorem Paragraph"
+            },
+            {
+                "_id": "567", "widgetType": "HEADING", "pageId": "321", "size": 4, "text": "Lorem ipsum",
+                "name": "Lorem Header"
+            },
+            {
+                "_id": "678", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%",
+                "url": "https://youtu.be/AM2Ivdi9c4E", "name": "Boat Video", "text": "Boats!"
+            },
+            {
+                "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>",
+                "name": "Lorem Paragraph"
+            }
         ];
 
         var api = {

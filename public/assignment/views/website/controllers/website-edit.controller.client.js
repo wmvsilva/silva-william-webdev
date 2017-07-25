@@ -1,4 +1,4 @@
-(function() {
+(function () {
     angular
         .module("WebAppMaker")
         .controller("EditWebsiteController", EditWebsiteController);
@@ -15,6 +15,7 @@
             model.websites = jQuery.extend(true, {}, WebsiteService.findWebsitesByUser(model.userId));
             model.website = jQuery.extend(true, {}, WebsiteService.findWebsitesById(model.websiteId));
         }
+
         init();
 
         function updateWebsite(websiteId, website) {
@@ -23,12 +24,12 @@
                 return;
             }
             WebsiteService.updateWebsite(websiteId, website);
-            $location.url("/user/"+model.userId+"/website");
+            $location.url("/user/" + model.userId + "/website");
         }
 
         function deleteWebsite(websiteId) {
             WebsiteService.deleteWebsite(websiteId);
-            $location.url("/user/"+model.userId+"/website");
+            $location.url("/user/" + model.userId + "/website");
         }
     }
 })();

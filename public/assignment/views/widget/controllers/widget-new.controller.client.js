@@ -1,4 +1,4 @@
-(function() {
+(function () {
     angular
         .module("WebAppMaker")
         .controller("NewWidgetController", NewWidgetController);
@@ -13,6 +13,7 @@
             model.websiteId = $routeParams["wid"];
             model.pageId = $routeParams["pid"];
         }
+
         init();
 
         function createWidget(pageId, widgetType) {
@@ -36,7 +37,8 @@
                     break;
             }
             var newWidget = WidgetService.createWidget(pageId, widget);
-            $location.url("/user/"+ model.userId+"/website/"+model.websiteId+"/page/"+model.pageId+"/widget/"+newWidget._id);
+            $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId +
+                "/widget/" + newWidget._id);
         }
     }
 })();

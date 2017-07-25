@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
     angular
         .module("WebAppMaker")
@@ -13,6 +13,7 @@
         function init() {
             model.user = jQuery.extend(true, {}, UserService.findUserById(userId));
         }
+
         init();
 
         function updateUser(userId, user) {

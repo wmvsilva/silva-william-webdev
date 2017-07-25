@@ -1,4 +1,4 @@
-(function() {
+(function () {
     angular
         .module("WebAppMaker")
         .controller("WebsiteListController", WebsiteListController);
@@ -10,6 +10,7 @@
             model.userId = $routeParams["uid"];
             model.websites = jQuery.extend(true, {}, WebsiteService.findWebsitesByUser(model.userId));
         }
+
         init();
     }
 })();

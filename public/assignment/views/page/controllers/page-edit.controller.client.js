@@ -1,4 +1,4 @@
-(function() {
+(function () {
     angular
         .module("WebAppMaker")
         .controller("EditPageController", EditPageController);
@@ -15,6 +15,7 @@
             model.pageId = $routeParams["pid"];
             model.page = jQuery.extend(true, {}, PageService.findPageById(model.pageId));
         }
+
         init();
 
         function updatePage(pageId, page) {
@@ -23,12 +24,12 @@
                 return;
             }
             PageService.updatePage(pageId, jQuery.extend(true, {}, page));
-            $location.url("/user/"+model.userId+"/website/"+model.websiteId+"/page");
+            $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page");
         }
 
         function deletePage(pageId) {
             PageService.deletePage(pageId);
-            $location.url("/user/"+model.userId+"/website/"+model.websiteId+"/page");
+            $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page");
         }
     }
 })();

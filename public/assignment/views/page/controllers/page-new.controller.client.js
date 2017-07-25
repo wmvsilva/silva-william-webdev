@@ -1,4 +1,4 @@
-(function() {
+(function () {
     angular
         .module("WebAppMaker")
         .controller("NewPageController", NewPageController);
@@ -12,6 +12,7 @@
             model.userId = $routeParams["uid"];
             model.websiteId = $routeParams["wid"];
         }
+
         init();
 
         function createPage(websiteId, page) {
@@ -20,7 +21,7 @@
                 return;
             }
             PageService.createPage(websiteId, page);
-            $location.url("/user/"+model.userId+"/website/"+model.websiteId+"/page");
+            $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page");
         }
     }
 })();

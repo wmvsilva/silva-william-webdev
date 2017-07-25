@@ -1,4 +1,4 @@
-(function() {
+(function () {
     angular
         .module("WebAppMaker")
         .controller("NewWebsiteController", NewWebsiteController);
@@ -12,6 +12,7 @@
             model.userId = $routeParams["uid"];
             model.websites = jQuery.extend(true, {}, WebsiteService.findWebsitesByUser(model.userId));
         }
+
         init();
 
         function createWebsite(userId, website) {
@@ -20,7 +21,7 @@
                 return;
             }
             WebsiteService.createWebsite(userId, website);
-            $location.url("/user/"+model.userId+"/website");
+            $location.url("/user/" + model.userId + "/website");
         }
     }
 })();

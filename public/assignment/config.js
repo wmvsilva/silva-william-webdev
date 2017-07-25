@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
     angular
         .module("WebAppMaker")
@@ -24,7 +24,7 @@
                 controller: "ProfileController",
                 controllerAs: "model"
             })
-        // website routes
+            // website routes
             .when("/user/:uid/website", {
                 templateUrl: "views/website/templates/website-list.view.client.html",
                 controller: "WebsiteListController",
