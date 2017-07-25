@@ -1,0 +1,56 @@
+<div class="wvs wvs-widget">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page">
+                <span class="glyphicon glyphicon-chevron-left pull-left wvs-nav-icon wvs-left-arrow"></span>
+            </a>
+            <span class="navbar-brand">Widgets</span>
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
+                <span class="glyphicon glyphicon-plus pull-right wvs-nav-icon"></span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div ng-repeat="widget in model.widgets" class="wvs-widget-list-item">
+            <div ng-switch="widget.widgetType">
+                <div ng-switch-when="HEADING">
+                    <div ng-include src="'views/widget/templates/widget-heading.view.client.html'"></div>
+                </div>
+                <div ng-switch-when="IMAGE">
+                    <div ng-include src="'views/widget/templates/widget-image.view.client.html'"></div>
+                </div>
+                <div ng-switch-when="YOUTUBE">
+                    <div ng-include src="'views/widget/templates/widget-youtube.view.client.html'"></div>
+                </div>
+                <div ng-switch-when="HTML">
+                    <div ng-include src="'views/widget/templates/widget-html.view.client.html'"></div>
+                </div>
+            </div>
+            <div class="wvs-widget-option">
+                <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+                    <span class="glyphicon glyphicon-cog wvs-gear"></span>
+                </a>
+                <a href="#">
+                    <span class="glyphicon glyphicon-align-justify wvs-black"></span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <a href="#">
+                <span class="glyphicon glyphicon glyphicon-play wvs-nav-icon wvs-play-icon wvs-black"></span>
+            </a>
+            <a href="#">
+                <span class="glyphicon glyphicon glyphicon-eye-open wvs-black"></span>
+            </a>
+            <a href="#!/user/{{model.userId}}">
+                <span class="glyphicon glyphicon-user pull-right wvs-nav-icon wvs-profile-icon"></span>
+            </a>
+        </div>
+    </nav>
+
+</div>

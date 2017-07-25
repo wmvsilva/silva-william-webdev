@@ -1,0 +1,81 @@
+<div class="wvs wvs-websites">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-3 hidden-xs hidden-sm">
+                    <a href="#!/user/{{model.userId}}/website">
+                        <span class="glyphicon glyphicon-chevron-left pull-left wvs-nav-icon wvs-left-arrow"></span>
+                    </a>
+                    <span class="navbar-brand">Websites</span>
+                    <a href="#!/user/{{model.userId}}/website/new">
+                        <span class="glyphicon glyphicon-plus pull-right wvs-nav-icon"></span>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-md-9">
+                    <a href="#!/user/{{model.userId}}/website">
+                        <span class="visible-xs visible-sm glyphicon glyphicon-chevron-left pull-left wvs-nav-icon wvs-left-arrow"></span>
+                    </a>
+                    <span class="navbar-brand">New Website</span>
+                    <a ng-click="model.createWebsite(model.userId, model.website)">
+                        <span class="glyphicon glyphicon-ok pull-right wvs-nav-icon"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-3 hidden-xs hidden-sm wvs-split-view-left">
+                <ul class="list-group">
+
+                    <li ng-repeat="website in model.websites" class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <a href="#!/user/{{model.userId}}/website/{{website._id}}/page">{{website.name}}</a>
+                            </div>
+                            <div class="col-xs-2">
+                                <a href="#!/user/{{model.userId}}/website/{{website._id}}" class="wvs-plus-link">
+                                    <span class="glyphicon glyphicon-cog pull-right wvs-settings-icon"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="col-xs-12 col-md-9 wvs-split-view-right">
+
+                <div ng-show="model.error" class="alert alert-danger">
+                    {{model.error}}
+                </div>
+
+                <label for="name">Name</label>
+                <input name="name"
+                       ng-model="model.website.name"
+                       placeholder="Name"
+                       type="text"
+                       class="form-control"
+                       id="name"/>
+
+                <label for="description">Description</label>
+                <textarea name="description"
+                          ng-model="model.website.description"
+                          rows="5"
+                          placeholder="Description"
+                          class="form-control"
+                          id="description"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <a href="#!/user/{{model.userId}}">
+                <span class="glyphicon glyphicon-user pull-right wvs-nav-icon"></span>
+            </a>
+        </div>
+    </nav>
+
+</div>

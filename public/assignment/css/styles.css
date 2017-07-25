@@ -122,10 +122,6 @@ a:hover {
     color: #428bca;
 }
 
-.wvs-widget img, .wvs-widget iframe {
-    width: 100%;
-}
-
 .wvs-widget .wvs-play-icon {
     padding-right: 10px;
 }

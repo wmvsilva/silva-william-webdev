@@ -1,0 +1,42 @@
+<div class="wvs wvs-pages">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <a href="#!/user/{{model.userId}}/website">
+                <span class="glyphicon glyphicon-chevron-left pull-left wvs-nav-icon wvs-left-arrow"></span>
+            </a>
+            <span class="navbar-brand">Pages</span>
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/new">
+                <span class="glyphicon glyphicon-plus pull-right wvs-nav-icon"></span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <ul class="list-group">
+
+            <li ng-repeat="page in model.pages" class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-10">
+                        <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget">{{page.name}}</a>
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}"
+                           class="wvs-plus-link">
+                            <span class="glyphicon glyphicon-cog pull-right wvs-settings-icon"></span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <a href="#!/user/{{model.userId}}">
+                <span class="glyphicon glyphicon-user pull-right wvs-nav-icon wvs-profile-icon"></span>
+            </a>
+        </div>
+    </nav>
+
+</div>
