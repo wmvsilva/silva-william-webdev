@@ -31,6 +31,9 @@
                     widget.width = "100%";
                     widget.url = "https://youtu.be/-MH6JZdGZcI";
                     break;
+                case "HTML":
+                    widget.text = "<p>Test HTML</p>";
+                    break;
             }
             var newWidget = WidgetService.createWidget(pageId, widget);
             $location.url("/user/"+ model.userId+"/website/"+model.websiteId+"/page/"+model.pageId+"/widget/"+newWidget._id);

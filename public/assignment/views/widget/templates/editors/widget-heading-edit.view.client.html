@@ -13,6 +13,10 @@
 
     <div class="container-fluid">
 
+        <div ng-show="model.error" class="alert alert-danger">
+            {{model.error}}
+        </div>
+
         <label for="name">Name</label>
         <input name="name"
                ng-model="model.widget.name"

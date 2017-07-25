@@ -18,6 +18,10 @@
         init();
 
         function updateWebsite(websiteId, website) {
+            if (!website.name) {
+                model.error = "Please enter a website name";
+                return;
+            }
             WebsiteService.updateWebsite(websiteId, website);
             $location.url("/user/"+model.userId+"/website");
         }
