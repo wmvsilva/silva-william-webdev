@@ -24,7 +24,7 @@
                     <div ng-include src="'views/widget/templates/widget-youtube.view.client.html'"></div>
                 </div>
                 <div ng-switch-when="HTML">
-                    <div ng-bind-html=model.trustAsHtml(widget.text)></div>
+                    <div ng-include src="'views/widget/templates/widget-html.view.client.html'"></div>
                 </div>
             </div>
             <div class="wvs-widget-option">
