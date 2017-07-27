@@ -4,10 +4,11 @@
         .module("WebAppMaker")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($routeParams, UserService) {
+    function ProfileController($routeParams, UserService, $location) {
         var model = this;
 
         model.updateUser = updateUser;
+        model.deleteUser = deleteUser;
 
         function init() {
             model.userId = $routeParams["uid"];
@@ -30,6 +31,11 @@
             }
             UserService.updateUser(userId, jQuery.extend(true, {}, user));
             model.updateMessage = "User was updated";
+        }
+
+        function deleteUser(userId) {
+            UserService.deleteUser(userId);
+            $location.url("login");
         }
     }
 })();
