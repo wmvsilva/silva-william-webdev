@@ -1,5 +1,12 @@
 module.exports = function (app) {
 
+    // http handlers
+    app.post("/api/user", registerUser);
+    app.get("/api/user", findUser);
+    app.get("/api/user/:userId", getUserById);
+    app.put("/api/user/:userId", updateUser);
+    app.delete("/api/user/:userId", deleteUser);
+
     var users = [
         {
             _id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder",
@@ -19,18 +26,11 @@ module.exports = function (app) {
         }
     ];
 
-    // http handlers
-    app.post("/api/user", registerUser);
-    app.get("/api/user", findUser);
-    app.get("/api/user/:userId", getUserById);
-    app.put("/api/user/:userId", updateUser);
-    app.delete("/api/user/:userId", deleteUser);
-
     function registerUser(req, res) {
         var user = req.body;
         user._id = (new Date()).getTime() + "";
         users.push(user);
-        res.send(user);
+        res.json(user);
     }
 
     function findUser(req, res) {
@@ -41,14 +41,14 @@ module.exports = function (app) {
             for (var u in users) {
                 var _user = users[u];
                 if (_user.username === username && _user.password === password) {
-                    res.send(_user);
+                    res.json(_user);
                     return;
                 }
             }
         } else if (username) {
             for (var u in users) {
                 if (users[u].username === username) {
-                    res.send(users[u]);
+                    res.json(users[u]);
                     return;
                 }
             }
@@ -60,7 +60,7 @@ module.exports = function (app) {
     function getUserById(req, response) {
         for (var u in users) {
             if (users[u]._id === req.params.userId) {
-                response.send(users[u]);
+                response.json(users[u]);
                 return;
             }
         }
@@ -74,7 +74,7 @@ module.exports = function (app) {
         for (var u in users) {
             if (users[u]._id === userId) {
                 users[u] = user;
-                res.send(user);
+                res.json(user);
                 return;
             }
         }

@@ -10,8 +10,8 @@
             model.userId = $routeParams["uid"];
             WebsiteService
                 .findWebsitesByUser(model.userId)
-                .then(function (websites) {
-                    model.websites = websites;
+                .then(function (response) {
+                    model.websites = response.data;
                 });
         }
 

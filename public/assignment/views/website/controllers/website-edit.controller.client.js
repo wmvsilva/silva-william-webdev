@@ -12,11 +12,13 @@
         function init() {
             model.userId = $routeParams["uid"];
             model.websiteId = $routeParams["wid"];
-            WebsiteService.findWebsitesByUser(model.userId)
-                .then(function(websites) {
-                   model.websites = websites;
+            WebsiteService
+                .findWebsitesByUser(model.userId)
+                .then(function(response) {
+                   model.websites = response.data;
                 });
-            WebsiteService.findWebsitesById(model.userId, model.websiteId)
+            WebsiteService
+                .findWebsitesById(model.websiteId)
                 .then(function (response) {
                     model.website = response.data;
                 });
@@ -29,13 +31,19 @@
                 model.error = "Please enter a website name";
                 return;
             }
-            WebsiteService.updateWebsite(websiteId, website);
-            $location.url("/user/" + model.userId + "/website");
+            WebsiteService
+                .updateWebsite(websiteId, website)
+                .then(function() {
+                    $location.url("/user/" + model.userId + "/website");
+                });
         }
 
         function deleteWebsite(websiteId) {
-            WebsiteService.deleteWebsite(websiteId);
-            $location.url("/user/" + model.userId + "/website");
+            WebsiteService
+                .deleteWebsite(websiteId)
+                .then(function() {
+                    $location.url("/user/" + model.userId + "/website");
+                });
         }
     }
 })();

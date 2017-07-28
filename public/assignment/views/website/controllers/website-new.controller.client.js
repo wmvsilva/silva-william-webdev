@@ -10,9 +10,10 @@
 
         function init() {
             model.userId = $routeParams["uid"];
-            WebsiteService.findWebsitesByUser(model.userId)
-                .then(function (websites) {
-                    model.websites = websites;
+            WebsiteService
+                .findWebsitesByUser(model.userId)
+                .then(function (response) {
+                    model.websites = response.data;
                 });
         }
 
@@ -23,7 +24,8 @@
                 model.error = "Please enter in a website name";
                 return;
             }
-            WebsiteService.createWebsite(userId, website)
+            WebsiteService
+                .createWebsite(userId, website)
                 .then(function() {
                     $location.url("/user/" + model.userId + "/website");
                 });
