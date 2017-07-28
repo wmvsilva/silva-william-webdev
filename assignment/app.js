@@ -22,7 +22,7 @@ var users = [
 // http handlers
 app.get("/api/users", getAllUsers);
 app.get("/api/user/:userId", getUserById);
-app.get("/api/user", findUserByCredentials);
+app.get("/api/user", findUser);
 
 function getAllUsers(req, response) {
     response.send(users);
@@ -36,16 +36,26 @@ function getUserById(req, response) {
     }
 }
 
-function findUserByCredentials(req, res) {
+function findUser(req, res) {
     var username = req.query.username;
     var password = req.query.password;
 
-    for (var u in users) {
-        var _user = users[u];
-        if (_user.username === username && _user.password === password) {
-            res.send(_user);
-            return;
+    if (username && password) {
+        for (var u in users) {
+            var _user = users[u];
+            if (_user.username === username && _user.password === password) {
+                res.send(_user);
+                return;
+            }
+        }
+    } else if (username) {
+        for (var u in users) {
+            if (users[u].username === username) {
+                res.send(users[u]);
+                return;
+            }
         }
     }
+
     res.send("0");
 }
