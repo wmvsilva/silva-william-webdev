@@ -41,7 +41,7 @@
         }
 
         function findUserById(userId) {
-            return $http.get("http://localhost:3000/api/user/" + userId);
+            return $http.get("/api/user/" + userId);
         }
 
         function findUserByUsername(username) {
@@ -54,13 +54,7 @@
         }
 
         function findUserByCredentials(username, password) {
-            for (var u in users) {
-                var _user = users[u];
-                if (_user.username === username && _user.password === password) {
-                    return _user;
-                }
-            }
-            return null;
+            return $http.get("/api/user?username=" + username + "&password=" + password);
         }
 
         function updateUser(userId, user) {
