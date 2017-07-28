@@ -24,6 +24,7 @@ app.get("/api/users", getAllUsers);
 app.get("/api/user/:userId", getUserById);
 app.get("/api/user", findUser);
 app.post("/api/user", registerUser);
+app.put("/api/user/:userId", updateUser);
 
 function getAllUsers(req, response) {
     response.send(users);
@@ -66,4 +67,18 @@ function registerUser(req, res) {
     user._id = (new Date()).getTime() + "";
     users.push(user);
     res.send(user);
+}
+
+function updateUser(req, res) {
+    var userId = req.params.userId;
+    var user = req.body;
+
+    for (var u in users) {
+        if (users[u]._id === userId) {
+            users[u] = user;
+            res.send(user);
+            return;
+        }
+    }
+    res.sendStatus(404);
 }
