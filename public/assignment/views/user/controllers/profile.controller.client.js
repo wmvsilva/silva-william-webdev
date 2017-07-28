@@ -12,10 +12,10 @@
 
         function init() {
             model.userId = $routeParams["uid"];
-            var promise = UserService.findUserById(model.userId);
-            promise.then(function (response) {
-                model.user = response.data;
-            });
+            UserService.findUserById(model.userId)
+                .then(function (response) {
+                    model.user = response.data;
+                });
         }
 
         init();
