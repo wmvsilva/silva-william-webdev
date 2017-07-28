@@ -12,8 +12,14 @@
         function init() {
             model.userId = $routeParams["uid"];
             model.websiteId = $routeParams["wid"];
-            model.websites = jQuery.extend(true, {}, WebsiteService.findWebsitesByUser(model.userId));
-            model.website = jQuery.extend(true, {}, WebsiteService.findWebsitesById(model.websiteId));
+            WebsiteService.findWebsitesByUser(model.userId)
+                .then(function(websites) {
+                   model.websites = websites;
+                });
+            WebsiteService.findWebsitesById(model.userId, model.websiteId)
+                .then(function (response) {
+                    model.website = response.data;
+                });
         }
 
         init();
