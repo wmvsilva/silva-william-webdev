@@ -14,7 +14,11 @@
             model.userId = $routeParams["uid"];
             model.websiteId = $routeParams["wid"];
             model.pageId = $routeParams["pid"];
-            model.widgets = jQuery.extend(true, {}, WidgetService.findWidgetsByPageId(model.pageId));
+            WidgetService
+                .findWidgetsByPageId(model.pageId)
+                .then(function(response) {
+                    model.widgets = response.data;
+                });
         }
 
         init();

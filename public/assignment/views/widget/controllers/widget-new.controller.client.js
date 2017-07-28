@@ -36,9 +36,13 @@
                     widget.text = "<p>Test HTML</p>";
                     break;
             }
-            var newWidget = WidgetService.createWidget(pageId, widget);
-            $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId +
-                "/widget/" + newWidget._id);
+            WidgetService
+                .createWidget(pageId, widget)
+                .then(function(response) {
+                    var newWidget = response.data;
+                    $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId +
+                        "/widget/" + newWidget._id);
+                });
         }
     }
 })();
