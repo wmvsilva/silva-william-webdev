@@ -12,7 +12,8 @@
 
         function init() {
             model.userId = $routeParams["uid"];
-            UserService.findUserById(model.userId)
+            UserService
+                .findUserById(model.userId)
                 .then(function (response) {
                     model.user = response.data;
                 });
@@ -27,18 +28,29 @@
                 model.error = "Please enter a username";
                 return;
             }
-            var foundUser = UserService.findUserByUsername(user.username);
-            if (foundUser && foundUser._id !== user._id) {
-                model.error = "User with that username already exists";
-                return;
-            }
-            UserService.updateUser(userId, jQuery.extend(true, {}, user));
-            model.updateMessage = "User was updated";
+            UserService
+                .findUserByUsername(user.username)
+                .then(function(response) {
+                  var foundUser = response.data;
+                  if (foundUser !== "0" && foundUser._id !== user._id) {
+                      return Promise.reject({});
+                  }
+                  return UserService.updateUser(userId, jQuery.extend(true, {}, user));
+                })
+                .then(function () {
+                    model.updateMessage = "User was updated";
+                })
+                .catch(function () {
+                    model.error = "User with that username already exists";
+                });
         }
 
         function deleteUser(userId) {
-            UserService.deleteUser(userId);
-            $location.url("login");
+            UserService
+                .deleteUser(userId)
+                .then(function () {
+                    $location.url("login");
+                });
         }
     }
 })();

@@ -28,13 +28,16 @@
                     if (_user === "0") {
                         return UserService.createUser(user);
                     } else {
-                        model.error = "User already exists";
+                        return Promise.reject({});
                     }
                 })
                 .then(function (response) {
                     var newUser = response.data;
                     $location.url("/user/" + newUser._id);
-                });
+                })
+                .catch(function () {
+                    model.error = "User already exists";
+                })
         }
     }
 })();

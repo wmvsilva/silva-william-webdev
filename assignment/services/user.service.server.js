@@ -1,84 +1,96 @@
-var app = require("../express");
+module.exports = function (app) {
 
-var users = [
-    {
-        _id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder",
-        "email": "alice@wonder.com"
-    },
-    {
-        _id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley",
-        "email": "bob@marley.com"
-    },
-    {
-        _id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia",
-        "email": "charly@garcia.com"
-    },
-    {
-        _id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi",
-        "email": "jose@annunzi.com"
-    }
-];
-
-// http handlers
-app.get("/api/users", getAllUsers);
-app.get("/api/user/:userId", getUserById);
-app.get("/api/user", findUser);
-app.post("/api/user", registerUser);
-app.put("/api/user/:userId", updateUser);
-
-function getAllUsers(req, response) {
-    response.send(users);
-}
-
-function getUserById(req, response) {
-    for (var u in users) {
-        if (users[u]._id === req.params.userId) {
-            response.send(users[u]);
+    var users = [
+        {
+            _id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder",
+            "email": "alice@wonder.com"
+        },
+        {
+            _id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley",
+            "email": "bob@marley.com"
+        },
+        {
+            _id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia",
+            "email": "charly@garcia.com"
+        },
+        {
+            _id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi",
+            "email": "jose@annunzi.com"
         }
+    ];
+
+    // http handlers
+    app.post("/api/user", registerUser);
+    app.get("/api/user", findUser);
+    app.get("/api/user/:userId", getUserById);
+    app.put("/api/user/:userId", updateUser);
+    app.delete("/api/user/:userId", deleteUser);
+
+    function registerUser(req, res) {
+        var user = req.body;
+        user._id = (new Date()).getTime() + "";
+        users.push(user);
+        res.send(user);
     }
-}
 
-function findUser(req, res) {
-    var username = req.query.username;
-    var password = req.query.password;
+    function findUser(req, res) {
+        var username = req.query.username;
+        var password = req.query.password;
 
-    if (username && password) {
+        if (username && password) {
+            for (var u in users) {
+                var _user = users[u];
+                if (_user.username === username && _user.password === password) {
+                    res.send(_user);
+                    return;
+                }
+            }
+        } else if (username) {
+            for (var u in users) {
+                if (users[u].username === username) {
+                    res.send(users[u]);
+                    return;
+                }
+            }
+        }
+
+        res.send("0");
+    }
+
+    function getUserById(req, response) {
         for (var u in users) {
-            var _user = users[u];
-            if (_user.username === username && _user.password === password) {
-                res.send(_user);
+            if (users[u]._id === req.params.userId) {
+                response.send(users[u]);
                 return;
             }
         }
-    } else if (username) {
+        response.sendStatus(404);
+    }
+
+    function updateUser(req, res) {
+        var userId = req.params.userId;
+        var user = req.body;
+
         for (var u in users) {
-            if (users[u].username === username) {
-                res.send(users[u]);
+            if (users[u]._id === userId) {
+                users[u] = user;
+                res.send(user);
                 return;
             }
         }
+        res.sendStatus(404);
     }
 
-    res.send("0");
-}
+    function deleteUser(req, res) {
+        var userId = req.params.userId;
 
-function registerUser(req, res) {
-    var user = req.body;
-    user._id = (new Date()).getTime() + "";
-    users.push(user);
-    res.send(user);
-}
-
-function updateUser(req, res) {
-    var userId = req.params.userId;
-    var user = req.body;
-
-    for (var u in users) {
-        if (users[u]._id === userId) {
-            users[u] = user;
-            res.send(user);
-            return;
+        for (var u in users) {
+            if (users[u]._id === userId) {
+                users.splice(u, 1);
+                res.sendStatus(200);
+                return;
+            }
         }
+        res.sendStatus(404);
     }
-    res.sendStatus(404);
-}
+};
