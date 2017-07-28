@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .factory("UserService", UserService);
 
-    function UserService() {
+    function UserService($http) {
 
         var users = [
             {
@@ -41,12 +41,7 @@
         }
 
         function findUserById(userId) {
-            for (var u in users) {
-                if (users[u]._id === userId) {
-                    return users[u];
-                }
-            }
-            return null;
+            return $http.get("http://localhost:3000/api/user/" + userId);
         }
 
         function findUserByUsername(username) {

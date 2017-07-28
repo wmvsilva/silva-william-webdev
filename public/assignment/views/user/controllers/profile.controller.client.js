@@ -12,7 +12,10 @@
 
         function init() {
             model.userId = $routeParams["uid"];
-            model.user = jQuery.extend(true, {}, UserService.findUserById(model.userId));
+            var promise = UserService.findUserById(model.userId);
+            promise.then(function (response) {
+                model.user = response.data;
+            });
         }
 
         init();
