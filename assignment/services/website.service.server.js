@@ -60,7 +60,7 @@ module.exports = function (app) {
         for (var w in websites) {
             if (websites[w]._id === websiteId) {
                 websites[w] = website;
-                res.json (website);
+                res.json(website);
                 return;
             }
         }
