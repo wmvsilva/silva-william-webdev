@@ -35,9 +35,13 @@
         return api;
 
         function createUser(user) {
-            user._id = (new Date()).getTime() + "";
-            users.push(user);
-            return user;
+            var url = "/api/user";
+
+            return $http.post(url, user);
+
+            // user._id = (new Date()).getTime() + "";
+            // users.push(user);
+            // return user;
         }
 
         function findUserById(userId) {

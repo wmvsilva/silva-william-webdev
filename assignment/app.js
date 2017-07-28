@@ -23,6 +23,7 @@ var users = [
 app.get("/api/users", getAllUsers);
 app.get("/api/user/:userId", getUserById);
 app.get("/api/user", findUser);
+app.post("/api/user", registerUser);
 
 function getAllUsers(req, response) {
     response.send(users);
@@ -58,4 +59,9 @@ function findUser(req, res) {
     }
 
     res.send("0");
+}
+
+function registerUser(req, res) {
+    var user = req.body;
+    res.send(user);
 }
