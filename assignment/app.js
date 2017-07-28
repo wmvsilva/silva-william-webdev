@@ -44,6 +44,7 @@ function findUserByCredentials(req, res) {
         var _user = users[u];
         if (_user.username === username && _user.password === password) {
             res.send(_user);
+            return;
         }
     }
     res.send("0");
