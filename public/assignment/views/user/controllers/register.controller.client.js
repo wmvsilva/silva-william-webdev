@@ -27,8 +27,11 @@
                 .then(function(response) {
                     var _user = response.data;
                     if (_user === "0") {
-                        var newUser = UserService.createUser(user);
-                        $location.url("/user/" + newUser._id);
+                        var promise2 = UserService.createUser(user);
+                        promise2.then(function (response) {
+                            var newUser = response.data;
+                            $location.url("/user/" + newUser._id);
+                        });
                     } else {
                         model.error = "User already exists";
                     }

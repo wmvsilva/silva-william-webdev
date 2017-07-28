@@ -63,5 +63,7 @@ function findUser(req, res) {
 
 function registerUser(req, res) {
     var user = req.body;
+    user._id = (new Date()).getTime() + "";
+    users.push(user);
     res.send(user);
 }
