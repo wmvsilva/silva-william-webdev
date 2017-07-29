@@ -7,6 +7,11 @@ module.exports = function (app) {
     app.delete("/api/widget/:widgetId", deleteWidget);
     app.put("/api/page/:pageId/widget", sortWidget);
 
+    var multer = require('multer');
+    var upload = multer({ dest: __dirname+'/../../public/uploads' });
+
+    app.post ("/api/upload", upload.single('myFile'), uploadImage);
+
     var widgets = [
         {
             "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO",
@@ -77,6 +82,15 @@ module.exports = function (app) {
         res.sendStatus(404);
     }
 
+    function findWidgetByIdInternal(widgetId) {
+        for (var w in widgets) {
+            if (widgets[w]._id === widgetId) {
+                return widgets[w];
+            }
+        }
+        return null;
+    }
+
     function updateWidget(req, res) {
         var widgetId = req.params.widgetId;
         var widget = req.body;
@@ -132,4 +146,29 @@ module.exports = function (app) {
     function arrayMove(arr, from, to) {
         arr.splice(to, 0, arr.splice(from, 1)[0]);
     }
+
+    function uploadImage(req, res) {
+        var widgetId      = req.body.widgetId;
+        var width         = req.body.width;
+        var myFile        = req.file;
+
+        var userId = req.body.userId;
+        var websiteId = req.body.websiteId;
+        var pageId = req.body.pageId;
+
+        var originalname  = myFile.originalname; // file name on user's computer
+        var filename      = myFile.filename;     // new file name in upload folder
+        var path          = myFile.path;         // full path of uploaded file
+        var destination   = myFile.destination;  // folder where file is saved to
+        var size          = myFile.size;
+        var mimetype      = myFile.mimetype;
+
+        var widget = findWidgetByIdInternal(widgetId);
+        widget.url = '/uploads/'+filename;
+
+        var callbackUrl   = "/assignment/#!/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget";
+
+        res.redirect(callbackUrl);
+    }
+
 };
