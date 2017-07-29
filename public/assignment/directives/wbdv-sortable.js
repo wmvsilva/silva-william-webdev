@@ -1,16 +1,26 @@
 (function() {
     angular
-        .module("wbdvDirectives", [])
+        .module("WebAppMaker")
         .directive("wbdvSortable", wbdvSortable);
 
     function wbdvSortable() {
+        var initial;
+        var final;
         return {
-            link: function ($scope, element, attrs) {
+            link: function ($scope, element, attrs, controller) {
                 element.sortable({
                     axis: "y",
-                    handle: ".wvs-sort-icon"
+                    handle: ".wvs-sort-icon",
+                    start: function(event, ui) {
+                        initial = ui.item.index();
+                    },
+                    stop: function(event, ui) {
+                        final = ui.item.index();
+                        controller.sortWidget(initial, final);
+                    }
                 });
-            }
+            },
+            controller: "WidgetListController"
         };
     }
 })();

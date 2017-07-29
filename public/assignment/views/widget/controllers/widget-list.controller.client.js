@@ -9,6 +9,7 @@
         model.getEmbeddedUrl = getEmbeddedUrl;
         model.trustUrl = trustUrl;
         model.trustAsHtml = trustAsHtml;
+        model.sortWidget = sortWidget;
 
         function init() {
             model.userId = $routeParams["uid"];
@@ -35,6 +36,10 @@
 
         function trustAsHtml(htmlSnippet) {
             return $sce.trustAsHtml(htmlSnippet);
+        }
+
+        function sortWidget(initial, final) {
+            WidgetService.sortWidget(model.pageId, initial, final);
         }
     }
 })();
