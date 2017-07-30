@@ -146,6 +146,8 @@ module.exports = function (app) {
         var widgetId = req.body.widgetId;
         var width = req.body.width;
         var myFile = req.file;
+        var name = req.body.name;
+        var text = req.body.text;
 
         var userId = req.body.userId;
         var websiteId = req.body.websiteId;
@@ -160,6 +162,9 @@ module.exports = function (app) {
 
         var widget = findWidgetByIdInternal(widgetId);
         widget.url = '/uploads/' + filename;
+        widget.width = width;
+        widget.name = name;
+        widget.text = text;
 
         var callbackUrl = "/assignment/#!/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget";
 
