@@ -8,13 +8,18 @@
 
         model.updateWidget = updateWidget;
         model.deleteWidget = deleteWidget;
+        model.uploadImage = uploadImage;
 
         function init() {
             model.userId = $routeParams["uid"];
             model.websiteId = $routeParams["wid"];
             model.pageId = $routeParams["pid"];
             model.widgetId = $routeParams["wgid"];
-            model.widget = jQuery.extend(true, {}, WidgetService.findWidgetById(model.widgetId));
+            WidgetService
+                .findWidgetById(model.widgetId)
+                .then(function (response) {
+                    model.widget = response.data;
+                });
         }
 
         init();
@@ -31,13 +36,27 @@
                     return;
                 }
             }
-            WidgetService.updateWidget(widgetId, widget);
-            $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget");
+            WidgetService
+                .updateWidget(widgetId, widget)
+                .then(function () {
+                    $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget");
+                });
         }
 
         function deleteWidget(widgetId) {
-            WidgetService.deleteWidget(widgetId);
-            $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget");
+            WidgetService
+                .deleteWidget(widgetId)
+                .then(function () {
+                    $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget");
+                });
+        }
+
+        function uploadImage() {
+            if (document.getElementById("wvs-widget-image-file").value !== "") {
+                jQuery("#wvs-upload-image-button").click();
+            } else {
+                model.error = "Please upload an image file before pressing Upload Image";
+            }
         }
     }
 })();

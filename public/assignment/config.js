@@ -4,7 +4,10 @@
         .module("WebAppMaker")
         .config(Config);
 
-    function Config($routeProvider) {
+    function Config($routeProvider, $httpProvider) {
+
+        $httpProvider.defaults.headers.post['Accept'] = 'application/json, text/javascript';
+
         $routeProvider
             .when("/", {
                 templateUrl: "views/home/templates/home.view.client.html"

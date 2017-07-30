@@ -9,12 +9,17 @@
         model.getEmbeddedUrl = getEmbeddedUrl;
         model.trustUrl = trustUrl;
         model.trustAsHtml = trustAsHtml;
+        model.sortWidget = sortWidget;
 
         function init() {
             model.userId = $routeParams["uid"];
             model.websiteId = $routeParams["wid"];
             model.pageId = $routeParams["pid"];
-            model.widgets = jQuery.extend(true, {}, WidgetService.findWidgetsByPageId(model.pageId));
+            WidgetService
+                .findWidgetsByPageId(model.pageId)
+                .then(function (response) {
+                    model.widgets = response.data;
+                });
         }
 
         init();
@@ -31,6 +36,10 @@
 
         function trustAsHtml(htmlSnippet) {
             return $sce.trustAsHtml(htmlSnippet);
+        }
+
+        function sortWidget(initial, final) {
+            WidgetService.sortWidget(model.pageId, initial, final);
         }
     }
 })();

@@ -8,7 +8,11 @@
 
         function init() {
             model.userId = $routeParams["uid"];
-            model.websites = jQuery.extend(true, {}, WebsiteService.findWebsitesByUser(model.userId));
+            WebsiteService
+                .findWebsitesByUser(model.userId)
+                .then(function (response) {
+                    model.websites = response.data;
+                });
         }
 
         init();

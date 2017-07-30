@@ -10,7 +10,11 @@
 
         function init() {
             model.userId = $routeParams["uid"];
-            model.websites = jQuery.extend(true, {}, WebsiteService.findWebsitesByUser(model.userId));
+            WebsiteService
+                .findWebsitesByUser(model.userId)
+                .then(function (response) {
+                    model.websites = response.data;
+                });
         }
 
         init();
@@ -20,8 +24,11 @@
                 model.error = "Please enter in a website name";
                 return;
             }
-            WebsiteService.createWebsite(userId, website);
-            $location.url("/user/" + model.userId + "/website");
+            WebsiteService
+                .createWebsite(userId, website)
+                .then(function () {
+                    $location.url("/user/" + model.userId + "/website");
+                });
         }
     }
 })();

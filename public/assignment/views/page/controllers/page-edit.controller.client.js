@@ -13,7 +13,11 @@
             model.userId = $routeParams["uid"];
             model.websiteId = $routeParams["wid"];
             model.pageId = $routeParams["pid"];
-            model.page = jQuery.extend(true, {}, PageService.findPageById(model.pageId));
+            PageService
+                .findPageById(model.pageId)
+                .then(function (response) {
+                    model.page = response.data;
+                })
         }
 
         init();
@@ -23,13 +27,19 @@
                 model.error = "Please enter a page name";
                 return;
             }
-            PageService.updatePage(pageId, jQuery.extend(true, {}, page));
-            $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page");
+            PageService
+                .updatePage(pageId, page)
+                .then(function () {
+                    $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page");
+                });
         }
 
         function deletePage(pageId) {
-            PageService.deletePage(pageId);
-            $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page");
+            PageService
+                .deletePage(pageId)
+                .then(function () {
+                    $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page");
+                });
         }
     }
 })();

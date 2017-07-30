@@ -9,7 +9,11 @@
         function init() {
             model.userId = $routeParams["uid"];
             model.websiteId = $routeParams["wid"];
-            model.pages = jQuery.extend(true, {}, PageService.findPageByWebsiteId(model.websiteId));
+            PageService
+                .findPageByWebsiteId(model.websiteId)
+                .then(function (response) {
+                    model.pages = response.data;
+                })
         }
 
         init();
