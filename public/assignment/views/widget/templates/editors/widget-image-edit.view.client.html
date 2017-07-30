@@ -51,17 +51,21 @@
                id="width"/>
 
         <form action="/api/upload" method="post" enctype="multipart/form-data">
-            <input name="myFile" type="file" class="form-control"/>
+            <input name="myFile" type="file" class="form-control" id="wvs-widget-image-file"/>
             <input name="width" value="{{model.widget.width}}" class="wvs-display-none"/>
             <input name="userId" value="{{model.userId}}" class="wvs-display-none"/>
             <input name="websiteId" value="{{model.websiteId}}" class="wvs-display-none"/>
             <input name="pageId" value="{{model.pageId}}" class="wvs-display-none"/>
             <input name="widgetId" value="{{model.widgetId}}" class="wvs-display-none"/>
-            <button class="btn btn-default btn-primary btn-block"
+            <button class="btn btn-default btn-primary btn-block wvs-display-none" id = "wvs-upload-image-button"
                     type="submit"
                     role="button">Upload Image
             </button>
         </form>
+
+        <a class="btn btn-default btn-primary btn-block"
+           ng-click="model.uploadImage()"
+           role="button">Upload Image</a>
 
         <a class="btn btn-default btn-danger btn-block"
            ng-click="model.deleteWidget(model.widgetId)"
