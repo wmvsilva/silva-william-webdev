@@ -14,8 +14,8 @@
             model.websiteId = $routeParams["wid"];
             WebsiteService
                 .findWebsitesByUser(model.userId)
-                .then(function(response) {
-                   model.websites = response.data;
+                .then(function (response) {
+                    model.websites = response.data;
                 });
             WebsiteService
                 .findWebsitesById(model.websiteId)
@@ -33,7 +33,7 @@
             }
             WebsiteService
                 .updateWebsite(websiteId, website)
-                .then(function() {
+                .then(function () {
                     $location.url("/user/" + model.userId + "/website");
                 });
         }
@@ -41,7 +41,7 @@
         function deleteWebsite(websiteId) {
             WebsiteService
                 .deleteWebsite(websiteId)
-                .then(function() {
+                .then(function () {
                     $location.url("/user/" + model.userId + "/website");
                 });
         }

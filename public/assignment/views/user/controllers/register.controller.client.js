@@ -22,7 +22,8 @@
                 model.error = "Passwords do not match";
                 return;
             }
-            UserService.findUserByUsername(user.username)
+            UserService
+                .findUserByUsername(user.username)
                 .then(function (response) {
                     var _user = response.data;
                     if (_user === "0") {

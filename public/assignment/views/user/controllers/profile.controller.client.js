@@ -1,5 +1,4 @@
 (function () {
-
     angular
         .module("WebAppMaker")
         .controller("ProfileController", ProfileController);
@@ -30,12 +29,12 @@
             }
             UserService
                 .findUserByUsername(user.username)
-                .then(function(response) {
-                  var foundUser = response.data;
-                  if (foundUser !== "0" && foundUser._id !== user._id) {
-                      return Promise.reject({});
-                  }
-                  return UserService.updateUser(userId, jQuery.extend(true, {}, user));
+                .then(function (response) {
+                    var foundUser = response.data;
+                    if (foundUser !== "0" && foundUser._id !== user._id) {
+                        return Promise.reject({});
+                    }
+                    return UserService.updateUser(userId, jQuery.extend(true, {}, user));
                 })
                 .then(function () {
                     model.updateMessage = "User was updated";

@@ -15,7 +15,7 @@
             model.pageId = $routeParams["pid"];
             PageService
                 .findPageById(model.pageId)
-                .then(function(response) {
+                .then(function (response) {
                     model.page = response.data;
                 })
         }
@@ -29,7 +29,7 @@
             }
             PageService
                 .updatePage(pageId, page)
-                .then(function() {
+                .then(function () {
                     $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page");
                 });
         }
@@ -37,7 +37,7 @@
         function deletePage(pageId) {
             PageService
                 .deletePage(pageId)
-                .then(function() {
+                .then(function () {
                     $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page");
                 });
         }

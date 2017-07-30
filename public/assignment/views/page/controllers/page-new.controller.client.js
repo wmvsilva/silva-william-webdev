@@ -20,8 +20,9 @@
                 model.error = "Please enter a page name";
                 return;
             }
-            PageService.createPage(websiteId, page)
-                .then(function() {
+            PageService
+                .createPage(websiteId, page)
+                .then(function () {
                     $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page");
                 });
         }

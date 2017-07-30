@@ -1,6 +1,5 @@
 module.exports = function (app) {
 
-    // http handlers
     app.post("/api/user", registerUser);
     app.get("/api/user", findUser);
     app.get("/api/user/:userId", getUserById);

@@ -1,4 +1,6 @@
 module.exports = function (app) {
+    var multer = require('multer');
+    var upload = multer({dest: __dirname + '/../../public/uploads'});
 
     app.post("/api/page/:pageId/widget", createWidget);
     app.get("/api/page/:pageId/widget", findWidgetsByPageId);
@@ -6,11 +8,7 @@ module.exports = function (app) {
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
     app.put("/api/page/:pageId/widget", sortWidget);
-
-    var multer = require('multer');
-    var upload = multer({ dest: __dirname+'/../../public/uploads' });
-
-    app.post ("/api/upload", upload.single('myFile'), uploadImage);
+    app.post("/api/upload", upload.single('myFile'), uploadImage);
 
     var widgets = [
         {
@@ -63,7 +61,7 @@ module.exports = function (app) {
             }
         }
 
-        pageWidgets.sort(function(a, b) {
+        pageWidgets.sort(function (a, b) {
             return a.idx - b.idx;
         });
 
@@ -73,13 +71,13 @@ module.exports = function (app) {
     function findWidgetById(req, res) {
         var widgetId = req.params.widgetId;
 
-        for (var w in widgets) {
-            if (widgets[w]._id === widgetId) {
-                res.json(widgets[w]);
-                return;
-            }
+        var widget = findWidgetByIdInternal(widgetId);
+
+        if (widget) {
+            res.json(widget);
+        } else {
+            res.sendStatus(404);
         }
-        res.sendStatus(404);
     }
 
     function findWidgetByIdInternal(widgetId) {
@@ -124,19 +122,16 @@ module.exports = function (app) {
         var final = req.query.final;
 
         var pageWidgets = [];
-
         for (var w in widgets) {
             if (widgets[w].pageId === pageId) {
                 pageWidgets.push(widgets[w]);
             }
         }
-
-        pageWidgets.sort(function(a, b) {
+        pageWidgets.sort(function (a, b) {
             return a.idx - b.idx;
         });
 
         arrayMove(pageWidgets, initial, final);
-
         for (var i = 0; i < pageWidgets.length; i++) {
             pageWidgets[i].idx = i;
         }
@@ -148,25 +143,25 @@ module.exports = function (app) {
     }
 
     function uploadImage(req, res) {
-        var widgetId      = req.body.widgetId;
-        var width         = req.body.width;
-        var myFile        = req.file;
+        var widgetId = req.body.widgetId;
+        var width = req.body.width;
+        var myFile = req.file;
 
         var userId = req.body.userId;
         var websiteId = req.body.websiteId;
         var pageId = req.body.pageId;
 
-        var originalname  = myFile.originalname; // file name on user's computer
-        var filename      = myFile.filename;     // new file name in upload folder
-        var path          = myFile.path;         // full path of uploaded file
-        var destination   = myFile.destination;  // folder where file is saved to
-        var size          = myFile.size;
-        var mimetype      = myFile.mimetype;
+        var originalname = myFile.originalname; // file name on user's computer
+        var filename = myFile.filename;     // new file name in upload folder
+        var path = myFile.path;         // full path of uploaded file
+        var destination = myFile.destination;  // folder where file is saved to
+        var size = myFile.size;
+        var mimetype = myFile.mimetype;
 
         var widget = findWidgetByIdInternal(widgetId);
-        widget.url = '/uploads/'+filename;
+        widget.url = '/uploads/' + filename;
 
-        var callbackUrl   = "/assignment/#!/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget";
+        var callbackUrl = "/assignment/#!/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget";
 
         res.redirect(callbackUrl);
     }

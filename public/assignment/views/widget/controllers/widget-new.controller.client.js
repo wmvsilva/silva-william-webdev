@@ -38,7 +38,7 @@
             }
             WidgetService
                 .createWidget(pageId, widget)
-                .then(function(response) {
+                .then(function (response) {
                     var newWidget = response.data;
                     $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId +
                         "/widget/" + newWidget._id);

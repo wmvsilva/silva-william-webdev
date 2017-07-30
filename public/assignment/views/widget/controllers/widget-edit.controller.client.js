@@ -16,7 +16,7 @@
             model.widgetId = $routeParams["wgid"];
             WidgetService
                 .findWidgetById(model.widgetId)
-                .then(function(response) {
+                .then(function (response) {
                     model.widget = response.data;
                 });
         }
@@ -37,14 +37,15 @@
             }
             WidgetService
                 .updateWidget(widgetId, widget)
-                .then(function() {
+                .then(function () {
                     $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget");
                 });
         }
 
         function deleteWidget(widgetId) {
-            WidgetService.deleteWidget(widgetId)
-                .then(function() {
+            WidgetService
+                .deleteWidget(widgetId)
+                .then(function () {
                     $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget");
                 });
         }

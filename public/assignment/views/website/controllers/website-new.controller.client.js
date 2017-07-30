@@ -26,7 +26,7 @@
             }
             WebsiteService
                 .createWebsite(userId, website)
-                .then(function() {
+                .then(function () {
                     $location.url("/user/" + model.userId + "/website");
                 });
         }

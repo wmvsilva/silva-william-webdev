@@ -19,7 +19,8 @@
                 model.errorMessage = "User not found";
                 return;
             }
-            UserService.findUserByCredentials(user.username, user.password)
+            UserService
+                .findUserByCredentials(user.username, user.password)
                 .then(function (response) {
                     user = response.data;
                     if (user === "0") {

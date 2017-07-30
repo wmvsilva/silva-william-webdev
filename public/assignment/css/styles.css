@@ -125,3 +125,7 @@ a:hover {
 .wvs-widget .wvs-play-icon {
     padding-right: 10px;
 }
+
+.wvs-display-none {
+    display: none;
+}

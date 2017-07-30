@@ -6,6 +6,7 @@
     function wbdvSortable() {
         var initial;
         var final;
+
         return {
             scope: {
                 sortWidgetCallback: '&'

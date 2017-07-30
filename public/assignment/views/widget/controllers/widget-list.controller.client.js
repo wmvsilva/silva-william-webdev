@@ -17,7 +17,7 @@
             model.pageId = $routeParams["pid"];
             WidgetService
                 .findWidgetsByPageId(model.pageId)
-                .then(function(response) {
+                .then(function (response) {
                     model.widgets = response.data;
                 });
         }

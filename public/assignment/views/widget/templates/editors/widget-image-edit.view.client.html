@@ -50,16 +50,17 @@
                class="form-control"
                id="width"/>
 
-        <form action="/api/upload"   method="post" enctype="multipart/form-data">
-            <input  name="myFile"    type="file" class="form-control"/>
-            <input  name="width"     value="{{model.widget.width}}" style="display: none"/>
-            <input  name="userId"    value="{{model.userId}}"   style="display: none"/>
-            <input  name="websiteId" value="{{model.websiteId}}"   style="display: none"/>
-            <input  name="pageId"    value="{{model.pageId}}"   style="display: none"/>
-            <input  name="widgetId"  value="{{model.widgetId}}"   style="display: none"/>
+        <form action="/api/upload" method="post" enctype="multipart/form-data">
+            <input name="myFile" type="file" class="form-control"/>
+            <input name="width" value="{{model.widget.width}}" class="wvs-display-none"/>
+            <input name="userId" value="{{model.userId}}" class="wvs-display-none"/>
+            <input name="websiteId" value="{{model.websiteId}}" class="wvs-display-none"/>
+            <input name="pageId" value="{{model.pageId}}" class="wvs-display-none"/>
+            <input name="widgetId" value="{{model.widgetId}}" class="wvs-display-none"/>
             <button class="btn btn-default btn-primary btn-block"
-               type="submit"
-               role="button">Upload Image</button>
+                    type="submit"
+                    role="button">Upload Image
+            </button>
         </form>
 
         <a class="btn btn-default btn-danger btn-block"
