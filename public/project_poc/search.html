@@ -2,7 +2,7 @@
 <h2>Search by Movie Title</h2>
 <input placeholder="Batman"
        ng-model="movieTitle"
-       class="form-control" />
+       class="form-control"/>
 <button ng-click="model.searchMovieByTitle(movieTitle)" class="btn btn-primary btn-block">
     Search
 </button>
@@ -11,11 +11,11 @@
     <tr ng-repeat="movie in model.movies.results">
         <td>
             <a href="#!/details/{{movie.id}}">
-                {{movie.title}}
+                <h3>{{movie.title}}</h3>
             </a>
         </td>
         <td>
-            <img ng-src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" />
+            <img ng-src="https://image.tmdb.org/t/p/w185{{movie.poster_path}}"/>
         </td>
     </tr>
 </table>

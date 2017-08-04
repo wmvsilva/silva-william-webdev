@@ -1,3 +1,19 @@
 <h1>The Movie Database (TMDb) API</h1>
 <h2>Movie Details</h2>
-{{model.movie}}
+<h3>{{model.movie.title}}</h3>
+<h4>{{model.movie.tagline}}</h4>
+<img ng-src="https://image.tmdb.org/t/p/w185{{model.movie.poster_path}}"/>
+<div>
+    {{model.movie.overview}}
+    <div>
+        <h5>Release Date</h5> {{model.movie.release_date}}
+    </div>
+    <h4>Cast</h4>
+    <ul>
+        <li ng-repeat="actor in model.actors.cast">
+            {{actor.name}}
+        </li>
+    </ul>
+    <h4>Trailer</h4>
+    <iframe width="560" height="315" ng-src="{{model.videoUrl}}" frameborder="0" allowfullscreen></iframe>
+</div>
