@@ -19,6 +19,18 @@
         Search
     </button>
 
+    <table class="table">
+        <tr ng-repeat="movie in model.movies.results">
+            <td>
+                <a href="#!/details/{{movie.id}}">
+                    {{movie.title}}
+                </a>
+            </td>
+            <td>
+                <img ng-src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" />
+            </td>
+        </tr>
+    </table>
     {{model.movies}}
 </div>
 </body>
