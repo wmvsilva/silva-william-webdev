@@ -9,29 +9,7 @@
     <title>Title</title>
 </head>
 <body>
-<div class="container-fluid" ng-controller="searchController as model">
-    <h1>The Movie Database (TMDb) API</h1>
-    <h2>Search by Movie Title</h2>
-    <input placeholder="Batman"
-           ng-model="movieTitle"
-           class="form-control" />
-    <button ng-click="model.searchMovieByTitle(movieTitle)" class="btn btn-primary btn-block">
-        Search
-    </button>
-
-    <table class="table">
-        <tr ng-repeat="movie in model.movies.results">
-            <td>
-                <a href="#!/details/{{movie.id}}">
-                    {{movie.title}}
-                </a>
-            </td>
-            <td>
-                <img ng-src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" />
-            </td>
-        </tr>
-    </table>
-    {{model.movies}}
+<div ng-view class="container-fluid">
 </div>
 </body>
 </html>
