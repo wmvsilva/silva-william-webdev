@@ -14,6 +14,11 @@
             model.websiteId = $routeParams["wid"];
             model.pageId = $routeParams["pid"];
             PageService
+                .findPageByWebsiteId(model.websiteId)
+                .then(function (response) {
+                    model.pages = response.data;
+                });
+            PageService
                 .findPageById(model.pageId)
                 .then(function (response) {
                     model.page = response.data;
