@@ -35,8 +35,10 @@ module.exports = function (app, websiteModel) {
 
         return websiteModel
             .findWebsiteById(websiteId)
-            .then(function (sites) {
-                res.json(sites);
+            .then(function (websiteDoc) {
+                res.json(websiteDoc);
+            }, function (err) {
+                res.sendStatus(404).send(err);
             });
     }
 
