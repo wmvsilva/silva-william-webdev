@@ -64,13 +64,11 @@ module.exports = function (app) {
     }
 
     function getUserById(req, response) {
-        for (var u in users) {
-            if (users[u]._id === req.params.userId) {
-                response.json(users[u]);
-                return;
-            }
-        }
-        response.sendStatus(404);
+        userModel
+            .findUserById(req.params.userId)
+            .then(function (user) {
+               response.json(user);
+            });
     }
 
     function updateUser(req, res) {
