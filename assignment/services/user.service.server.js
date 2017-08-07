@@ -1,3 +1,5 @@
+var userModel = require("../models/user.model.server");
+
 module.exports = function (app) {
 
     app.post("/api/user", registerUser);
@@ -27,9 +29,14 @@ module.exports = function (app) {
 
     function registerUser(req, res) {
         var user = req.body;
-        user._id = (new Date()).getTime() + "";
-        users.push(user);
-        res.json(user);
+        userModel
+            .createUser(user)
+            .then(function (user) {
+               res.json(user);
+            });
+        // user._id = (new Date()).getTime() + "";
+        // users.push(user);
+        // res.json(user);
     }
 
     function findUser(req, res) {
