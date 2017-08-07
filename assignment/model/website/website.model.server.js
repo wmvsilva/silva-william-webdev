@@ -1,5 +1,6 @@
 module.exports = function () {
     var mongoose = require("mongoose");
+    var userModel = require("../user/user.model.server");
     var websiteSchema = require("./website.schema.server")();
 
     var websiteModel = mongoose.model("WebsiteSchema", websiteSchema);
@@ -15,7 +16,16 @@ module.exports = function () {
 
     function createWebsiteForUser(userId, website) {
         website._user = userId;
-        return websiteModel.create(website);
+        var websiteTmp = null;
+        return websiteModel
+            .create(website)
+            .then(function (websiteDoc) {
+                websiteTmp = websiteDoc;
+               return userModel.addWebsite(userId, websiteDoc._id);
+            })
+            .then(function (userDoc) {
+                return websiteTmp;
+            });
     }
 
     function findAllWebsitesForUser(userId) {
