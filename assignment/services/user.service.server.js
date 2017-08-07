@@ -44,13 +44,16 @@ module.exports = function (app) {
         var password = req.query.password;
 
         if (username && password) {
-            for (var u in users) {
-                var _user = users[u];
-                if (_user.username === username && _user.password === password) {
-                    res.json(_user);
+            userModel
+                .findUserByCredentials(username, password)
+                .then(function (user) {
+                   res.json(user);
+                   return;
+                }, function (err) {
+                    res.sendStatus(404).send(err);
                     return;
-                }
-            }
+                });
+            return;
         } else if (username) {
             for (var u in users) {
                 if (users[u].username === username) {
@@ -75,14 +78,13 @@ module.exports = function (app) {
         var userId = req.params.userId;
         var user = req.body;
 
-        for (var u in users) {
-            if (users[u]._id === userId) {
-                users[u] = user;
-                res.json(user);
-                return;
-            }
-        }
-        res.sendStatus(404);
+        userModel
+            .updateUser(userId, user)
+            .then(function (status) {
+               res.json(status);
+            }, function (err) {
+                res.sendStatus(404).send(err);
+            });
     }
 
     function deleteUser(req, res) {
