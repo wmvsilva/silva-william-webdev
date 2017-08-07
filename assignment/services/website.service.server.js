@@ -14,6 +14,8 @@ module.exports = function (app, websiteModel) {
             .createWebsiteForUser(userId, website)
             .then(function (website) {
                 res.json(website);
+            }, function (err) {
+                res.sentStatus(500).send(err);
             });
     }
 
