@@ -24,8 +24,8 @@ module.exports = function (app, websiteModel) {
 
         return websiteModel
             .findAllWebsitesForUser(userId)
-            .then(function (sites) {
-                res.json(sites);
+            .then(function (websites) {
+                res.json(websites);
             });
     }
 
