@@ -59,7 +59,7 @@ module.exports = function (app, websiteModel) {
         return websiteModel
             .deleteWebsite(websiteId)
             .then(function (status) {
-                res.sendStatus(200);
+                res.json(status);
             });
     }
 };
