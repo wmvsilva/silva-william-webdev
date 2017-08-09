@@ -53,27 +53,25 @@ module.exports = function (app) {
         var widgetId = req.params.widgetId;
         var widget = req.body;
 
-        for (var w in widgets) {
-            if (widgets[w]._id === widgetId) {
-                widgets[w] = widget;
+        widgetModel
+            .updateWidget(widgetId, widget)
+            .then(function (widget) {
                 res.json(widget);
-                return;
-            }
-        }
-        res.sendStatus(404);
+            }, function (err) {
+                res.sendStatus(404).send(err);
+            });
     }
 
     function deleteWidget(req, res) {
         var widgetId = req.params.widgetId;
 
-        for (var w in widgets) {
-            if (widgets[w]._id === widgetId) {
-                widgets.splice(w, 1);
+        widgetModel
+            .deleteWidget(widgetId)
+            .then(function (status) {
                 res.sendStatus(200);
-                return;
-            }
-        }
-        res.sendStatus(404);
+            }, function (err) {
+                res.sendStatus(404).send(err);
+            });
     }
 
     function sortWidget(req, res) {

@@ -9,6 +9,7 @@ pageModel.findPageById = findPageById;
 pageModel.updatePage = updatePage;
 pageModel.deletePage = deletePage;
 pageModel.addWidget = addWidget;
+pageModel.removeWidget = removeWidget;
 
 module.exports = pageModel;
 
