@@ -3,16 +3,17 @@ var userSchema = require("./user.schema.server");
 
 var userModel = mongoose.model("UserModel", userSchema);
 
-var api = {
-    createUser: createUser,
-    findUserById: findUserById,
-    findUserByUsername: findUserByUsername,
-    findUserByCredentials: findUserByCredentials,
-    updateUser: updateUser,
-    deleteUser: deleteUser,
-    addWebsite: addWebsite
-};
-module.exports = api;
+userModel.createUser = createUser;
+userModel.findUserById = findUserById;
+userModel.findUserByUsername = findUserByUsername;
+userModel.findUserByCredentials = findUserByCredentials;
+userModel.updateUser = updateUser;
+userModel.deleteUser = deleteUser;
+userModel.addWebsite = addWebsite;
+userModel.removeWebsite = removeWebsite;
+
+
+module.exports = userModel;
 
 function createUser(user) {
     return userModel.create(user);

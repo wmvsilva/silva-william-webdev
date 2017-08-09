@@ -54,10 +54,10 @@ module.exports = function (app, websiteModel) {
     }
 
     function deleteWebsite(req, res) {
-        var userId = req.params.userId;
         var websiteId = req.params.websiteId;
 
-        return deleteWebsite(userId, websiteId)
+        return websiteModel
+            .deleteWebsite(websiteId)
             .then(function (status) {
                 res.json(status);
             });
