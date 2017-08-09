@@ -9,7 +9,7 @@ var websiteSchema = mongoose.Schema({
     },
     {collection: "website"});
 
-websiteSchema.pre('remove', function(next) {
+websiteSchema.pre('remove', function (next) {
     console.log("test");
     mongoose.model("WebsiteModel")
         .findById(this._id)
@@ -28,7 +28,7 @@ websiteSchema.pre('remove', function(next) {
         });
 });
 
-websiteSchema.post('save', function(doc) {
+websiteSchema.post('save', function (doc) {
     mongoose.model("UserModel")
         .findById(doc._user)
         .then(function (user) {
@@ -39,14 +39,14 @@ websiteSchema.post('save', function(doc) {
             return Promise.resolve();
         })
         .then(function (user) {
-                next();
+            next();
         })
 });
 
 function deleteAllPages(pages, curI) {
-        if (pages.length === 0) {
-                return Promise.resolve();
-        }
+    if (pages.length === 0) {
+        return Promise.resolve();
+    }
     if (curI === pages.length - 1) {
         return pages[curI].remove();
     } else {

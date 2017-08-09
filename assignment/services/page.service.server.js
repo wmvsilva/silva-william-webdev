@@ -12,8 +12,9 @@ module.exports = function (app) {
         var websiteId = req.params.websiteId;
         var page = req.body;
 
-        return pageModel.createPage(websiteId, page)
-            .then(function(page) {
+        return pageModel
+            .createPage(websiteId, page)
+            .then(function (page) {
                 res.json(page);
             });
     }
@@ -21,7 +22,8 @@ module.exports = function (app) {
     function findPageByWebsiteId(req, res) {
         var websiteId = req.params.websiteId;
 
-        return pageModel.findAllPagesForWebsite(websiteId)
+        return pageModel
+            .findAllPagesForWebsite(websiteId)
             .then(function (websitePages) {
                 res.json(websitePages);
             });
@@ -41,7 +43,8 @@ module.exports = function (app) {
         var pageId = req.params.pageId;
         var page = req.body;
 
-        return pageModel.updatePage(pageId, page)
+        return pageModel
+            .updatePage(pageId, page)
             .then(function (page) {
                 res.json(page);
             });
@@ -50,7 +53,8 @@ module.exports = function (app) {
     function deletePage(req, res) {
         var pageId = req.params.pageId;
 
-        return pageModel.deletePage(pageId)
+        return pageModel
+            .deletePage(pageId)
             .then(function (status) {
                 res.sendStatus(200);
             });

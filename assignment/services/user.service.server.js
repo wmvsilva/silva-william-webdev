@@ -13,7 +13,7 @@ module.exports = function (app) {
         userModel
             .createUser(user)
             .then(function (user) {
-               res.json(user);
+                res.json(user);
             });
     }
 
@@ -29,8 +29,8 @@ module.exports = function (app) {
                         res.send("0");
                         return;
                     }
-                   res.json(user);
-                   return;
+                    res.json(user);
+                    return;
                 }, function (err) {
                     res.sendStatus(404).send(err);
                     return;
@@ -44,8 +44,8 @@ module.exports = function (app) {
                         res.send("0");
                         return;
                     }
-                   res.json(user);
-                   return;
+                    res.json(user);
+                    return;
                 });
             return;
         }
@@ -57,7 +57,7 @@ module.exports = function (app) {
         userModel
             .findUserById(req.params.userId)
             .then(function (user) {
-               response.json(user);
+                response.json(user);
             });
     }
 
@@ -68,7 +68,7 @@ module.exports = function (app) {
         userModel
             .updateUser(userId, user)
             .then(function (status) {
-               res.json(status);
+                res.json(status);
             }, function (err) {
                 res.sendStatus(404).send(err);
             });
@@ -79,7 +79,7 @@ module.exports = function (app) {
 
         userModel
             .deleteUser(userId)
-            .then(function(status) {
+            .then(function (status) {
                 res.sendStatus(200);
             });
     }

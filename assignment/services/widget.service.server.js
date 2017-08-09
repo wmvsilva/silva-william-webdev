@@ -28,12 +28,12 @@ module.exports = function (app) {
     function findWidgetsByPageId(req, res) {
         var pageId = req.params.pageId;
 
-        //TODO Make sure there is sorting here
-        // TODO Error handling
         widgetModel
             .findAllWidgetsForPage(pageId)
             .then(function (widgets) {
                 res.json(widgets);
+            }, function (err) {
+                res.status(500).send(err);
             });
     }
 
@@ -80,14 +80,13 @@ module.exports = function (app) {
         var end = req.query.final;
 
 
-        widgetModel.reorderWidget(pageId, start, end)
+        widgetModel
+            .reorderWidget(pageId, start, end)
             .then(function (page) {
                 res.sendStatus(200);
+            }, function (err) {
+                res.status(500).send(err);
             });
-    }
-
-    function arrayMove(arr, from, to) {
-        arr.splice(to, 0, arr.splice(from, 1)[0]);
     }
 
     function uploadImage(req, res) {
@@ -108,15 +107,27 @@ module.exports = function (app) {
         var size = myFile.size;
         var mimetype = myFile.mimetype;
 
-        var widget = findWidgetByIdInternal(widgetId);
-        widget.url = '/uploads/' + filename;
-        widget.width = width;
-        widget.name = name;
-        widget.text = text;
+        widgetModel
+            .findWidgetById(widgetId)
+            .then(function (widget) {
+                widget.url = '/uploads/' + filename;
+                widget.width = width;
+                widget.name = name;
+                widget.text = text;
 
-        var callbackUrl = "/assignment/#!/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget";
+                widgetModel.updateWidget(widgetId, widget)
+                    .then(function (widget) {
+                        res.json(widget);
+                    }, function (err) {
+                        res.sendStatus(404).send(err);
+                    });
 
-        res.redirect(callbackUrl);
+                var callbackUrl = "/assignment/#!/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget";
+
+                res.redirect(callbackUrl);
+            }, function (err) {
+                res.status(500).send(err);
+            });
     }
 
 };
