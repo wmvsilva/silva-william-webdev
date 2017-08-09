@@ -28,6 +28,8 @@ module.exports = function (app) {
             .findAllWebsitesForUser(userId)
             .then(function (websites) {
                 res.json(websites);
+            }, function (err) {
+                res.status(500).send(err);
             });
     }
 
@@ -52,6 +54,8 @@ module.exports = function (app) {
             .updateWebsite(websiteId, website)
             .then(function (website) {
                 res.json(website);
+            }, function (err) {
+                res.status(500).send(err);
             });
     }
 
@@ -62,6 +66,8 @@ module.exports = function (app) {
             .deleteWebsite(websiteId)
             .then(function (status) {
                 res.json(status);
+            }, function (err) {
+                res.status(500).send(err);
             });
     }
 };

@@ -10,7 +10,6 @@ var websiteSchema = mongoose.Schema({
     {collection: "website"});
 
 websiteSchema.pre('remove', function (next) {
-    console.log("test");
     mongoose.model("WebsiteModel")
         .findById(this._id)
         .populate("pages _user")

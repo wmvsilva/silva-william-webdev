@@ -16,6 +16,8 @@ module.exports = function (app) {
             .createPage(websiteId, page)
             .then(function (page) {
                 res.json(page);
+            }, function (err) {
+                res.status(500).send(err);
             });
     }
 
@@ -26,6 +28,8 @@ module.exports = function (app) {
             .findAllPagesForWebsite(websiteId)
             .then(function (websitePages) {
                 res.json(websitePages);
+            }, function (err) {
+                res.status(500).send(err);
             });
     }
 
@@ -36,6 +40,8 @@ module.exports = function (app) {
             .findPageById(pageId)
             .then(function (page) {
                 res.json(page);
+            }, function (err) {
+                res.status(500).send(err);
             });
     }
 
@@ -47,6 +53,8 @@ module.exports = function (app) {
             .updatePage(pageId, page)
             .then(function (page) {
                 res.json(page);
+            }, function (err) {
+                res.status(500).send(err);
             });
     }
 
@@ -57,6 +65,8 @@ module.exports = function (app) {
             .deletePage(pageId)
             .then(function (status) {
                 res.sendStatus(200);
+            }, function (err) {
+                res.status(500).send(err);
             });
     }
 };
