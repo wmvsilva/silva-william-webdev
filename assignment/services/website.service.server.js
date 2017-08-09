@@ -1,4 +1,6 @@
-module.exports = function (app, websiteModel) {
+module.exports = function (app) {
+
+    var websiteModel = require("../model/website/website.model.server");
 
     app.post("/api/user/:userId/website", createWebsite);
     app.get("/api/user/:userId/website", findWebsitesForUser);

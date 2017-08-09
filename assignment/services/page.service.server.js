@@ -1,4 +1,6 @@
-module.exports = function (app, pageModel) {
+module.exports = function (app) {
+
+    var pageModel = require("../model/page/page.model.server");
 
     app.post("/api/website/:websiteId/page", createPage);
     app.get("/api/website/:websiteId/page", findPageByWebsiteId);

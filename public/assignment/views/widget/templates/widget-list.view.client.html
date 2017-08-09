@@ -13,7 +13,7 @@
 
     <div wbdv-sortable sort-widget-callback="model.sortWidget(initial, final)" class="container-fluid">
         <div ng-repeat="widget in model.widgets" class="wvs-widget-list-item">
-            <div ng-switch="widget.widgetType">
+            <div ng-switch="widget.type">
                 <div ng-switch-when="HEADING">
                     <div ng-include src="'views/widget/templates/widget-heading.view.client.html'"></div>
                 </div>
