@@ -76,24 +76,14 @@ module.exports = function (app) {
 
     function sortWidget(req, res) {
         var pageId = req.params.pageId;
-        var initial = req.query.initial;
-        var final = req.query.final;
+        var start = req.query.initial;
+        var end = req.query.final;
 
-        var pageWidgets = [];
-        for (var w in widgets) {
-            if (widgets[w].pageId === pageId) {
-                pageWidgets.push(widgets[w]);
-            }
-        }
-        pageWidgets.sort(function (a, b) {
-            return a.idx - b.idx;
-        });
 
-        arrayMove(pageWidgets, initial, final);
-        for (var i = 0; i < pageWidgets.length; i++) {
-            pageWidgets[i].idx = i;
-        }
-        res.sendStatus(200);
+        widgetModel.reorderWidget(pageId, start, end)
+            .then(function (page) {
+                res.sendStatus(200);
+            });
     }
 
     function arrayMove(arr, from, to) {
