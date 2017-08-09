@@ -14,16 +14,7 @@ module.exports = websiteModel;
 
 function createWebsiteForUser(userId, website) {
     website._user = userId;
-    var websiteTmp = null;
-    return websiteModel
-        .create(website)
-        .then(function (websiteDoc) {
-            websiteTmp = websiteDoc;
-            return userModel.addWebsite(userId, websiteDoc._id);
-        })
-        .then(function (userDoc) {
-            return websiteTmp;
-        });
+    return websiteModel.create(website);
 }
 
 function findAllWebsitesForUser(userId) {
@@ -42,11 +33,5 @@ function deleteWebsite(websiteId) {
     var userId = null;
     return websiteModel
         .findWebsiteById(websiteId)
-        .then(function (websiteDoc) {
-            userId = websiteDoc._user;
-            return websiteModel.remove({_id: websiteId});
-        })
-        .then(function (status) {
-            return userModel.removeWebsite(userId, websiteId);
-        });
+        .remove();
 }

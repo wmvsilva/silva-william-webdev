@@ -27,9 +27,16 @@ websiteSchema.pre('remove', function(next) {
         });
 });
 
-websiteSchema.pre('create', function(next) {
-        console.log(this);
-
+websiteSchema.post('save', function(doc) {
+    mongoose.model("UserModel")
+        .findById(doc._user)
+        .then(function (user) {
+            user.websites.push(doc.id);
+            return user.save();
+        })
+        .then(function (user) {
+                next();
+        })
 });
 
 function deleteAllPages(pages, curI) {
