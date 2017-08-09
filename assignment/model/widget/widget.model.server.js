@@ -15,17 +15,9 @@ module.exports = widgetModel;
 
 function createWidget(pageId, widget) {
     widget._page = pageId;
-    var widgetTmp = null;
 
     return widgetModel
-        .create(widget)
-        .then(function (widgetDoc) {
-            widgetTmp = widgetDoc;
-            return pageModel.addWidget(pageId, widgetDoc._id);
-        })
-        .then(function (websiteDoc) {
-            return widgetTmp;
-        });
+        .create(widget);
 }
 
 function findAllWidgetsForPage(pageId) {

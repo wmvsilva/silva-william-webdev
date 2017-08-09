@@ -10,6 +10,7 @@ var websiteSchema = mongoose.Schema({
     {collection: "website"});
 
 websiteSchema.pre('remove', function(next) {
+    console.log("test");
     mongoose.model("WebsiteModel")
         .findById(this._id)
         .populate("pages _user")
@@ -31,8 +32,11 @@ websiteSchema.post('save', function(doc) {
     mongoose.model("UserModel")
         .findById(doc._user)
         .then(function (user) {
-            user.websites.push(doc.id);
-            return user.save();
+            if (user.websites.indexOf(doc.id) === -1) {
+                user.websites.push(doc.id);
+                return user.save();
+            }
+            return Promise.resolve();
         })
         .then(function (user) {
                 next();
