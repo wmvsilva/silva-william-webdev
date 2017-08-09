@@ -4,9 +4,45 @@ var websiteSchema = mongoose.Schema({
         _user: {type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'},
         name: String,
         description: String,
-        oages: [{type: mongoose.Schema.Types.ObjectId, ref: 'PageModel'}],
+        pages: [{type: mongoose.Schema.Types.ObjectId, ref: 'PageModel'}],
         dateCreated: {type: Date, default: Date.now()}
     },
     {collection: "website"});
+
+websiteSchema.pre('remove', function(next) {
+    mongoose.model("WebsiteModel")
+        .findById(this._id)
+        .populate("pages _user")
+        .exec(function (err, website) {
+            deleteAllPages(website.pages, 0)
+                .then(function (status) {
+                    var user = website._user;
+                    var index = user.websites.indexOf(website.id);
+                    user.websites.splice(index, 1);
+                    return user.save();
+                })
+                .then(function (user) {
+                    next();
+                });
+        });
+});
+
+websiteSchema.pre('create', function(next) {
+        console.log(this);
+
+});
+
+function deleteAllPages(pages, curI) {
+        if (pages.length === 0) {
+                return Promise.resolve();
+        }
+    if (curI === pages.length - 1) {
+        return pages[curI].remove();
+    } else {
+        return pages[curI].remove().then(function (status) {
+            return deleteAllPages(pages, curI + 1);
+        });
+    }
+}
 
 module.exports = websiteSchema;

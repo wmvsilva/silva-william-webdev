@@ -1,6 +1,5 @@
 var mongoose = require("mongoose");
 var userSchema = require("./user.schema.server");
-
 var userModel = mongoose.model("UserModel", userSchema);
 
 userModel.createUser = createUser;
@@ -11,7 +10,6 @@ userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
 userModel.addWebsite = addWebsite;
 userModel.removeWebsite = removeWebsite;
-
 
 module.exports = userModel;
 
@@ -36,7 +34,10 @@ function updateUser(userId, user) {
 }
 
 function deleteUser(userId) {
-    return userModel.remove({_id: userId});
+    return userModel.findUserById(userId)
+        .then(function (user) {
+            return user.remove();
+        });
 }
 
 function addWebsite(userId, websiteId) {
