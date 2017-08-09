@@ -25,8 +25,17 @@
         <input ng-model="model.widget.rows" class="form-control" type="number"/>
         Placeholder
         <input ng-model="model.widget.placeholder" class="form-control"/>
-        Formatted
-        <input ng-model="model.widget.formatted" type="checkbox"/>
+
+        <div class="input-group">
+            <input type="text"
+                   class="form-control wvs-formatted-box"
+                   value="Formatted"
+                   readonly>
+            <span class="input-group-addon">
+                <input ng-model="model.widget.formatted"
+                       type="checkbox" />
+            </span>
+        </div>
 
         <a class="btn btn-default btn-danger btn-block"
            ng-click="model.deleteWidget(model.widgetId)"
