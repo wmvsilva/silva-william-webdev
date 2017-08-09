@@ -3,14 +3,13 @@ var pageSchema = require("./page.schema.server");
 
 var pageModel = mongoose.model("PageModel", pageSchema);
 
-var api = {
-    createPage: createPage,
-    findAllPagesForWebsite: findAllPagesForWebsite,
-    findPageById: findPageById,
-    updatePage: updatePage,
-    deletePage: deletePage
-};
-module.exports = api;
+pageModel.createPage = createPage;
+pageModel.findAllPagesForWebsite = findAllPagesForWebsite;
+pageModel.findPageById = findPageById;
+pageModel.updatePage = updatePage;
+pageModel.deletePage = deletePage;
+
+module.exports = pageModel;
 
 function createPage(websiteId, page) {
     page._website = websiteId;
