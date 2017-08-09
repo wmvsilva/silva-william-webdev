@@ -12,7 +12,13 @@
     </nav>
 
     <div class="container-fluid">
+        <div text-angular
+             ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'], ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],['indent','outdent'],['html']]"
+             ng-model="model.widget.text"></div>
 
+        <a class="btn btn-default btn-danger btn-block"
+           ng-click="model.deleteWidget(model.widgetId)"
+           role="button">Delete</a>
     </div>
 
     <nav class="navbar navbar-default navbar-fixed-bottom">
@@ -22,14 +28,5 @@
             </a>
         </div>
     </nav>
-
-    <div text-angular
-         ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'], ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],['indent','outdent'],['html']]"
-         ng-model="model.html"
-    ></div>
-
-    {{model.html}}
-
-    <div ng-bind-html="model.html"></div>
 
 </div>

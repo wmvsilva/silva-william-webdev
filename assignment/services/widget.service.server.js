@@ -21,7 +21,7 @@ module.exports = function (app) {
             .then(function (widget) {
                 res.json(widget);
             }, function (err) {
-                res.sentStatus(500).send(err);
+                res.status(500).send(err);
             });
     }
 
