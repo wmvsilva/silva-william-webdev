@@ -14,7 +14,7 @@ websiteSchema.pre('remove', function (next) {
         .findById(this._id)
         .populate("pages _user")
         .exec(function (err, website) {
-            deleteAllPages(website.pages, 0)
+            deleteAllKids(website.pages, 0)
                 .then(function (status) {
                     var user = website._user;
                     var index = user.websites.indexOf(website.id);
@@ -42,15 +42,15 @@ websiteSchema.post('save', function (doc) {
         })
 });
 
-function deleteAllPages(pages, curI) {
-    if (pages.length === 0) {
+function deleteAllKids(kids, curI) {
+    if (kids.length === 0) {
         return Promise.resolve();
     }
-    if (curI === pages.length - 1) {
-        return pages[curI].remove();
+    if (curI === kids.length - 1) {
+        return kids[curI].remove();
     } else {
-        return pages[curI].remove().then(function (status) {
-            return deleteAllPages(pages, curI + 1);
+        return kids[curI].remove().then(function (status) {
+            return deleteAllKids(kids, curI + 1);
         });
     }
 }

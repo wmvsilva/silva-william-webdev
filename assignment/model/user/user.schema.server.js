@@ -17,20 +17,23 @@ userSchema.pre('remove', function(next) {
         .findById(this._id)
         .populate("websites")
         .exec(function (err, user) {
-            deleteAllWebsites(user.websites, 0).then(function(status) {
+            deleteAllKids(user.websites, 0).then(function(status) {
                 next();
             });
         });
 });
 
-function deleteAllWebsites(websites, curI) {
-        if (curI === websites.length - 1) {
-             return websites[curI].remove();
-        } else {
-            return websites[curI].remove().then(function (status) {
-                return deleteAllWebsites(websites, curI + 1);
-            });
-        }
+function deleteAllKids(kids, curI) {
+    if (kids.length === 0) {
+        return Promise.resolve();
+    }
+    if (curI === kids.length - 1) {
+        return kids[curI].remove();
+    } else {
+        return kids[curI].remove().then(function (status) {
+            return deleteAllKids(kids, curI + 1);
+        });
+    }
 }
 
 module.exports = userSchema;
