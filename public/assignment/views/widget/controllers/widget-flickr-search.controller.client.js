@@ -1,9 +1,9 @@
 (function () {
     angular
         .module("WebAppMaker")
-        .controller("flickrController", flickrController);
+        .controller("FlickrImageSearchController", FlickrImageSearchController);
 
-    function flickrController(flickrService, $routeParams, WidgetService, $location) {
+    function FlickrImageSearchController(FlickrService, $routeParams, WidgetService, $location) {
         var model = this;
 
         model.searchPhotos = searchPhotos;
@@ -23,7 +23,7 @@
         init();
 
         function selectPhoto(photo) {
-            var url = "https://farm"+photo.farm+".staticflickr.com/"+photo.server+"/"+photo.id+"_"+photo.secret+"_m.jpg";
+            var url = "https://farm"+photo.farm+".staticflickr.com/"+photo.server+"/"+photo.id+"_"+photo.secret+"_b.jpg";
             model.widget.url = url;
             WidgetService
                 .updateWidget(model.widgetId, model.widget)
@@ -33,11 +33,9 @@
         }
 
         function searchPhotos(searchTerm) {
-            console.log(searchTerm);
-            flickrService.searchPhotos(searchTerm)
+            FlickrService.searchPhotos(searchTerm)
                 .then(function(response) {
-                    console.log(response.data);
-                    data = response.data.replace("jsonFlickrApi(","");
+                    var data = response.data.replace("jsonFlickrApi(","");
                     data = data.substring(0,data.length - 1);
                     data = JSON.parse(data);
                     model.photos = data.photos;

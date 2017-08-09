@@ -40,7 +40,6 @@ function updateWidget(widgetId, widget) {
 }
 
 function deleteWidget(widgetId) {
-    var pageId = null;
     return widgetModel
         .findWidgetById(widgetId)
         .then(function (widgetDoc) {
