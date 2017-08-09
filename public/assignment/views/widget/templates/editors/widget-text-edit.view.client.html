@@ -1,10 +1,44 @@
-<div class="container-fluid">
-    Text
-    <input ng-model="model.widget.text" class="form-control"/>
-    Rows
-    <input ng-model="model.widget.rows" class="form-control" type="number"/>
-    Placeholder
-    <input ng-model="model.widget.placeholder" class="form-control"/>
-    Formatted
-    <input ng-model="model.widget.formatted" type="checkbox"/>
+<div class="wvs wvs-pages">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+                <span class="glyphicon glyphicon-chevron-left pull-left wvs-nav-icon wvs-left-arrow"></span>
+            </a>
+            <span class="navbar-brand">Widget Edit</span>
+            <a ng-click="model.updateWidget(model.widgetId, model.widget)">
+                <span class="glyphicon glyphicon-ok pull-right wvs-nav-icon"></span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <label for="name">Name</label>
+        <input name="name"
+               ng-model="model.widget.name"
+               placeholder="Widget Name"
+               type="text"
+               class="form-control"
+               id="name"/>
+        Text
+        <input ng-model="model.widget.text" class="form-control"/>
+        Rows
+        <input ng-model="model.widget.rows" class="form-control" type="number"/>
+        Placeholder
+        <input ng-model="model.widget.placeholder" class="form-control"/>
+        Formatted
+        <input ng-model="model.widget.formatted" type="checkbox"/>
+
+        <a class="btn btn-default btn-danger btn-block"
+           ng-click="model.deleteWidget(model.widgetId)"
+           role="button">Delete</a>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <a href="#!/user/{{model.userId}}">
+                <span class="glyphicon glyphicon-user pull-right wvs-nav-icon wvs-profile-icon"></span>
+            </a>
+        </div>
+    </nav>
+
 </div>

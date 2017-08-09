@@ -12,6 +12,14 @@
     </nav>
 
     <div class="container-fluid">
+        <label for="name">Name</label>
+        <input name="name"
+               ng-model="model.widget.name"
+               placeholder="Widget Name"
+               type="text"
+               class="form-control"
+               id="name"/>
+
         <div text-angular
              ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'], ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],['indent','outdent'],['html']]"
              ng-model="model.widget.text"></div>
