@@ -25,12 +25,12 @@
         init();
 
         function updateWidget(widgetId, widget) {
-            if (jQuery.inArray(widget.widgetType, ["HEADING", "HTML"]) !== -1) {
+            if (jQuery.inArray(widget.type, ["HEADING", "HTML"]) !== -1) {
                 if (!widget.text) {
                     model.error = "Please enter widget text";
                     return;
                 }
-            } else if (jQuery.inArray(widget.widgetType, ["IMAGE", "YOUTUBE"]) !== -1) {
+            } else if (jQuery.inArray(widget.type, ["IMAGE", "YOUTUBE"]) !== -1) {
                 if (!widget.url) {
                     model.error = "Please enter a valid widget url";
                     return;

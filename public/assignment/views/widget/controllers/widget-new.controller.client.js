@@ -18,7 +18,7 @@
 
         function createWidget(pageId, widgetType) {
             var widget = {};
-            widget.widgetType = widgetType;
+            widget.type = widgetType;
             switch (widgetType) {
                 case "HEADING":
                     widget.size = 1;

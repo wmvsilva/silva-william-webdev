@@ -4,7 +4,7 @@
             <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                 <span class="glyphicon glyphicon-chevron-left pull-left wvs-nav-icon wvs-left-arrow"></span>
             </a>
-            <span class="navbar-brand">HTML Widget</span>
+            <span class="navbar-brand">Widget Edit</span>
             <a ng-click="model.updateWidget(model.widgetId, model.widget)">
                 <span class="glyphicon glyphicon-ok pull-right wvs-nav-icon"></span>
             </a>
@@ -19,10 +19,23 @@
                type="text"
                class="form-control"
                id="name"/>
+        Text
+        <input ng-model="model.widget.text" class="form-control"/>
+        Rows
+        <input ng-model="model.widget.rows" class="form-control" type="number"/>
+        Placeholder
+        <input ng-model="model.widget.placeholder" class="form-control"/>
 
-        <div text-angular
-             ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'], ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],['indent','outdent'],['html']]"
-             ng-model="model.widget.text"></div>
+        <div class="input-group">
+            <input type="text"
+                   class="form-control wvs-formatted-box"
+                   value="Formatted"
+                   readonly>
+            <span class="input-group-addon">
+                <input ng-model="model.widget.formatted"
+                       type="checkbox" />
+            </span>
+        </div>
 
         <a class="btn btn-default btn-danger btn-block"
            ng-click="model.deleteWidget(model.widgetId)"
