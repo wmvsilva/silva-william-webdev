@@ -3,13 +3,14 @@
         .module("tmdbApp")
         .controller("detailsController", detailsController);
 
-    function detailsController($routeParams, movieService, $sce, UserService) {
+    function detailsController($routeParams, movieService, $sce, UserService, ReviewService) {
         var model = this;
 
         model.trustUrl = trustUrl;
         model.likeMovie = likeMovie;
         model.unlikeMovie = unlikeMovie;
         model.doesUserLikeMovie = doesUserLikeMovie;
+        model.createReview = createReview;
 
         function init() {
             model.id = $routeParams.id;
@@ -77,6 +78,15 @@
                 return false;
             }
             return model.user.likedMovies.indexOf(model.movie.id) !== -1;
+        }
+
+        function createReview(userId, movieId, review) {
+            review._user = userId;
+            review._movieId = movieId;
+            ReviewService.createReview(review)
+                .then(function (review) {
+                    console.log("Review made");
+                })
         }
     }
 })();

@@ -36,3 +36,12 @@
     <h4>Trailer</h4>
     <iframe width="560" height="315" ng-src="{{model.videoUrl}}" frameborder="0" allowfullscreen></iframe>
 </div>
+
+<h2>Reviews</h2>
+{{model.reviews}}
+
+<h3>Write Review</h3>
+<input ng-model="model.review.text">
+<div class="btn btn-primary" ng-click="model.createReview(userId, movieId, model.review)">
+    Submit Review
+</div>
