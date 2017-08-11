@@ -34,7 +34,10 @@ function findUserByCredentials(username, password) {
 
 function updateUser(userId, user) {
     return userModel
-        .update({_id: userId}, {$set: user});
+        .update({_id: userId}, {$set: user})
+        .then((function (user) {
+            return userModel.findUserById(userId);
+        }));
 }
 
 function deleteUser(userId) {

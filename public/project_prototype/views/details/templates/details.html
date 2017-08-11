@@ -4,6 +4,25 @@
 <h4>{{model.movie.tagline}}</h4>
 <img ng-src="https://image.tmdb.org/t/p/w185{{model.movie.poster_path}}"/>
 <div>
+    <div ng-switch="model.doesUserLikeMovie()">
+        <div ng-switch-when="true">
+            LIKED
+        </div>
+        <div ng-switch-when="false">
+            NOT LIKED
+        </div>
+    </div>
+    <a ng-click="model.likeMovie(model.userId, model.movie.id)">
+        Like Movie
+    </a>
+    <div>
+        <a ng-click="model.unlikeMovie(model.userId, model.movie.id)">
+            Un-like Movie
+        </a>
+    </div>
+</div>
+
+<div>
     {{model.movie.overview}}
     <div>
         <h5>Release Date</h5> {{model.movie.release_date}}

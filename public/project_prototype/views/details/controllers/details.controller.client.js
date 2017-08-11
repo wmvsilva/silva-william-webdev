@@ -3,13 +3,23 @@
         .module("tmdbApp")
         .controller("detailsController", detailsController);
 
-    function detailsController($routeParams, movieService, $sce) {
+    function detailsController($routeParams, movieService, $sce, UserService) {
         var model = this;
 
         model.trustUrl = trustUrl;
+        model.likeMovie = likeMovie;
+        model.unlikeMovie = unlikeMovie;
+        model.doesUserLikeMovie = doesUserLikeMovie;
 
         function init() {
             model.id = $routeParams.id;
+            model.userId = $routeParams.userId;
+
+            UserService
+                .findUserById(model.userId)
+                .then(function (response) {
+                    model.user = response.data;
+                });
 
             movieService
                 .searchMovieById(model.id)
@@ -39,6 +49,34 @@
 
         function trustUrl(url) {
             return $sce.trustAsResourceUrl(url);
+        }
+
+        function likeMovie(userId, movieId) {
+            var user = model.user;
+            user.likedMovies.push(movieId);
+            UserService.updateUser(userId, user)
+                .then(function (response) {
+                    model.user = response.data;
+                });
+        }
+
+        function unlikeMovie(userId, movieId) {
+            var user = model.user;
+            var index = user.likedMovies.indexOf(movieId);
+            user.likedMovies.splice(index, 1);
+
+
+            UserService.updateUser(userId, user)
+                .then(function (response) {
+                    model.user = response.data;
+                });
+        }
+
+        function doesUserLikeMovie() {
+            if (!model.user || !model.movie) {
+                return false;
+            }
+            return model.user.likedMovies.indexOf(model.movie.id) !== -1;
         }
     }
 })();

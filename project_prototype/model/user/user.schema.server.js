@@ -6,9 +6,7 @@ var userSchema = mongoose.Schema({
         firstName: String,
         lastName: String,
         email: String,
-        phone: String,
-        websites: [{type: mongoose.Schema.Types.ObjectId, ref: 'WebsiteModel'}],
-        dateCreated: {type: Date, default: Date.now()}
+        likedMovies: [Number]
     },
     {collection: "project-user"});
 
