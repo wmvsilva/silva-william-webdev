@@ -28,6 +28,12 @@
                     }
                 });
 
+            UserService
+                .followedBy(model.userId)
+                .then(function (response) {
+                    model.followedBy = response.data;
+                });
+
             ReviewService
                 .findReviewsByUserId(model.userId)
                 .then(function (response) {

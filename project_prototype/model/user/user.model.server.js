@@ -12,6 +12,8 @@ userModel.deleteUser = deleteUser;
 userModel.followUser = followUser;
 userModel.unfollowUser = unfollowUser;
 
+userModel.whoFollows = whoFollows;
+
 module.exports = userModel;
 
 function createUser(user) {
@@ -67,4 +69,9 @@ function unfollowUser(userId, otherUserId) {
             user.following.splice(index, 1);
             return user.save();
         })
+}
+
+function whoFollows(userId) {
+    return userModel
+        .find({following: userId});
 }

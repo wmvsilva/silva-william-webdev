@@ -10,6 +10,7 @@ module.exports = function (app) {
 
     app.get("/project-api/user-follow/", followUser);
     app.get("/project-api/user-unfollow/", unfollowUser);
+    app.get("/project-api/user-who-follows/:userId", whoFollows)
 
 
     function registerUser(req, res) {
@@ -120,6 +121,19 @@ module.exports = function (app) {
             .unfollowUser(userId, otherUserId)
             .then(function (status) {
                 res.json(status);
+            }, function (err) {
+                res.status(500).send(err);
+                return;
+            });
+    }
+
+    function whoFollows(req, res) {
+        var userId = req.params.userId;
+
+        userModel
+            .whoFollows(userId)
+            .then(function (users) {
+                res.json(users);
             }, function (err) {
                 res.status(500).send(err);
                 return;

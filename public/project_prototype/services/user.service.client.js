@@ -13,7 +13,8 @@
             "updateUser": updateUser,
             "deleteUser": deleteUser,
             followUser: followUser,
-            unfollowUser: unfollowUser
+            unfollowUser: unfollowUser,
+            followedBy: followedBy
         };
         return api;
 
@@ -54,6 +55,11 @@
 
         function unfollowUser(userId, otherUserId) {
             var url = "/project-api/user-unfollow/?userId=" + userId + "&otherUserId=" + otherUserId;
+            return $http.get(url);
+        }
+
+        function followedBy(userId) {
+            var url = "/project-api/user-who-follows/" + userId;
             return $http.get(url);
         }
 
