@@ -3,14 +3,28 @@ module.exports = function (app) {
     var productModel = require("../model/product/product.model.server");
 
     app.post("/project-api/product", createProduct);
-    app.get("/project-api/product/:userId", findProductsByUserId);
+    app.get("/project-api/product/id/:productId", findProductById);
+    app.get("/project-api/product/user/:userId", findProductsByUserId);
     app.get("/project-api/product/movie/:movieId", findProductsByMovieId);
     app.delete("/project-api/product/:productId", deleteProduct);
+    app.get("/project-api/product/buy/", userBuyProduct);
 
     function createProduct(req, res) {
         var product = req.body;
         productModel
             .createProduct(product)
+            .then(function (product) {
+                res.json(product);
+            }, function (err) {
+                res.status(500).send(err);
+            });
+    }
+
+    function findProductById(req, res) {
+        var productId = req.params.productId;
+
+        return productModel
+            .findProductById(productId)
             .then(function (product) {
                 res.json(product);
             }, function (err) {
@@ -49,6 +63,20 @@ module.exports = function (app) {
             .deleteProduct(productId)
             .then(function (status) {
                 res.sendStatus(200);
+            }, function (err) {
+                res.status(500).send(err);
+                return;
+            });
+    }
+
+    function userBuyProduct(req, res) {
+        var userId = req.query.userId;
+        var productId = req.query.productId;
+
+        productModel
+            .userBuyProduct(productId, userId)
+            .then(function (status) {
+                res.json(status);
             }, function (err) {
                 res.status(500).send(err);
                 return;

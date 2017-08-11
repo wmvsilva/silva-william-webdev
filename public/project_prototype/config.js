@@ -54,5 +54,10 @@
                 controller: "sellController",
                 controllerAs: "model"
             })
+            .when("/product/:productId", {
+                templateUrl: "views/sell/templates/product-detail.view.client.html",
+                controller: "productDetailController",
+                controllerAs: "model"
+            })
     }
 })();

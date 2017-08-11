@@ -6,7 +6,9 @@ var productSchema = mongoose.Schema({
         description: String,
     price: String,
     imageUrl: String,
-    category: String
+    category: String,
+    purchased: Boolean,
+    buyer: {type: mongoose.Schema.Types.ObjectId, ref: 'ProjectUserModel'}
     },
     {collection: "project-product"});
 

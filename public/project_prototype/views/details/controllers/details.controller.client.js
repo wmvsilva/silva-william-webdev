@@ -3,7 +3,7 @@
         .module("tmdbApp")
         .controller("detailsController", detailsController);
 
-    function detailsController($routeParams, movieService, $sce, UserService, ReviewService, ProductService) {
+    function detailsController($routeParams, $location, movieService, $sce, UserService, ReviewService, ProductService) {
         var model = this;
 
         model.trustUrl = trustUrl;
@@ -11,6 +11,8 @@
         model.unlikeMovie = unlikeMovie;
         model.doesUserLikeMovie = doesUserLikeMovie;
         model.createReview = createReview;
+        model.buyProduct = buyProduct;
+
 
         function init() {
             model.id = $routeParams.id;
@@ -104,6 +106,11 @@
                             model.reviews = response.data;
                         });
                 })
+        }
+
+        function buyProduct(productId) {
+            console.log("Buying " +productId);
+            $location.url("/product/" + productId +"?userId=" + model.userId);
         }
     }
 })();

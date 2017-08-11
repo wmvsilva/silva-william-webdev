@@ -7,9 +7,11 @@
 
         var api = {
             "createProduct": createProduct,
+            findProductById: findProductById,
             findProductsByUserId: findProductsByUserId,
             findProductsByMovieId: findProductsByMovieId,
-            deleteProduct: deleteProduct
+            deleteProduct: deleteProduct,
+            userBuyProduct: userBuyProduct
         };
         return api;
 
@@ -18,8 +20,13 @@
             return $http.post(url, product);
         }
 
+        function findProductById(productId) {
+            var url = "/project-api/product/id/" + productId;
+            return $http.get(url);
+        }
+
         function findProductsByUserId(userId) {
-            var url = "/project-api/product/" + userId;
+            var url = "/project-api/product/user/" + userId;
             return $http.get(url);
         }
 
@@ -31,6 +38,11 @@
         function deleteProduct(productId) {
             var url = "/project-api/product/" + productId;
             return $http.delete(url);
+        }
+
+        function userBuyProduct(userId, productId) {
+            var url = "/project-api/product/buy?productId=" + productId + "&userId=" + userId;
+            return $http.get(url);
         }
     }
 })();
