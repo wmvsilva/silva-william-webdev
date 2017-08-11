@@ -1,0 +1,74 @@
+<div class="wvs wvs-profile">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <span class="navbar-brand">Profile</span>
+            <a ng-click="model.updateUser(model.user._id, model.user)">
+                <span class="glyphicon glyphicon-ok pull-right wvs-nav-icon"></span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+
+        <div ng-show="model.updateMessage" class="alert alert-info">
+            {{model.updateMessage }}
+        </div>
+
+        <div ng-show="model.error" class="alert alert-danger">
+            {{model.error }}
+        </div>
+
+        <label for="username">Username</label>
+        <input name="username"
+               ng-model="model.user.username"
+               placeholder="username"
+               type="text"
+               class="form-control"
+               id="username"/>
+
+        <label for="email">Email</label>
+        <input name="email"
+               type="email"
+               ng-model="model.user.email"
+               placeholder="alice@wonderland.com"
+               class="form-control"
+               id="email"/>
+
+        <label for="firstName">First Name</label>
+        <input name="firstName"
+               ng-model="model.user.firstName"
+               placeholder="Alice"
+               type="text"
+               class="form-control"
+               id="firstName"/>
+
+        <label for="lastName">Last Name</label>
+        <input name="lastName"
+               ng-model="model.user.lastName"
+               placeholder="Wonderland"
+               type="text"
+               class="form-control"
+               id="lastName"/>
+
+        <a class="btn btn-default btn-primary btn-block"
+           href="#!/user/{{model.user._id}}/website"
+           role="button">Websites</a>
+
+        <a class="btn btn-default btn-danger btn-block"
+           href="#!/login"
+           role="button">Logout</a>
+
+        <a class="btn btn-default btn-danger btn-block"
+           ng-click="model.deleteUser(model.user._id)"
+           role="button">Unregister</a>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <a href="#!/user/{{model.user._id}}">
+                <span class="pull-right glyphicon glyphicon-user wvs-nav-icon"></span>
+            </a>
+        </div>
+    </nav>
+
+</div>
