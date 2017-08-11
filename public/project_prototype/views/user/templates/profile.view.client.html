@@ -62,15 +62,18 @@
             </li>
         </ul>
 
-        <h4>Purchases</h4>
+        <h4>Products for sale</h4>
         <div ng-repeat="product in model.products" class="wvs-widget-list-item">
             <b>For Movie:</b> {{product.movieTitle}}
             <b>Category:</b> {{product.category}}
             <b>Description:</b> {{product.description}}
             <b>Price:</b> {{product.price}}
             <b>Image:</b> {{product.imageUrl}}
-            <div>
-                Sold by {{product._userId}}
+            <div ng-if="product.buyer" class="btn btn-info">
+                Sold to {{product.buyer}}
+            </div>
+            <div ng-if="!product.buyer" class="btn btn-warning">
+                Not sold
             </div>
         </div>
 
