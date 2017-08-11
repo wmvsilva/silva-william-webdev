@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="tmdbApp">
+<head>
+    <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="../vendor/angular/angular.js"></script>
+    <script src="../vendor/angular/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <!-- Controllers -->
+    <script src="./views/search/controllers/search.controller.client.js"></script>
+    <script src="./views/details/controllers/details.controller.client.js"></script>
+    <!-- Services -->
+    <script src="./services/movie.service.client.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-view class="container-fluid">
+</div>
+</body>
+</html>
