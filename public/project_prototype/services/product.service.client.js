@@ -8,6 +8,7 @@
         var api = {
             "createProduct": createProduct,
             findProductsByUserId: findProductsByUserId,
+            findProductsByMovieId: findProductsByMovieId,
             deleteProduct: deleteProduct
         };
         return api;
@@ -19,6 +20,11 @@
 
         function findProductsByUserId(userId) {
             var url = "/project-api/product/" + userId;
+            return $http.get(url);
+        }
+
+        function findProductsByMovieId(movieId) {
+            var url = "/project-api/product/movie/" + movieId;
             return $http.get(url);
         }
 

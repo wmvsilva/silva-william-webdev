@@ -6,6 +6,7 @@ var productModel = mongoose.model("ProjectProductModel", productSchema);
 productModel.createProduct = createProduct;
 productModel.findProductsByUserId = findProductsByUserId;
 productModel.deleteProduct = deleteProduct;
+productModel.findProductsByMovieId = findProductsByMovieId;
 
 
 module.exports = productModel;
@@ -18,6 +19,11 @@ function createProduct(product) {
 function findProductsByUserId(userId) {
     return productModel
         .find({_userId: userId});
+}
+
+function findProductsByMovieId(movieId) {
+    return productModel
+        .find({_movieId: movieId});
 }
 
 function deleteProduct(productId) {

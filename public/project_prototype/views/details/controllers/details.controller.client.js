@@ -3,7 +3,7 @@
         .module("tmdbApp")
         .controller("detailsController", detailsController);
 
-    function detailsController($routeParams, movieService, $sce, UserService, ReviewService) {
+    function detailsController($routeParams, movieService, $sce, UserService, ReviewService, ProductService) {
         var model = this;
 
         model.trustUrl = trustUrl;
@@ -37,6 +37,13 @@
             movieService
                 .findVideosForMovie(model.id)
                 .then(renderVideos);
+
+            ProductService
+                .findProductsByMovieId(model.id)
+                .then(function (response) {
+                    model.products = response.data;
+                })
+
         }
 
         init();

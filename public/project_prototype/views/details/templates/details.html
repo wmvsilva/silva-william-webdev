@@ -49,3 +49,13 @@ Is recommended? <input type="checkbox" ng-model="model.review.isRecommended">
 <div class="btn btn-primary" ng-click="model.createReview(model.userId, model.id, model.review)">
     Submit Review
 </div>
+
+<h3>Products for sale for this movie</h3>
+<ul>
+    <li ng-repeat="product in model.products">
+        <b>Category:</b> {{product.category}}
+        <b>Description:</b> {{product.description}}
+        <b>Price:</b> {{product.price}}
+        <b>Image:</b> {{product.imageUrl}}
+    </li>
+</ul>

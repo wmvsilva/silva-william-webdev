@@ -4,6 +4,7 @@ module.exports = function (app) {
 
     app.post("/project-api/product", createProduct);
     app.get("/project-api/product/:userId", findProductsByUserId);
+    app.get("/project-api/product/movie/:movieId", findProductsByMovieId);
     app.delete("/project-api/product/:productId", deleteProduct);
 
     function createProduct(req, res) {
@@ -22,6 +23,18 @@ module.exports = function (app) {
 
         return productModel
             .findProductsByUserId(userId)
+            .then(function (products) {
+                res.json(products);
+            }, function (err) {
+                res.status(500).send(err);
+            });
+    }
+
+    function findProductsByMovieId(req, res) {
+        var movieId = req.params.movieId;
+
+        return productModel
+            .findProductsByMovieId(movieId)
             .then(function (products) {
                 res.json(products);
             }, function (err) {
