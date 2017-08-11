@@ -1,0 +1,20 @@
+<h2>What movie do you want to sell a product for?</h2>
+<input placeholder="Batman"
+       ng-model="movieTitle"
+       class="form-control"/>
+<button ng-click="model.searchMovieByTitle(movieTitle)" class="btn btn-primary btn-block">
+    Search
+</button>
+
+<table class="table">
+    <tr ng-repeat="movie in model.movies.results">
+        <td>
+            <a href="#!/sell/movie/{{movie.id}}?userId={{model.userId}}">
+                <h3>{{movie.title}}</h3>
+            </a>
+        </td>
+        <td>
+            <img ng-src="https://image.tmdb.org/t/p/w185{{movie.poster_path}}"/>
+        </td>
+    </tr>
+</table>

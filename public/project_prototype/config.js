@@ -39,5 +39,20 @@
                 controller: "ProfileController",
                 controllerAs: "model"
             })
+            .when("/sell", {
+                templateUrl: "views/sell/templates/sell.view.client.html",
+                controller: "sellController",
+                controllerAs: "model"
+            })
+            .when("/sell/search", {
+                templateUrl: "views/sell/templates/sell-search.view.client.html",
+                controller: "sellController",
+                controllerAs: "model"
+            })
+            .when("/sell/movie/:movieId", {
+                templateUrl: "views/sell/templates/sell-select.view.client.html",
+                controller: "sellController",
+                controllerAs: "model"
+            })
     }
 })();
