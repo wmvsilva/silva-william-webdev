@@ -14,7 +14,8 @@
             "deleteUser": deleteUser,
             followUser: followUser,
             unfollowUser: unfollowUser,
-            followedBy: followedBy
+            followedBy: followedBy,
+            searchUserByName: searchUserByName
         };
         return api;
 
@@ -60,6 +61,12 @@
 
         function followedBy(userId) {
             var url = "/project-api/user-who-follows/" + userId;
+            return $http.get(url);
+        }
+
+
+        function searchUserByName(username) {
+            var url = "/project-api/search-user/?username=" + username;
             return $http.get(url);
         }
 

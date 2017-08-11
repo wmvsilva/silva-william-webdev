@@ -1,0 +1,15 @@
+<h2>Search for User</h2>
+<input placeholder="user123"
+       ng-model="userName"
+       class="form-control"/>
+<button ng-click="model.searchUserByName(userName)" class="btn btn-primary btn-block">
+    Search
+</button>
+
+<ul>
+    <li ng-repeat="user in model.users">
+        <a href="#!/profile/{{user._id}}?userId={{model.userId}}">
+            {{user.username}}
+        </a>
+    </li>
+</ul>

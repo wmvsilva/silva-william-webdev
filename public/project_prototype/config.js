@@ -39,6 +39,11 @@
                 controller: "ProfileController",
                 controllerAs: "model"
             })
+            .when("/search-user", {
+                templateUrl: "views/search/templates/search-user.view.client.html",
+                controller: "SearchUserController",
+                controllerAs: "model"
+            })
             .when("/sell", {
                 templateUrl: "views/sell/templates/sell.view.client.html",
                 controller: "sellController",

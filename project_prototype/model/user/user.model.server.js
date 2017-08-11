@@ -14,6 +14,8 @@ userModel.unfollowUser = unfollowUser;
 
 userModel.whoFollows = whoFollows;
 
+userModel.searchUserByName = searchUserByName;
+
 module.exports = userModel;
 
 function createUser(user) {
@@ -74,4 +76,9 @@ function unfollowUser(userId, otherUserId) {
 function whoFollows(userId) {
     return userModel
         .find({following: userId});
+}
+
+function searchUserByName(username) {
+    return userModel
+        .find({"username" : {$regex : ".*" + username + ".*"}});
 }

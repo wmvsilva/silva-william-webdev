@@ -10,7 +10,9 @@ module.exports = function (app) {
 
     app.get("/project-api/user-follow/", followUser);
     app.get("/project-api/user-unfollow/", unfollowUser);
-    app.get("/project-api/user-who-follows/:userId", whoFollows)
+    app.get("/project-api/user-who-follows/:userId", whoFollows);
+
+    app.get("/project-api/search-user/", searchUserByName);
 
 
     function registerUser(req, res) {
@@ -132,6 +134,19 @@ module.exports = function (app) {
 
         userModel
             .whoFollows(userId)
+            .then(function (users) {
+                res.json(users);
+            }, function (err) {
+                res.status(500).send(err);
+                return;
+            });
+    }
+
+    function searchUserByName(req, res) {
+        var username = req.query.username;
+
+        userModel
+            .searchUserByName(username)
             .then(function (users) {
                 res.json(users);
             }, function (err) {
