@@ -24,17 +24,23 @@
                 .findUserById(model.otherUserId)
                 .then(function (response) {
                     model.otherUser = response.data;
-                    model.otherUser.likedMovieNames = [];
+                    model.otherUser.likedMoviesFull = [];
                     for (var i = 0; i < model.otherUser.likedMovies.length; i++) {
                         (function () {
                             var movieId = model.otherUser.likedMovies[i];
                             movieService
                                 .searchMovieById(movieId)
                                 .then(function (movie) {
-                                    model.otherUser.likedMovieNames.push(movie.title);
+                                    model.otherUser.likedMoviesFull.push(movie);
                                 });
                         })();
                     }
+                });
+
+            UserService
+                .followedBy(model.otherUserId)
+                .then(function (response) {
+                    model.followedBy = response.data;
                 });
 
             ReviewService

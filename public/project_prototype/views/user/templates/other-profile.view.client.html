@@ -20,11 +20,28 @@
 
         <h3>You are logged in as {{model.user.username}}</h3>
 
-        <h3>Username</h3>
-        {{model.otherUser.username}}
+        <h3>Viewing user '{{model.otherUser.username}}'</h3>
+
+        <h4>Follows</h4>
+        {{model.otherUser.following}}
+
+        <h4>Is Followed By</h4>
+        <ul>
+            <li ng-repeat="user in model.followedBy">
+                <a href="#!/profile/{{user._id}}?userId={{model.userId}}">
+                    {{user.username}}
+                </a>
+            </li>
+        </ul>
 
         <h4>Liked Movies</h4>
-        {{model.otherUser.likedMovieNames}}
+        <ul>
+            <li ng-repeat="movie in model.otherUser.likedMoviesFull">
+                <a href="#!/details/{{movie.id}}?userId={{model.userId}}">
+                    {{movie.title}}
+                </a>
+            </li>
+        </ul>
 
         <h4>Reviews</h4>
         <div ng-repeat="review in model.reviews" class="wvs-widget-list-item">

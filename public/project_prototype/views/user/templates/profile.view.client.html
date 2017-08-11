@@ -56,7 +56,9 @@
         <h4>You are being followed by</h4>
         <ul>
             <li ng-repeat="user in model.followedBy">
-                {{user.username}}
+                <a href="#!/profile/{{user._id}}?userId={{model.userId}}">
+                    {{user.username}}
+                </a>
             </li>
         </ul>
 
@@ -73,6 +75,13 @@
         </div>
 
         <h4>Liked Movies</h4>
+        <ul>
+            <li ng-repeat="movie in model.user.likedMoviesFull">
+                <a href="#!/details/{{movie.id}}?userId={{model.userId}}">
+                    {{movie.title}}
+                </a>
+            </li>
+        </ul>
         {{model.user.likedMovieNames}}
 
         <h4>Reviews</h4>
