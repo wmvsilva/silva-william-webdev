@@ -5,6 +5,6 @@
 <input placeholder="price" ng-model="model.product.price">
 <input placeholder="imageUrl" ng-model="model.product.imageUrl">
 
-<div class="btn btn-primary">
+<div class="btn btn-primary" ng-click="model.createProduct(model.userId, model.movieId, model.product)">
     Post Product
 </div>
