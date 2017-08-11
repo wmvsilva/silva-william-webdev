@@ -22,6 +22,12 @@
                     model.user = response.data;
                 });
 
+            ReviewService
+                .findReviewsByMovieId(model.id)
+                .then(function (response) {
+                    model.reviews = response.data;
+                });
+
             movieService
                 .searchMovieById(model.id)
                 .then(renderMovie);
@@ -81,11 +87,15 @@
         }
 
         function createReview(userId, movieId, review) {
-            review._user = userId;
+            review._userId = userId;
             review._movieId = movieId;
             ReviewService.createReview(review)
                 .then(function (review) {
-                    console.log("Review made");
+                    ReviewService
+                        .findReviewsByMovieId(model.id)
+                        .then(function (response) {
+                            model.reviews = response.data;
+                        });
                 })
         }
     }

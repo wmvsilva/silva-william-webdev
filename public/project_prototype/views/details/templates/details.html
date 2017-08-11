@@ -38,10 +38,14 @@
 </div>
 
 <h2>Reviews</h2>
-{{model.reviews}}
+<div ng-repeat="review in model.reviews" class="wvs-widget-list-item">
+    "{{review.text}}" says user {{review._userId}} <span ng-if="review.isRecommended" class="glyphicon glyphicon-ok"></span>
+    <span ng-if="!review.isRecommended" class="glyphicon glyphicon-remove"></span>
+</div>
 
 <h3>Write Review</h3>
+Is recommended? <input type="checkbox" ng-model="model.review.isRecommended">
 <input ng-model="model.review.text">
-<div class="btn btn-primary" ng-click="model.createReview(userId, movieId, model.review)">
+<div class="btn btn-primary" ng-click="model.createReview(model.userId, model.id, model.review)">
     Submit Review
 </div>

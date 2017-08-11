@@ -15,5 +15,5 @@ function createReview(review) {
 
 function findReviewsByMovieId(movieId) {
     return reviewModel
-        .find({movieId: movieId});
+        .find({_movieId: movieId});
 }
