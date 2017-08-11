@@ -8,6 +8,10 @@ module.exports = function (app) {
     app.put("/project-api/user/:userId", updateUser);
     app.delete("/project-api/user/:userId", deleteUser);
 
+    app.get("/project-api/user-follow/", followUser);
+    app.get("/project-api/user-unfollow/", unfollowUser);
+
+
     function registerUser(req, res) {
         var user = req.body;
         userModel
@@ -88,6 +92,34 @@ module.exports = function (app) {
             .deleteUser(userId)
             .then(function (status) {
                 res.sendStatus(200);
+            }, function (err) {
+                res.status(500).send(err);
+                return;
+            });
+    }
+
+    function followUser(req, res) {
+        var userId = req.query.userId;
+        var otherUserId = req.query.otherUserId;
+
+        userModel
+            .followUser(userId, otherUserId)
+            .then(function (status) {
+                res.json(status);
+            }, function (err) {
+                res.status(500).send(err);
+                return;
+            });
+    }
+
+    function unfollowUser(req, res) {
+        var userId = req.query.userId;
+        var otherUserId = req.query.otherUserId;
+
+        userModel
+            .unfollowUser(userId, otherUserId)
+            .then(function (status) {
+                res.json(status);
             }, function (err) {
                 res.status(500).send(err);
                 return;

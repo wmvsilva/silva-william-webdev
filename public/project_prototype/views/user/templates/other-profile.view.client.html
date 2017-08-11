@@ -1,0 +1,53 @@
+<div class="wvs wvs-profile">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <span class="navbar-brand">Profile</span>
+            <a ng-click="model.updateUser(model.user._id, model.user)">
+                <span class="glyphicon glyphicon-ok pull-right wvs-nav-icon"></span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+
+        <div ng-show="model.updateMessage" class="alert alert-info">
+            {{model.updateMessage }}
+        </div>
+
+        <div ng-show="model.error" class="alert alert-danger">
+            {{model.error }}
+        </div>
+
+        <h3>You are logged in as {{model.user.username}}</h3>
+
+        <h3>Username</h3>
+        {{model.otherUser.username}}
+
+        <h4>Liked Movies</h4>
+        {{model.otherUser.likedMovieNames}}
+
+        <h4>Reviews</h4>
+        <div ng-repeat="review in model.reviews" class="wvs-widget-list-item">
+            "{{review.text}}" for Movie {{review.movieTitle}} <span ng-if="review.isRecommended" class="glyphicon glyphicon-ok"></span>
+            <span ng-if="!review.isRecommended" class="glyphicon glyphicon-remove"></span>
+        </div>
+
+        <a ng-if="!model.isUserFollowing(model.user, model.otherUserId)"
+           class="btn btn-default btn-info btn-block"
+           ng-click="model.followUser(model.userId, model.otherUserId)"
+           role="button">Follow user</a>
+        <a ng-if="model.isUserFollowing(model.user, model.otherUserId)"
+           class="btn btn-default btn-danger btn-block"
+           ng-click="model.unfollowUser(model.userId, model.otherUserId)"
+           role="button">Un-follow user</a>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <a href="#!/user/{{model.user._id}}">
+                <span class="pull-right glyphicon glyphicon-user wvs-nav-icon"></span>
+            </a>
+        </div>
+    </nav>
+
+</div>

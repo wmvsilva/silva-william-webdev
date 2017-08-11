@@ -1,35 +1,44 @@
 (function () {
     angular
         .module("tmdbApp")
-        .controller("ProfileController", ProfileController);
+        .controller("OtherProfileController", OtherProfileController);
 
-    function ProfileController($routeParams, UserService, $location, ReviewService, movieService, ProductService) {
+    function OtherProfileController($routeParams, UserService, $location, ReviewService, movieService, ProductService) {
         var model = this;
 
-        model.updateUser = updateUser;
-        model.deleteUser = deleteUser;
+        model.followUser = followUser;
+        model.unfollowUser = unfollowUser;
+        model.isUserFollowing = isUserFollowing;
 
         function init() {
-            model.userId = $routeParams["uid"];
+            model.userId = $routeParams.userId;
+            model.otherUserId = $routeParams["uid"];
+
             UserService
                 .findUserById(model.userId)
                 .then(function (response) {
                     model.user = response.data;
-                    model.user.likedMovieNames = [];
-                    for (var i = 0; i < model.user.likedMovies.length; i++) {
+                })
+
+            UserService
+                .findUserById(model.otherUserId)
+                .then(function (response) {
+                    model.otherUser = response.data;
+                    model.otherUser.likedMovieNames = [];
+                    for (var i = 0; i < model.otherUser.likedMovies.length; i++) {
                         (function () {
-                            var movieId = model.user.likedMovies[i];
+                            var movieId = model.otherUser.likedMovies[i];
                             movieService
                                 .searchMovieById(movieId)
                                 .then(function (movie) {
-                                    model.user.likedMovieNames.push(movie.title);
+                                    model.otherUser.likedMovieNames.push(movie.title);
                                 });
                         })();
                     }
                 });
 
             ReviewService
-                .findReviewsByUserId(model.userId)
+                .findReviewsByUserId(model.otherUserId)
                 .then(function (response) {
                     model.reviews = response.data;
                     for (var i = 0; i < model.reviews.length; i++) {
@@ -46,7 +55,7 @@
                 });
 
             ProductService
-                .findProductsByUserId(model.userId)
+                .findProductsByUserId(model.otherUserId)
                 .then(function (response) {
                    model.products = response.data;
                     for (var i = 0; i < model.products.length; i++) {
@@ -67,36 +76,35 @@
 
         init();
 
-        function updateUser(userId, user) {
-            model.error = null;
-            model.updateMessage = null;
-            if (!user.username) {
-                model.error = "Please enter a username";
-                return;
-            }
+        function followUser(userId, otherUserId) {
             UserService
-                .findUserByUsername(user.username)
-                .then(function (response) {
-                    var foundUser = response.data;
-                    if (foundUser !== "0" && foundUser._id !== user._id) {
-                        return Promise.reject({});
-                    }
-                    return UserService.updateUser(userId, jQuery.extend(true, {}, user));
+                .followUser(userId, otherUserId)
+                .then(function (status) {
+                    UserService
+                        .findUserById(userId)
+                        .then(function (response) {
+                            model.user = response.data;
+                        });
                 })
-                .then(function () {
-                    model.updateMessage = "User was updated";
-                })
-                .catch(function () {
-                    model.error = "User with that username already exists";
-                });
         }
 
-        function deleteUser(userId) {
+        function unfollowUser(userId, otherUserId) {
             UserService
-                .deleteUser(userId)
-                .then(function () {
-                    $location.url("login");
-                });
+                .unfollowUser(userId, otherUserId)
+                .then(function (status) {
+                    UserService
+                        .findUserById(userId)
+                        .then(function (response) {
+                            model.user = response.data;
+                        });
+                })
+        }
+
+        function isUserFollowing(user, otherUserId) {
+            if (!user) {
+                return false;
+            }
+            return user.following.indexOf(otherUserId) !== -1;
         }
     }
 })();

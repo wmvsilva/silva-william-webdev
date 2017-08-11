@@ -59,5 +59,10 @@
                 controller: "productDetailController",
                 controllerAs: "model"
             })
+            .when("/profile/:uid", {
+                templateUrl: "views/user/templates/other-profile.view.client.html",
+                controller: "OtherProfileController",
+                controllerAs: "model"
+            })
     }
 })();

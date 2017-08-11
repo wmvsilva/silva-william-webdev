@@ -50,6 +50,18 @@
                class="form-control"
                id="lastName"/>
 
+        <h4>Purchases</h4>
+        <div ng-repeat="product in model.products" class="wvs-widget-list-item">
+            <b>For Movie:</b> {{product.movieTitle}}
+            <b>Category:</b> {{product.category}}
+            <b>Description:</b> {{product.description}}
+            <b>Price:</b> {{product.price}}
+            <b>Image:</b> {{product.imageUrl}}
+            <div>
+                Sold by {{product._userId}}
+            </div>
+        </div>
+
         <h4>Liked Movies</h4>
         {{model.user.likedMovieNames}}
 

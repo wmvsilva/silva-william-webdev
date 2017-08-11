@@ -11,7 +11,9 @@
             "findUserByUsername": findUserByUsername,
             "findUserByCredentials": findUserByCredentials,
             "updateUser": updateUser,
-            "deleteUser": deleteUser
+            "deleteUser": deleteUser,
+            followUser: followUser,
+            unfollowUser: unfollowUser
         };
         return api;
 
@@ -43,6 +45,16 @@
         function deleteUser(userId) {
             var url = "/project-api/user/" + userId;
             return $http.delete(url);
+        }
+
+        function followUser(userId, otherUserId) {
+            var url = "/project-api/user-follow/?userId=" + userId + "&otherUserId=" + otherUserId;
+            return $http.get(url);
+        }
+
+        function unfollowUser(userId, otherUserId) {
+            var url = "/project-api/user-unfollow/?userId=" + userId + "&otherUserId=" + otherUserId;
+            return $http.get(url);
         }
 
     }
