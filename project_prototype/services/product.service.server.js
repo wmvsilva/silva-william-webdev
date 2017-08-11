@@ -8,6 +8,7 @@ module.exports = function (app) {
     app.get("/project-api/product/movie/:movieId", findProductsByMovieId);
     app.delete("/project-api/product/:productId", deleteProduct);
     app.get("/project-api/product/buy/", userBuyProduct);
+    app.get("/project-api/products-bought/:userId", findProductsByBuyer);
 
     function createProduct(req, res) {
         var product = req.body;
@@ -80,6 +81,18 @@ module.exports = function (app) {
             }, function (err) {
                 res.status(500).send(err);
                 return;
+            });
+    }
+
+    function findProductsByBuyer(req, res) {
+        var userId = req.params.userId;
+
+        productModel
+            .findProductsByBuyer(userId)
+            .then(function (products) {
+                res.json(products);
+            }, function (err) {
+                res.status(500).send(err);
             });
     }
 };

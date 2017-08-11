@@ -60,20 +60,36 @@
             </li>
         </ul>
 
+        <h4>Products Purchased</h4>
+        <ul>
+            <li ng-repeat="product in model.productsPurchased" class="wvs-widget-list-item">
+                <b>For Movie:</b> {{product._movieId}}
+                <b>Category:</b> {{product.category}}
+                <b>Description:</b> {{product.description}}
+                <b>Price:</b> {{product.price}}
+                <b>Image:</b> {{product.imageUrl}}
+                <div>
+                    Sold by {{product._userId}}
+                </div>
+            </li>
+        </ul>
+
         <h4>Products for sale</h4>
-        <div ng-repeat="product in model.products" class="wvs-widget-list-item">
-            <b>For Movie:</b> {{product.movieTitle}}
-            <b>Category:</b> {{product.category}}
-            <b>Description:</b> {{product.description}}
-            <b>Price:</b> {{product.price}}
-            <b>Image:</b> {{product.imageUrl}}
-            <div ng-if="product.buyer" class="btn btn-info">
-                Sold to {{product.buyer}}
-            </div>
-            <div ng-if="!product.buyer" class="btn btn-warning">
-                Not sold
-            </div>
-        </div>
+        <ul>
+            <li ng-repeat="product in model.products" class="wvs-widget-list-item">
+                <b>For Movie:</b> {{product.movieTitle}}
+                <b>Category:</b> {{product.category}}
+                <b>Description:</b> {{product.description}}
+                <b>Price:</b> {{product.price}}
+                <b>Image:</b> {{product.imageUrl}}
+                <div ng-if="product.buyer" class="btn btn-info">
+                    Sold to {{product.buyer}}
+                </div>
+                <div ng-if="!product.buyer" class="btn btn-warning">
+                    Not sold
+                </div>
+            </li>
+        </ul>
 
         <h4>Liked Movies</h4>
         <ul>

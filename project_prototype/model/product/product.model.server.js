@@ -9,7 +9,7 @@ productModel.findProductsByUserId = findProductsByUserId;
 productModel.deleteProduct = deleteProduct;
 productModel.findProductsByMovieId = findProductsByMovieId;
 productModel.userBuyProduct = userBuyProduct;
-
+productModel.findProductsByBuyer = findProductsByBuyer;
 
 
 module.exports = productModel;
@@ -50,4 +50,9 @@ function userBuyProduct(productId, userId) {
             product.buyer = userId;
             return product.save();
         })
+}
+
+function findProductsByBuyer(userId) {
+    return productModel
+        .find({buyer: userId});
 }

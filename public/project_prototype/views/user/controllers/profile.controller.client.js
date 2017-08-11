@@ -68,6 +68,12 @@
                     }
                 });
 
+            ProductService
+                .findProductsByBuyer(model.userId)
+                .then(function (response) {
+                   model.productsPurchased = response.data;
+                });
+
 
         }
 

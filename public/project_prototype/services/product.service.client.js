@@ -11,7 +11,8 @@
             findProductsByUserId: findProductsByUserId,
             findProductsByMovieId: findProductsByMovieId,
             deleteProduct: deleteProduct,
-            userBuyProduct: userBuyProduct
+            userBuyProduct: userBuyProduct,
+            findProductsByBuyer: findProductsByBuyer
         };
         return api;
 
@@ -42,6 +43,11 @@
 
         function userBuyProduct(userId, productId) {
             var url = "/project-api/product/buy?productId=" + productId + "&userId=" + userId;
+            return $http.get(url);
+        }
+
+        function findProductsByBuyer(userId) {
+            var url = "/project-api/products-bought/" + userId;
             return $http.get(url);
         }
     }
