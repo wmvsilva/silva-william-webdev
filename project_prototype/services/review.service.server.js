@@ -4,6 +4,8 @@ module.exports = function (app) {
 
     app.post("/project-api/review", createReview);
     app.get("/project-api/review/:movieId", findReviewsByMovieId);
+    app.get("/project-api/review/user/:userId", findReviewsByUserId);
+
 
     function createReview(req, res) {
         var review = req.body;
@@ -21,6 +23,18 @@ module.exports = function (app) {
 
         return reviewModel
             .findReviewsByMovieId(movieId)
+            .then(function (reviews) {
+                res.json(reviews);
+            }, function (err) {
+                res.status(500).send(err);
+            });
+    }
+
+    function findReviewsByUserId(req, res) {
+        var userId = req.params.userId;
+
+        return reviewModel
+            .findReviewsByUserId(userId)
             .then(function (reviews) {
                 res.json(reviews);
             }, function (err) {

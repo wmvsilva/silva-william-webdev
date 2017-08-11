@@ -3,7 +3,7 @@
         .module("tmdbApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($routeParams, UserService, $location) {
+    function ProfileController($routeParams, UserService, $location, ReviewService, movieService) {
         var model = this;
 
         model.updateUser = updateUser;
@@ -15,7 +15,37 @@
                 .findUserById(model.userId)
                 .then(function (response) {
                     model.user = response.data;
+                    model.user.likedMovieNames = [];
+                    for (var i = 0; i < model.user.likedMovies.length; i++) {
+                        (function () {
+                            var movieId = model.user.likedMovies[i];
+                            movieService
+                                .searchMovieById(movieId)
+                                .then(function (movie) {
+                                    model.user.likedMovieNames.push(movie.title);
+                                });
+                        })();
+                    }
                 });
+
+            ReviewService
+                .findReviewsByUserId(model.userId)
+                .then(function (response) {
+                    model.reviews = response.data;
+                    for (var i = 0; i < model.reviews.length; i++) {
+                        (function () {
+                            var movieId = model.reviews[i]._movieId;
+                            var review = model.reviews[i];
+                            movieService
+                                .searchMovieById(movieId)
+                                .then(function (movie) {
+                                    review.movieTitle = movie.title;
+                                });
+                        })();
+                    }
+                });
+
+
         }
 
         init();

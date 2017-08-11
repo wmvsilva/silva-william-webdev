@@ -50,6 +50,15 @@
                class="form-control"
                id="lastName"/>
 
+        <h4>Liked Movies</h4>
+        {{model.user.likedMovieNames}}
+
+        <h4>Reviews</h4>
+        <div ng-repeat="review in model.reviews" class="wvs-widget-list-item">
+            "{{review.text}}" for Movie {{review.movieTitle}} <span ng-if="review.isRecommended" class="glyphicon glyphicon-ok"></span>
+            <span ng-if="!review.isRecommended" class="glyphicon glyphicon-remove"></span>
+        </div>
+
         <a class="btn btn-default btn-primary btn-block"
            href="#!/search?userId={{model.userId}}"
            role="button">Search for Movies</a>

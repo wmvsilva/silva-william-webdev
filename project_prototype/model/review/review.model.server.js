@@ -5,6 +5,7 @@ var reviewModel = mongoose.model("ProjectReviewModel", reviewSchema);
 
 reviewModel.createReview = createReview;
 reviewModel.findReviewsByMovieId = findReviewsByMovieId;
+reviewModel.findReviewsByUserId = findReviewsByUserId;
 
 module.exports = reviewModel;
 
@@ -16,4 +17,9 @@ function createReview(review) {
 function findReviewsByMovieId(movieId) {
     return reviewModel
         .find({_movieId: movieId});
+}
+
+function findReviewsByUserId(userId) {
+    return reviewModel
+        .find({_userId: userId});
 }

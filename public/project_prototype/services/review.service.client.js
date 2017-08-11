@@ -7,7 +7,8 @@
 
         var api = {
             "createReview": createReview,
-            findReviewsByMovieId: findReviewsByMovieId
+            findReviewsByMovieId: findReviewsByMovieId,
+            findReviewsByUserId: findReviewsByUserId
         };
         return api;
 
@@ -18,6 +19,11 @@
 
         function findReviewsByMovieId(movieId) {
             var url = "/project-api/review/" + movieId;
+            return $http.get(url);
+        }
+
+        function findReviewsByUserId(userId) {
+            var url = "/project-api/review/user/" + userId;
             return $http.get(url);
         }
     }

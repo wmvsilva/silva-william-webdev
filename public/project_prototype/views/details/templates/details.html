@@ -57,8 +57,11 @@ Is recommended? <input type="checkbox" ng-model="model.review.isRecommended">
         <b>Description:</b> {{product.description}}
         <b>Price:</b> {{product.price}}
         <b>Image:</b> {{product.imageUrl}}
-        <div class="btn btn-success" ng-click="model.buyProduct(product._id)">
+        <div ng-if="!product.purchased" class="btn btn-success" ng-click="model.buyProduct(product._id)">
             Buy
+        </div>
+        <div ng-if="product.purchased" class="btn btn-danger" >
+            Purchased
         </div>
     </li>
 </ul>
