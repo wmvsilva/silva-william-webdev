@@ -1,0 +1,14 @@
+<div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
+
+<h1>Product Details</h1>
+
+<b>For Movie:</b> {{model.product.movieTitle}}
+<b>Category:</b> {{model.product.category}}
+<b>Description:</b> {{model.product.description}}
+<b>Price:</b> {{model.product.price}}
+<b>Image:</b> {{model.product.imageUrl}}
+
+<h4>Do you want to buy this?</h4>
+<div class="btn btn-success" ng-click="model.userBuyProduct(model.userId, model.productId)">
+    Buy
+</div>
