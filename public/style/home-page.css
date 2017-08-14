@@ -30,6 +30,7 @@ a:hover {
     position: relative;
 }
 
+
 .intro-text-name::before {
     content: ' ';
     position: absolute;
@@ -56,14 +57,40 @@ a:hover {
     right: -40px;
 }
 
+@media (max-width: 991px) {
+    .intro-text-name {
+        font-size: 33px;
+    }
+    .intro-text-name::before {
+        width: 40px;
+        left: 0px;
+    }
+    .intro-text-name::after {
+        width: 40px;
+        right: 0px;
+    }
+}
+
 .intro-text-subtitle {
     font-size: 20px;
     margin-bottom: 12px;
 }
 
+@media (max-width: 991px) {
+    .intro-text-subtitle {
+        font-size: 15px;
+    }
+}
+
 .github-btn {
     font-size: 18px;
     background-color: rgba(255, 255, 255, 0.67);
+}
+
+@media (max-width: 991px) {
+    .github-btn {
+        font-size: 13px;
+    }
 }
 
 .home-page-name {
@@ -86,11 +113,21 @@ a:hover {
     border-radius: 30px;
 }
 
+@media (max-width: 991px) {
+    .profile-pic-wrapper {
+        margin-top: 16px;
+        text-align: center;
+    }
+    .profile-pic {
+        height: 200px;
+    }
+}
+
 .profile-description {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 250px;
+    height: auto;
     font-size: 16px;
 }
 
@@ -105,7 +142,7 @@ a:hover {
 }
 
 .project-row {
-    height: 250px;
+    height: auto;
 }
 
 .project-pic {
@@ -114,16 +151,25 @@ a:hover {
     background-size: cover;
     background-color: transparent;
     background-position: 50% 50%;
-    height: 100%;
+    height: 250px;
+    width: 250px;
     border-radius: 30px;
+
+    margin: 0 auto;
 }
 
 .project-description {
-    height: 100%;
+    height: auto;
     padding-left: 50px;
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+@media (max-width: 991px) {
+    .project-description {
+        padding-left: 15px;
+    }
 }
 
 .project-description-2 {
@@ -136,7 +182,7 @@ a:hover {
 
 .assignment-row {
     margin-top: 25px;
-    height: 250px;
+    height: auto;
 }
 
 .assignment-pic {
@@ -145,10 +191,12 @@ a:hover {
     background-size: contain;
     background-color: transparent;
     background-position: 50% 50%;
-    height: 100%;
+    height: 250px;
+    width: 250px;
     border-radius: 30px;
 
     border: 1px rgba(165, 160, 179, 0.48) solid;
+    margin: 0 auto;
 }
 
 .assignment-description {
@@ -157,7 +205,12 @@ a:hover {
     justify-content: center;
     flex-direction: column;
     height: 100%;
+}
 
+@media (max-width: 991px) {
+    .assignment-description {
+        padding-right: 15px;
+    }
 }
 
 .footer {
@@ -168,4 +221,10 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media (max-width: 991px) {
+    .footer {
+        font-size: 12px;
+    }
 }
