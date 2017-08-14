@@ -29,8 +29,8 @@ module.exports = function (app) {
 
     app.get('/google/oauth/callback',
         passport.authenticate('google', {
-            successRedirect: '/#!/profile',
-            failureRedirect: '/#!/login'
+            successRedirect: '/project_prototype/index.html#!/user',
+            failureRedirect: '/project_prototype/index.html#!/login'
         }));
 
     var googleConfig = {
