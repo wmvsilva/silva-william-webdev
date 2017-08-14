@@ -20,7 +20,7 @@
                 return;
             }
             UserService
-                .findUserByCredentials(user.username, user.password)
+                .login(user.username, user.password)
                 .then(function (response) {
                     user = response.data;
                     if (user === "0") {

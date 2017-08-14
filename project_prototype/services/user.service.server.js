@@ -1,6 +1,13 @@
 module.exports = function (app) {
-
+    var passport = require("passport");
     var userModel = require("../model/user/user.model.server");
+    var LocalStrategy = require('passport-local').Strategy;
+    passport.use(new LocalStrategy(localStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
+
+    app.post("/project-api/login", passport.authenticate('local'), login);
 
     app.post("/project-api/user", registerUser);
     app.get("/project-api/user", findUser);
@@ -14,6 +21,28 @@ module.exports = function (app) {
 
     app.get("/project-api/search-user/", searchUserByName);
 
+    function localStrategy(username, password, done) {
+        userModel
+            .findUserByCredentials(username, password)
+            .then(
+                function(user) {
+                    if (!user) {
+                        return done(null, false);
+                    }
+                    return done(null, user);
+                },
+                function(err) {
+                    if (err) {
+                        return done(err);
+                    }
+                }
+            );
+    }
+
+    function login(req, res) {
+        var user = req.user;
+        res.json(user);
+    }
 
     function registerUser(req, res) {
         var user = req.body;
@@ -27,8 +56,8 @@ module.exports = function (app) {
     }
 
     function findUser(req, res) {
-        var username = req.query.username;
-        var password = req.query.password;
+        var username = req.params.username;
+        var password = req.params.password;
 
         if (username && password) {
             userModel
@@ -153,5 +182,22 @@ module.exports = function (app) {
                 res.status(500).send(err);
                 return;
             });
+    }
+
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    function deserializeUser(user, done) {
+        userModel
+            .findUserById(user._id)
+            .then(
+                function(user){
+                    done(null, user);
+                },
+                function(err){
+                    done(err, null);
+                }
+            );
     }
 };
