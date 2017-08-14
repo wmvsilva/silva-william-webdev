@@ -2,42 +2,121 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Web Dev Course Home Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link href="style/normalize.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans|Pacifico" rel="stylesheet">
+
+    <link href="style/home-page.css" rel="stylesheet"/>
+    <title>William Silva - Web Dev Course Home</title>
 </head>
 <body>
-    <h1>Web Dev Course Home Page</h1>
+<div class="wrapper">
+    <div class="intro">
+        <div class="intro-text">
+            <div class="intro-text-name">
+                William Silva
+            </div>
+            <div class="intro-text-subtitle">
+                Computer Science Student, Northeastern University
+            </div>
+            <a href="https://github.com/wmvsilva/silva-william-webdev">
+                <div class="github-btn btn btn-default">
+                    <i class="fa fa-github" aria-hidden="true"></i>
+                    Github
+                </div>
+            </a>
+        </div>
+    </div>
 
-    <p>
-        This is your website's home page. Your home page should have a picture of yourself, link to your assignments,
-        link to your final project implementation on Heroku, link to your GitHub,
-        link to a 5 minute video demoing your project. Your home page should look
-        spectacular. You should feel proud to share your homepage with your potential employer.
-        I should feel proud to share your homepage with my colleagues.
-    </p>
+    <div class="container-fluid homeworks">
+        <div class="row profile">
+            <h1 class="home-page-name">Web Dev Course Home Page</h1>
+            <div class="col-md-2">
 
-    <h2>Required links</h2>
-    <ul>
-        <li>
-            <a href="project/index.html">Project</a>
-        </li>
-        <li>
-            <a href="project_poc/index.html">Project POC (Project3)</a>
-        </li>
-        <li>
-            <a href="project_prototype/index.html">Project Prototype (Project4)</a>
-        </li>
-        <li>
-            <a href="assignment/">Assignment</a>
-        </li>
-        <li>
-            <a href="test/index.html">Test MongoDB</a>
-        </li>
-        <li>
-            <a href="https://github.com/wmvsilva/silva-william-webdev">Your public repository at GitHub.com</a>
-        </li>
-        <li>
-            <a href="/lectures">Lectures</a>
-        </li>
-    </ul>
+            </div>
+            <div class="col-md-6 profile-description">
+                <div>
+                    <div class="profile-description-1">
+                        My name is William Silva, and I am a student at Northeastern University majoring in Computer
+                        Science. I am in the combined BS and MS program and will be graduating at the end of Fall 2017
+                        with both degrees.
+                    </div>
+                    <div>
+                        I've completed three software development co-ops at Galatea Associates, Swoop, and
+                        SmarterTravel. At SmarterTravel, I did my first web development work using React to make travel
+                        search websites like this. Currently, I'm focusing on classes rather than working on any
+                        personal projects.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 profile-pic-wrapper">
+                <img class="profile-pic" src="img/profile-pic.jpg"/>
+            </div>
+        </div>
+
+        <div>
+            <h1 class="work-header">My Work</h1>
+
+            <div class="row project-row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2 project-pic"></div>
+                <div class="col-md-6 project-description">
+                    <a href="project_prototype/index.html">
+                        <h3>Project: The Movie Index (PROTOTYPE)</h3>
+                    </a>
+                    <div>
+                        <a href="https://www.youtube.com/watch?v=3SqRtiS1-4o">
+                            <div class="project-video-link">
+                                Video Demo <i class="fa fa-file-video-o" aria-hidden="true"></i>
+                            </div>
+                        </a>
+                        <a href="test/index.html">
+                            <div class="project-mongo-link">
+                                Test Mongo Connection <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                            </div>
+                        </a>
+                        <div>
+                            The Movie Index (MI) is my final project for CS5610. It is hosted on Heroku and uses a Mongo
+                            mLab database. Using MI, users can log in to view and review their favorite movies! Users
+                            can
+                            maintain a profile with a description that shows all of the movies they have "liked".
+                        </div>
+                        <div class="project-description-2">
+                            Additionally, the MI allows users to sell movie products which other users can buy!
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+            <div class="row assignment-row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2 assignment-pic hidden-md hidden-lg"></div>
+                <div class="col-md-6 assignment-description">
+                    <a href="assignment/">
+                        <h3>Assignment: WebAppMaker</h3>
+                    </a>
+                    <div>
+                        WebAppMaker was created over the course of the semester as a series of homework assignments. It
+                        is hosted on Heroku and uses Mongo mLab just like the project. Users can log in to make their
+                        own web pages!
+                    </div>
+
+                </div>
+                <div class="col-md-2 assignment-pic hidden-sm hidden-xs"></div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div>
+            Copyright © William Silva 2017. All Rights Reserved.
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -1,0 +1,230 @@
+html, body, .wrapper {
+    height: 100%;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.intro {
+    background-image: url("../img/laptop.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: transparent;
+    background-position: 50% 50%;
+
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.intro-text-name {
+    font-family: 'Pacifico', cursive;
+    font-size: 58px;
+    padding-bottom: 8px;
+    position: relative;
+}
+
+
+.intro-text-name::before {
+    content: ' ';
+    position: absolute;
+    top: 50%;
+    height: 2px;
+    width: 80px;
+    margin: 0 10px;
+    display: inline-block;
+    zoom: 1;
+    background: #333;
+    left: -40px;
+}
+
+.intro-text-name::after {
+    content: ' ';
+    position: absolute;
+    top: 50%;
+    height: 2px;
+    width: 80px;
+    margin: 0 10px;
+    display: inline-block;
+    zoom: 1;
+    background: #333;
+    right: -40px;
+}
+
+@media (max-width: 991px) {
+    .intro-text-name {
+        font-size: 33px;
+    }
+    .intro-text-name::before {
+        width: 40px;
+        left: 0px;
+    }
+    .intro-text-name::after {
+        width: 40px;
+        right: 0px;
+    }
+}
+
+.intro-text-subtitle {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+@media (max-width: 991px) {
+    .intro-text-subtitle {
+        font-size: 15px;
+    }
+}
+
+.github-btn {
+    font-size: 18px;
+    background-color: rgba(255, 255, 255, 0.67);
+}
+
+@media (max-width: 991px) {
+    .github-btn {
+        font-size: 13px;
+    }
+}
+
+.home-page-name {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.profile {
+    background: #eee;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.profile-pic-wrapper {
+}
+
+.profile-pic {
+    height: 250px;
+    border-radius: 30px;
+}
+
+@media (max-width: 991px) {
+    .profile-pic-wrapper {
+        margin-top: 16px;
+        text-align: center;
+    }
+    .profile-pic {
+        height: 200px;
+    }
+}
+
+.profile-description {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    font-size: 16px;
+}
+
+.profile-description-1 {
+    margin-bottom: 25px;
+}
+
+.work-header {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.project-row {
+    height: auto;
+}
+
+.project-pic {
+    background-image: url("../img/movie-index.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: transparent;
+    background-position: 50% 50%;
+    height: 250px;
+    width: 250px;
+    border-radius: 30px;
+
+    margin: 0 auto;
+}
+
+.project-description {
+    height: auto;
+    padding-left: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+@media (max-width: 991px) {
+    .project-description {
+        padding-left: 15px;
+    }
+}
+
+.project-description-2 {
+    margin-top: 10px;
+}
+
+.project-mongo-link {
+    margin-bottom: 10px;
+}
+
+.assignment-row {
+    margin-top: 25px;
+    height: auto;
+}
+
+.assignment-pic {
+    background-image: url("../img/assignment-pic.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: transparent;
+    background-position: 50% 50%;
+    height: 250px;
+    width: 250px;
+    border-radius: 30px;
+
+    border: 1px rgba(165, 160, 179, 0.48) solid;
+    margin: 0 auto;
+}
+
+.assignment-description {
+    padding-right: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+@media (max-width: 991px) {
+    .assignment-description {
+        padding-right: 15px;
+    }
+}
+
+.footer {
+    background: #eee;
+    min-height: 46px;
+    margin-top: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 991px) {
+    .footer {
+        font-size: 12px;
+    }
+}
