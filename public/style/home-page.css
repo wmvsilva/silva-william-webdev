@@ -23,8 +23,73 @@ html, body, .wrapper {
     font-family: 'Pacifico', cursive;
     font-size: 58px;
     padding-bottom: 8px;
+    position: relative;
+}
+
+.intro-text-name::before {
+    content: ' ';
+    position: absolute;
+    top: 50%;
+    height: 2px;
+    width: 80px;
+    margin: 0 10px;
+    display: inline-block;
+    zoom: 1;
+    background: #333;
+    left: -40px;
+}
+
+.intro-text-name::after {
+    content: ' ';
+    position: absolute;
+    top: 50%;
+    height: 2px;
+    width: 80px;
+    margin: 0 10px;
+    display: inline-block;
+    zoom: 1;
+    background: #333;
+    right: -40px;
 }
 
 .intro-text-subtitle {
     font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.github-btn {
+    font-size: 18px;
+    background-color: rgba(255, 255, 255, 0.67);
+}
+
+.home-page-name {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.profile {
+    background: #eee;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.profile-pic-wrapper {
+}
+
+.profile-pic {
+    height: 250px;
+    border-radius: 30px;
+}
+
+.profile-description {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    font-size: 16px;
+}
+
+.profile-description-1 {
+    margin-bottom: 25px;
 }
