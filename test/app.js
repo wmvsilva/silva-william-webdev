@@ -16,14 +16,14 @@ if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
 // above with your own URL given to you by mLab
 
 var mongoose = require("mongoose");
-mongoose.connect(connectionString);
+var conn = mongoose.createConnection(connectionString);
 mongoose.Promise = q.Promise;
 
 var TestSchema = mongoose.Schema({
     message: String
 });
 
-var TestModel = mongoose.model("TestModel", TestSchema);
+var TestModel = conn.model("TestModel", TestSchema);
 
 function findAllMessages(req, res) {
     TestModel

@@ -1,0 +1,30 @@
+html, body, .wrapper {
+    height: 100%;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.intro {
+    background-image: url("../img/laptop.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: transparent;
+    background-position: 50% 50%;
+
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.intro-text-name {
+    font-family: 'Pacifico', cursive;
+    font-size: 58px;
+    padding-bottom: 8px;
+}
+
+.intro-text-subtitle {
+    font-size: 20px;
+}

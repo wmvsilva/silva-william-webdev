@@ -6,7 +6,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(__dirname + '/public'));
 
-// require("./test/app");
+require("./test/app");
 require("./assignment/app")(app);
 require("./project_prototype/app")(app);
 
