@@ -21,6 +21,12 @@ module.exports = function (app) {
 
     app.get("/project-api/search-user/", searchUserByName);
 
+    app.get("/project-api/checkLogin", checkLogin);
+
+    function checkLogin(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
+    }
+
     function localStrategy(username, password, done) {
         userModel
             .findUserByCredentials(username, password)

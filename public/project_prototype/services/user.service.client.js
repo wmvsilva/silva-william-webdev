@@ -15,9 +15,17 @@
             followUser: followUser,
             unfollowUser: unfollowUser,
             followedBy: followedBy,
-            searchUserByName: searchUserByName
+            searchUserByName: searchUserByName,
+            checkLogin: checkLogin
         };
         return api;
+
+        function checkLogin() {
+            return $http.get("/project-api/checkLogin")
+                .then(function (response) {
+                    return response.data;
+                });
+        }
 
         function createUser(user) {
             var url = "/project-api/user";

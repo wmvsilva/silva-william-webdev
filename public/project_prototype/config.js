@@ -37,7 +37,10 @@
             .when("/user/:uid", {
                 templateUrl: "views/user/templates/profile.view.client.html",
                 controller: "ProfileController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    qweqweqwee: checkLogin
+                }
             })
             .when("/search-user", {
                 templateUrl: "views/search/templates/search-user.view.client.html",
@@ -47,7 +50,10 @@
             .when("/sell", {
                 templateUrl: "views/sell/templates/sell.view.client.html",
                 controller: "sellController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    qweqweqwee: checkLogin
+                }
             })
             .when("/sell/search", {
                 templateUrl: "views/sell/templates/sell-search.view.client.html",
@@ -69,5 +75,20 @@
                 controller: "OtherProfileController",
                 controllerAs: "model"
             })
+    }
+
+    function checkLogin(UserService, $q, $location) {
+        var deferred = $q.defer();
+        UserService
+            .checkLogin()
+            .then(function (user) {
+                if (user === '0') {
+                    deferred.reject();
+                    $location.url("/login");
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+        return deferred.promise;
     }
 })();
