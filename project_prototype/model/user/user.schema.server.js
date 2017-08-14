@@ -7,7 +7,11 @@ var userSchema = mongoose.Schema({
         lastName: String,
         email: String,
         likedMovies: [Number],
-    following: [{type: mongoose.Schema.Types.ObjectId, ref: 'ProjectUserModel'}]
+    following: [{type: mongoose.Schema.Types.ObjectId, ref: 'ProjectUserModel'}],
+    google: {
+            id: String,
+        token: String
+    }
     },
     {collection: "project-user"});
 

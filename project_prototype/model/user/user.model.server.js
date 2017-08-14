@@ -16,7 +16,13 @@ userModel.whoFollows = whoFollows;
 
 userModel.searchUserByName = searchUserByName;
 
+userModel.findUserByGoogleId = findUserByGoogleId;
+
 module.exports = userModel;
+
+function findUserByGoogleId(googleId) {
+    return userModel.findOne({'google.id': googleId});
+}
 
 function createUser(user) {
     return userModel
