@@ -34,12 +34,12 @@
                 controller: "RegisterController",
                 controllerAs: "model"
             })
-            .when("/user/:uid", {
+            .when("/user", {
                 templateUrl: "views/user/templates/profile.view.client.html",
                 controller: "ProfileController",
                 controllerAs: "model",
                 resolve: {
-                    qweqweqwee: checkLogin
+                    user: checkLogin
                 }
             })
             .when("/search-user", {

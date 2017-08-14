@@ -3,14 +3,14 @@
         .module("tmdbApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($routeParams, UserService, $location, ReviewService, movieService, ProductService) {
+    function ProfileController($routeParams, UserService, $location, ReviewService, movieService, ProductService, user) {
         var model = this;
 
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
 
         function init() {
-            model.userId = $routeParams["uid"];
+            model.userId = user._id;
             UserService
                 .findUserById(model.userId)
                 .then(function (response) {
