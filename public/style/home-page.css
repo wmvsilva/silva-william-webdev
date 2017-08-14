@@ -3,6 +3,10 @@ html, body, .wrapper {
     font-family: 'Nunito Sans', sans-serif;
 }
 
+a:hover {
+    cursor: pointer;
+}
+
 .intro {
     background-image: url("../img/laptop.jpg");
     background-repeat: no-repeat;
@@ -92,4 +96,76 @@ html, body, .wrapper {
 
 .profile-description-1 {
     margin-bottom: 25px;
+}
+
+.work-header {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.project-row {
+    height: 250px;
+}
+
+.project-pic {
+    background-image: url("../img/movie-index.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: transparent;
+    background-position: 50% 50%;
+    height: 100%;
+    border-radius: 30px;
+}
+
+.project-description {
+    height: 100%;
+    padding-left: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.project-description-2 {
+    margin-top: 10px;
+}
+
+.project-mongo-link {
+    margin-bottom: 10px;
+}
+
+.assignment-row {
+    margin-top: 25px;
+    height: 250px;
+}
+
+.assignment-pic {
+    background-image: url("../img/assignment-pic.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: transparent;
+    background-position: 50% 50%;
+    height: 100%;
+    border-radius: 30px;
+
+    border: 1px rgba(165, 160, 179, 0.48) solid;
+}
+
+.assignment-description {
+    padding-right: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+
+}
+
+.footer {
+    background: #eee;
+    min-height: 46px;
+    margin-top: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
