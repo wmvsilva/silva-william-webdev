@@ -1,0 +1,12 @@
+.mi-navbar {
+    border-radius: 0;
+    max-width: 1200px;
+    flex: 1 auto;
+}
+
+.mi-nav-container {
+    background-color: #292b2c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
