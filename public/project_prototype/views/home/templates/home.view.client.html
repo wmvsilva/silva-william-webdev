@@ -1,0 +1,9 @@
+<div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
+
+<div class="mi-container container-fluid">
+    <h3>Playing Now</h3>
+    <div ng-repeat="movie in model.moviesPlayingNow.results">
+        <img ng-src="https://image.tmdb.org/t/p/w154{{movie.poster_path}}"/>
+        {{movie.title}}
+    </div>
+</div>

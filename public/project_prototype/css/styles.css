@@ -142,3 +142,8 @@ a:hover {
 .wvs-formatted-box:read-only {
     background-color: white;
 }
+
+.mi-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}

@@ -4,9 +4,14 @@
     flex: 1 auto;
 }
 
+.mi-navbar button {
+    cursor: pointer;
+}
+
 .mi-nav-container {
     background-color: #292b2c;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 15px;
 }

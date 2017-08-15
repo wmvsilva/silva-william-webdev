@@ -10,8 +10,8 @@
 
         $routeProvider
             .when("/", {
-                templateUrl: "views/search/templates/search.html",
-                controller: "searchController",
+                templateUrl: "views/home/templates/home.view.client.html",
+                controller: "homeController",
                 controllerAs: "model",
                 resolve: {
                     user: getLoggedInUser
