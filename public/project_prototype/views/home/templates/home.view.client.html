@@ -30,10 +30,22 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <h3>Entertainment Weekly News</h3>
-                <div ng-repeat="article in model.articles">
-                    {{article.title}}
-                    <img ng-src="{{article.urlToImage}}" class="article-image"/>
+            <div class="articles">
+                <div ng-repeat="article in model.articles" class="news-story">
+                    <a href="{{article.url}}">
+                        <div class="article-image" style="background-image: url('{{article.urlToImage}}')">
+                        </div>
+                    </a>
+                    <div class="news-story-title">
+                        <a href="{{article.url}}">
+                            <h5>{{article.title}}</h5>
+                        </a>
+                        <p class="timestamp">Posted
+                            {{article.publishedAt | date}}
+                        </p>
+                    </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>
