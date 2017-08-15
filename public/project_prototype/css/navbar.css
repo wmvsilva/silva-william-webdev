@@ -4,7 +4,7 @@
     flex: 1 auto;
 }
 
-.mi-navbar button {
+.mi-navbar button, .mi-navbar a {
     cursor: pointer;
 }
 
@@ -14,4 +14,35 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 15px;
+}
+
+.footer {
+    background: #eee;
+    min-height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 991px) {
+    .footer {
+        font-size: 12px;
+    }
+}
+
+.wrapper {
+    min-height: 100%;
+}
+
+.main {
+    overflow:auto;
+    padding-bottom:46px;
+}
+
+.footer {
+    position: relative;
+    margin-top: -46px;
+    height: 46px;
+    clear:both;
 }

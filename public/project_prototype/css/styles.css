@@ -1,6 +1,9 @@
 body {
-    padding-bottom: 60px;
     background: #f3f2f5;
+}
+
+html, body {
+    height: 100%;
 }
 
 a:hover {
