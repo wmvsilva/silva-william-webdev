@@ -10,6 +10,7 @@ module.exports = function (app) {
 
 
     app.post("/project-api/login", passport.authenticate('local'), login);
+    app.post  ('/project-api/logout',         logout);
 
     app.post("/project-api/user", registerUser);
     app.get("/project-api/user", findUser);
@@ -103,6 +104,11 @@ module.exports = function (app) {
     function login(req, res) {
         var user = req.user;
         res.json(user);
+    }
+
+    function logout(req, res) {
+        req.logOut();
+        res.send(200);
     }
 
     function registerUser(req, res) {

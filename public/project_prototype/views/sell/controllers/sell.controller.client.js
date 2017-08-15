@@ -3,7 +3,7 @@
         .module("tmdbApp")
         .controller("sellController", sellController);
 
-    function sellController($routeParams, $location, movieService, ProductService) {
+    function sellController($routeParams, $location, movieService, ProductService, user) {
         var model = this;
 
         this.searchMovieByTitle = searchMovieByTitle;
@@ -11,7 +11,9 @@
         this.deleteProduct = deleteProduct;
 
         function init() {
-            model.userId = $routeParams.userId;
+            if (user) {
+                model.userId = user._id;
+            }
             model.movieId = $routeParams.movieId;
             grabProducts();
         }
@@ -51,7 +53,7 @@
             ProductService
                 .createProduct(product)
                 .then(function (product) {
-                    $location.url("/sell?userId=" + userId);
+                    $location.url("/sell");
                 })
         }
 

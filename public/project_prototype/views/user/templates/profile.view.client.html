@@ -54,7 +54,7 @@
         <h4>You are being followed by</h4>
         <ul>
             <li ng-repeat="user in model.followedBy">
-                <a href="#!/profile/{{user._id}}?userId={{model.userId}}">
+                <a href="#!/profile/{{user._id}}">
                     {{user.username}}
                 </a>
             </li>
@@ -94,7 +94,7 @@
         <h4>Liked Movies</h4>
         <ul>
             <li ng-repeat="movie in model.user.likedMoviesFull">
-                <a href="#!/details/{{movie.id}}?userId={{model.userId}}">
+                <a href="#!/details/{{movie.id}}">
                     {{movie.title}}
                 </a>
             </li>
@@ -108,15 +108,15 @@
         </div>
 
         <a class="btn btn-default btn-primary btn-block"
-           href="#!/search?userId={{model.userId}}"
+           href="#!/search"
            role="button">Search for Movies</a>
 
         <a class="btn btn-default btn-primary btn-block"
-           href="#!/search-user?userId={{model.userId}}"
+           href="#!/search-user"
            role="button">Search for Users</a>
 
         <a class="btn btn-default btn-primary btn-block"
-           href="#!/sell?userId={{model.userId}}"
+           href="#!/sell"
            role="button">Enter Sell Mode</a>
 
         <a ng-click="model.updateUser(model.user._id, model.user)" class="btn btn-info btn-block">
@@ -124,7 +124,7 @@
         </a>
 
         <a class="btn btn-default btn-danger btn-block"
-           href="#!/login"
+           ng-click="model.logout()"
            role="button">Logout</a>
 
         <a class="btn btn-default btn-danger btn-block"

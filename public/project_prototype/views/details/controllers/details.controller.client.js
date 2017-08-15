@@ -3,7 +3,7 @@
         .module("tmdbApp")
         .controller("detailsController", detailsController);
 
-    function detailsController($routeParams, $location, movieService, $sce, UserService, ReviewService, ProductService) {
+    function detailsController($routeParams, $location, movieService, $sce, UserService, ReviewService, ProductService, user) {
         var model = this;
 
         model.trustUrl = trustUrl;
@@ -16,7 +16,9 @@
 
         function init() {
             model.id = $routeParams.id;
-            model.userId = $routeParams.userId;
+            if (user) {
+                model.userId = user._id;
+            }
 
             UserService
                 .findUserById(model.userId)
@@ -60,7 +62,9 @@
 
         function renderVideos(videos) {
             model.videos = videos;
-            model.videoUrl = trustUrl("https://www.youtube.com/embed/" + model.videos.results[0].key);
+            if (model.videos.results[0]) {
+                model.videoUrl = trustUrl("https://www.youtube.com/embed/" + model.videos.results[0].key);
+            }
         }
 
         function trustUrl(url) {
@@ -110,7 +114,7 @@
 
         function buyProduct(productId) {
             console.log("Buying " +productId);
-            $location.url("/product/" + productId +"?userId=" + model.userId);
+            $location.url("/product/" + productId);
         }
     }
 })();

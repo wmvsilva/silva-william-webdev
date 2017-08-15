@@ -22,7 +22,7 @@
         <h4>Is Followed By</h4>
         <ul>
             <li ng-repeat="user in model.followedBy">
-                <a href="#!/profile/{{user._id}}?userId={{model.userId}}">
+                <a href="#!/profile/{{user._id}}">
                     {{user.username}}
                 </a>
             </li>
@@ -31,7 +31,7 @@
         <h4>Liked Movies</h4>
         <ul>
             <li ng-repeat="movie in model.otherUser.likedMoviesFull">
-                <a href="#!/details/{{movie.id}}?userId={{model.userId}}">
+                <a href="#!/details/{{movie.id}}">
                     {{movie.title}}
                 </a>
             </li>

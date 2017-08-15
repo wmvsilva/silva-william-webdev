@@ -3,14 +3,16 @@
         .module("tmdbApp")
         .controller("productDetailController", productDetailController);
 
-    function productDetailController($routeParams, $location, movieService, ProductService) {
+    function productDetailController($routeParams, $location, movieService, ProductService, user) {
         var model = this;
 
         this.userBuyProduct = userBuyProduct;
 
 
         function init() {
-            model.userId = $routeParams.userId;
+            if (user) {
+                model.userId = user._id;
+            }
             model.productId = $routeParams.productId;
 
             ProductService
@@ -32,7 +34,7 @@
             ProductService
                 .userBuyProduct(userId, productId)
                 .then(function (status) {
-                    $location.url("/details/" + model.product._movieId + "?userId=" + model.userId);
+                    $location.url("/details/" + model.product._movieId);
                 })
         }
 

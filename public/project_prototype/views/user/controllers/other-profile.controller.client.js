@@ -3,7 +3,7 @@
         .module("tmdbApp")
         .controller("OtherProfileController", OtherProfileController);
 
-    function OtherProfileController($routeParams, UserService, $location, ReviewService, movieService, ProductService) {
+    function OtherProfileController($routeParams, UserService, $location, ReviewService, movieService, ProductService, user) {
         var model = this;
 
         model.followUser = followUser;
@@ -11,7 +11,9 @@
         model.isUserFollowing = isUserFollowing;
 
         function init() {
-            model.userId = $routeParams.userId;
+            if (user) {
+                model.userId = user._id;
+            }
             model.otherUserId = $routeParams["uid"];
 
             UserService

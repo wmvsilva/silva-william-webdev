@@ -8,16 +8,19 @@
                 <a class="nav-link" href="#!/login">Login</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#!/user/{{model.userId}}">Profile</a>
+                <a class="nav-link" href="#!/user/">Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#!/search?userId={{model.userId}}">Movie-Search</a>
+                <a class="nav-link" href="#!/search">Movie-Search</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#!/search-user?userId={{model.userId}}">User-Search</a>
+                <a class="nav-link" href="#!/search-user">User-Search</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#!/sell?userId={{model.userId}}">Sell</a>
+                <a class="nav-link" href="#!/sell">Sell</a>
+            </li>
+            <li>
+                Logged in as {{model.userId}}
             </li>
         </ul>
     </div>

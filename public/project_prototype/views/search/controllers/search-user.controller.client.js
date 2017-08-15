@@ -3,13 +3,15 @@
         .module("tmdbApp")
         .controller("SearchUserController", SearchUserController);
 
-    function SearchUserController(UserService, $routeParams) {
+    function SearchUserController(UserService, $routeParams, user) {
         var model = this;
 
         model.searchUserByName = searchUserByName;
 
         function init() {
-            model.userId = $routeParams.userId;
+            if (user) {
+                model.userId = user._id;
+            }
         }
 
         init();

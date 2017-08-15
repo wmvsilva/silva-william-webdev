@@ -8,6 +8,7 @@
 
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
+        model.logout = logout;
 
         function init() {
             model.userId = user._id;
@@ -108,6 +109,14 @@
                 .deleteUser(userId)
                 .then(function () {
                     $location.url("login");
+                });
+        }
+
+        function logout(){
+            UserService
+                .logout()
+                .then(function (response) {
+                   $location.url("/login");
                 });
         }
     }
