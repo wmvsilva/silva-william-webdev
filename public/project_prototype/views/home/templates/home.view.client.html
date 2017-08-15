@@ -1,9 +1,16 @@
 <div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
 
 <div class="mi-container container-fluid">
-    <h3>Playing Now</h3>
-    <div ng-repeat="movie in model.moviesPlayingNow.results">
-        <img ng-src="https://image.tmdb.org/t/p/w154{{movie.poster_path}}"/>
-        {{movie.title}}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h3>Playing Now</h3>
+            <div class="mi-horizontal-scroll">
+                <div ng-repeat="movie in model.moviesPlayingNow.results" class="hvr-curl-top-left">
+                    <a href="#!/details/{{movie.id}}">
+                        <img ng-src="https://image.tmdb.org/t/p/w154{{movie.poster_path}}"/>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

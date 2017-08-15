@@ -1,5 +1,6 @@
 body {
     padding-bottom: 60px;
+    background: #f3f2f5;
 }
 
 a:hover {
@@ -146,4 +147,25 @@ a:hover {
 .mi-container {
     max-width: 1200px;
     margin: 0 auto;
+}
+
+.mi-horizontal-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    display: flex;
+}
+
+.mi-horizontal-scroll img {
+    width: 120px;
+    height: 100%;
+}
+
+.mi-horizontal-scroll div:first-child {
+    margin-left: 0;
+}
+
+.mi-horizontal-scroll div {
+    margin-left: 16px;
+    height: 185px;
 }
