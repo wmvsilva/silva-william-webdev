@@ -3,9 +3,9 @@
 <h1>The Movie Database (TMDb) API</h1>
 <h2>Search by Movie Title</h2>
 <input placeholder="Batman"
-       ng-model="movieTitle"
+       ng-model="model.movieTitle"
        class="form-control"/>
-<button ng-click="model.searchMovieByTitle(movieTitle)" class="btn btn-primary btn-block">
+<button ng-click="model.searchMovieByTitle(model.movieTitle)" class="btn btn-primary btn-block">
     Search
 </button>
 

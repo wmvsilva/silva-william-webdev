@@ -16,6 +16,7 @@
             }
 
             model.logout = logout;
+            model.searchMovieNavbar = searchMovieNavbar;
         }
 
         function logout(){
@@ -24,6 +25,10 @@
                 .then(function (response) {
                     $location.url("/login");
                 });
+        }
+
+        function searchMovieNavbar(movieTitle) {
+            $location.url("/search?movieTitle=" + movieTitle);
         }
 
         var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;

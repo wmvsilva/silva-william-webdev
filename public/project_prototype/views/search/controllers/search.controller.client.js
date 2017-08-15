@@ -10,8 +10,10 @@
         model.searchMovieByTitle = searchMovieByTitle;
 
         function init() {
-            if (user) {
-                model.userId = user._id;
+            model.movieTitleParam = $routeParams.movieTitle;
+            if (model.movieTitleParam) {
+                model.movieTitle = model.movieTitleParam;
+                searchMovieByTitle(model.movieTitleParam);
             }
         }
 
