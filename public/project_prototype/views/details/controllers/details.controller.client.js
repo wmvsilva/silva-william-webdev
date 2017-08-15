@@ -3,8 +3,9 @@
         .module("tmdbApp")
         .controller("detailsController", detailsController);
 
-    function detailsController($routeParams, $location, movieService, $sce, UserService, ReviewService, ProductService, user) {
+    function detailsController($routeParams, $location, movieService, $sce, UserService, ReviewService, ProductService, user, InitializeService) {
         var model = this;
+        InitializeService.initialize(model, detailsController, arguments);
 
         model.trustUrl = trustUrl;
         model.likeMovie = likeMovie;

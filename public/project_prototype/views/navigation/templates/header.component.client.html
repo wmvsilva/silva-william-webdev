@@ -1,15 +1,16 @@
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded navbar-fixed-top">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+            aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#!/login">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#!/user/">Profile</a>
-            </li>
+    <a class="navbar-brand" href="#">
+        <i class="fa fa-film" aria-hidden="true"></i>
+        MovieIndex
+    </a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-md-0">
             <li class="nav-item">
                 <a class="nav-link" href="#!/search">Movie-Search</a>
             </li>
@@ -19,9 +20,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="#!/sell">Sell</a>
             </li>
-            <li>
-                Logged in as {{model.userId}}
-            </li>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <li ng-if="model.userId" class="nav-item"><a class="nav-link" href="#!/user">Profile</a></li>
+            <li class="nav-item"><a class="nav-link" ng-click="model.logout()">Sign Out</a></li>
         </ul>
     </div>
 </nav>

@@ -3,15 +3,14 @@
         .module("tmdbApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($routeParams, UserService, $location, ReviewService, movieService, ProductService, user) {
+    function ProfileController($routeParams, UserService, $location, ReviewService, movieService, ProductService, user, InitializeService) {
         var model = this;
+        InitializeService.initialize(model, ProfileController, arguments);
 
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
-        model.logout = logout;
 
         function init() {
-            model.userId = user._id;
             UserService
                 .findUserById(model.userId)
                 .then(function (response) {
@@ -109,14 +108,6 @@
                 .deleteUser(userId)
                 .then(function () {
                     $location.url("login");
-                });
-        }
-
-        function logout(){
-            UserService
-                .logout()
-                .then(function (response) {
-                   $location.url("/login");
                 });
         }
     }

@@ -3,8 +3,9 @@
         .module("tmdbApp")
         .controller("productDetailController", productDetailController);
 
-    function productDetailController($routeParams, $location, movieService, ProductService, user) {
+    function productDetailController($routeParams, $location, movieService, ProductService, user, InitializeService) {
         var model = this;
+        InitializeService.initialize(model, productDetailController, arguments);
 
         this.userBuyProduct = userBuyProduct;
 

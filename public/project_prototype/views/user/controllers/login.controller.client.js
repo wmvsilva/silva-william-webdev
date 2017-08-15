@@ -4,8 +4,9 @@
         .module("tmdbApp")
         .controller("LoginController", LoginController);
 
-    function LoginController($location, UserService) {
+    function LoginController($location, UserService, user, InitializeService) {
         var model = this;
+        InitializeService.initialize(model, LoginController, arguments);
 
         model.login = login;
 

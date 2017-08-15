@@ -3,8 +3,9 @@
         .module("tmdbApp")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController(UserService, $location) {
+    function RegisterController(UserService, $location, InitializeService, user) {
         var model = this;
+        InitializeService.initialize(model, RegisterController, arguments);
 
         model.registerUser = registerUser;
 

@@ -3,8 +3,9 @@
         .module("tmdbApp")
         .controller("searchController", searchController);
 
-    function searchController(movieService, $routeParams, user) {
+    function searchController(movieService, $routeParams, user, InitializeService) {
         var model = this;
+        InitializeService.initialize(model, searchController, arguments);
 
         model.searchMovieByTitle = searchMovieByTitle;
 

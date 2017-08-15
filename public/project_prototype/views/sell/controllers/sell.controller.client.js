@@ -3,8 +3,9 @@
         .module("tmdbApp")
         .controller("sellController", sellController);
 
-    function sellController($routeParams, $location, movieService, ProductService, user) {
+    function sellController($routeParams, $location, movieService, ProductService, user, InitializeService) {
         var model = this;
+        InitializeService.initialize(model, sellController, arguments);
 
         this.searchMovieByTitle = searchMovieByTitle;
         this.createProduct = createProduct;
