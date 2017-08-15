@@ -1,23 +1,39 @@
 <div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
 
-<h1>The Movie Database (TMDb) API</h1>
-<h2>Search by Movie Title</h2>
-<input placeholder="Batman"
-       ng-model="model.movieTitle"
-       class="form-control"/>
-<button ng-click="model.searchMovieByTitle(model.movieTitle)" class="btn btn-primary btn-block">
-    Search
-</button>
+<div class="container-fluid mi-container mi-search">
+    <h2>Search by Movie Title</h2>
+    <form class="movie-search-form">
+        <input placeholder="Movie Title"
+               ng-model="model.movieTitle"
+               class="form-control"/>
+        <button ng-click="model.searchMovieByTitle(model.movieTitle)"
+                class="btn btn-primary btn-block"
+                type="submit">
+            Search
+        </button>
+    </form>
 
-<table class="table">
-    <tr ng-repeat="movie in model.movies.results">
-        <td>
-            <a href="#!/details/{{movie.id}}">
-                <h3>{{movie.title}}</h3>
+    <!--<table class="table">-->
+        <!--<tr ng-repeat="movie in model.movies.results">-->
+            <!--<td>-->
+                <!--<a href="#!/details/{{movie.id}}">-->
+                    <!--<h3>{{movie.title}}</h3>-->
+                <!--</a>-->
+            <!--</td>-->
+            <!--<td>-->
+                <!--<img ng-src="https://image.tmdb.org/t/p/w185{{movie.poster_path}}"/>-->
+            <!--</td>-->
+        <!--</tr>-->
+    <!--</table>-->
+
+    <ul class="item-list">
+        <li ng-repeat="movie in model.movies.results">
+            <a href="#!/details/{{movie.id}}" class="hvr-shrink movie-search-result">
+                <img ng-src="https://image.tmdb.org/t/p/w185{{movie.poster_path}}"
+                     onerror="if (this.src != 'img/img-404.jpg') this.src = 'img/img-404.jpg';"/>
+                <div class="movie-title-search">{{movie.title}}</div>
             </a>
-        </td>
-        <td>
-            <img ng-src="https://image.tmdb.org/t/p/w185{{movie.poster_path}}"/>
-        </td>
-    </tr>
-</table>
+        </li>
+    </ul>
+
+</div>

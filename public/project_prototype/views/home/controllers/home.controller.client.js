@@ -19,7 +19,6 @@
             newsService.getEntertainmentWeeklyArticles()
                 .then(function (result) {
                     model.articles = result.articles;
-                    console.log(model.articles);
                 });
         }
 

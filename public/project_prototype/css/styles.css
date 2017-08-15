@@ -172,3 +172,7 @@ a:hover {
     margin-left: 16px;
     height: 185px;
 }
+
+.mi-search input {
+    margin-bottom: 10px;
+}
