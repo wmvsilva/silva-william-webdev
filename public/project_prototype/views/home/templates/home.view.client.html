@@ -13,4 +13,27 @@
             </div>
         </div>
     </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h3>Top Rated Movies</h3>
+            <div class="mi-horizontal-scroll">
+                <div ng-repeat="movie in model.topRatedMovies.results" class="hvr-curl-top-left">
+                    <a href="#!/details/{{movie.id}}">
+                        <img ng-src="https://image.tmdb.org/t/p/w154{{movie.poster_path}}"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h3>Entertainment Weekly News</h3>
+                <div ng-repeat="article in model.articles">
+                    {{article.title}}
+                    <img ng-src="{{article.urlToImage}}" class="article-image"/>
+                </div>
+        </div>
+    </div>
 </div>
