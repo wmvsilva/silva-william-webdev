@@ -71,14 +71,27 @@
                 <h2>Reviews</h2>
             </div>
             <div class="panel-body">
-                <div ng-repeat="review in model.reviews" class="wvs-widget-list-item">
-                    "{{review.text}}" says user {{review._userId}}
-                    <i ng-if="review.isRecommended" class="fa fa-check" aria-hidden="true"></i>
-                    <i ng-if="!review.isRecommended" class="fa fa-times" aria-hidden="true"></i>
+                <div ng-repeat="review in model.reviews" class="mi-movie-detail-review">
+                    <div class="container-fluid">
+                        <div class="btn btn-success" ng-if="review.isRecommended" >
+                            <i class="fa fa-check" aria-hidden="true"></i> Recommended
+                        </div>
+                        <div class="btn btn-danger" ng-if="!review.isRecommended">
+                            <i class="fa fa-times" aria-hidden="true"></i> Not Recommended
+                        </div>
+                        <div>
+                            "{{review.text}}"
+                        </div>
+                        <div class="movie-detail-review-author">
+                            - Submitted by {{review._userId.username}}
+                        </div>
+                    </div>
                 </div>
                 <h3>Write Review</h3>
-                Is recommended? <input type="checkbox" ng-model="model.review.isRecommended">
-                <input ng-model="model.review.text">
+                <textarea rows="4" cols="50" ng-model="model.review.text"></textarea>
+                <div>
+                    Recommended? <input type="checkbox" ng-model="model.review.isRecommended">
+                </div>
                 <div class="btn btn-primary" ng-click="model.createReview(model.userId, model.id, model.review)">
                     Submit Review
                 </div>
@@ -90,20 +103,34 @@
                 <h3>Products for sale for this movie</h3>
             </div>
             <div class="panel-body">
-                <ul>
-                    <li ng-repeat="product in model.products">
-                        <b>Category:</b> {{product.category}}
-                        <b>Description:</b> {{product.description}}
-                        <b>Price:</b> {{product.price}}
-                        <b>Image:</b> {{product.imageUrl}}
-                        <div ng-if="!product.purchased" class="btn btn-success" ng-click="model.buyProduct(product._id)">
-                            Buy
-                        </div>
-                        <div ng-if="product.purchased" class="btn btn-danger" >
-                            Purchased
-                        </div>
-                    </li>
-                </ul>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Image</th>
+                        <th>State</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="product in model.products">
+                        <td>{{product.category}}</td>
+                        <td>{{product.description}}</td>
+                        <td>{{product.price}}</td>
+                        <td><img ng-src="{{product.imageUrl}}" /></td>
+                        <td>
+                            <div ng-if="!product.purchased" class="btn btn-success" ng-click="model.buyProduct(product._id)">
+                                Buy
+                            </div>
+                            <div ng-if="product.purchased" class="btn btn-danger" >
+                                Purchased
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

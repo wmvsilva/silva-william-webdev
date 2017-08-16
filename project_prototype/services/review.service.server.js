@@ -23,6 +23,7 @@ module.exports = function (app) {
 
         return reviewModel
             .findReviewsByMovieId(movieId)
+            .populate("_userId", "_id username")
             .then(function (reviews) {
                 res.json(reviews);
             }, function (err) {
