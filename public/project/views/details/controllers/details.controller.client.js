@@ -74,7 +74,8 @@
             }
             var user = model.user;
             user.likedMovies.push(movieId);
-            UserService.updateUser(userId, user)
+            UserService
+                .updateUser(userId, user)
                 .then(function (response) {
                     model.user = response.data;
                 });

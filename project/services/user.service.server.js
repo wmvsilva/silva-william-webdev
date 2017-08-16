@@ -1,6 +1,10 @@
+var request = require('request');
+
 module.exports = function (app) {
     var passport = require("passport");
     var userModel = require("../model/user/user.model.server");
+    var movieModel = require("../model/movie/movie.model.server");
+
     var LocalStrategy = require('passport-local').Strategy;
     var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
@@ -178,10 +182,37 @@ module.exports = function (app) {
         var userId = req.params.userId;
         var user = req.body;
 
-        userModel
+        return userModel
             .updateUser(userId, user)
-            .then(function (status) {
-                res.json(status);
+            .then(function (user) {
+                return movieModel
+                    .findMoviesThatMatchIds(user.likedMovies);
+            }, function (err) {
+                res.sendStatus(404).send(err);
+            })
+            .then(function (movies) {
+                var missingMovieIds = [];
+                for (var m in user.likedMovies) {
+                    if (movies.indexOf(user.likedMovies[m]) === -1) {
+                        missingMovieIds.push(user.likedMovies[m]);
+                    }
+                }
+
+                for (var m in missingMovieIds) {
+                    var movieId = missingMovieIds[m];
+                    request("https://api.themoviedb.org/3/movie/" + movieId + "?api_key=9a1db3dd9659485ffb9d482a484908e0",
+                        function (error, response, body) {
+                            var jsonMovie = JSON.parse(body);
+                            var abridgedMovie = {
+                                id: jsonMovie.id,
+                                title: jsonMovie.title,
+                                poster_path: jsonMovie.poster_path
+                            };
+                            movieModel
+                                .createMovie(abridgedMovie);
+                        });
+                }
+                res.sendStatus(200);
             }, function (err) {
                 res.sendStatus(404).send(err);
             });
