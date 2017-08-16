@@ -12,7 +12,9 @@
             findProductsByMovieId: findProductsByMovieId,
             deleteProduct: deleteProduct,
             userBuyProduct: userBuyProduct,
-            findProductsByBuyer: findProductsByBuyer
+            findProductsByBuyer: findProductsByBuyer,
+            getAllProducts: getAllProducts,
+            updateProduct: updateProduct
         };
         return api;
 
@@ -41,6 +43,11 @@
             return $http.delete(url);
         }
 
+        function updateProduct(productId, product) {
+            var url = "/project-api/product/" + productId;
+            return $http.put(url, product);
+        }
+
         function userBuyProduct(userId, productId) {
             var url = "/project-api/product/buy?productId=" + productId + "&userId=" + userId;
             return $http.get(url);
@@ -48,6 +55,11 @@
 
         function findProductsByBuyer(userId) {
             var url = "/project-api/products-bought/" + userId;
+            return $http.get(url);
+        }
+
+        function getAllProducts() {
+            var url = "/project-api/admin/product";
             return $http.get(url);
         }
     }

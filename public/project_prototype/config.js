@@ -128,6 +128,14 @@
                 resolve: {
                     user: checkAdmin
                 }
+            })
+            .when("/admin/products", {
+                templateUrl: "views/admin/templates/admin-product.view.client.html",
+                controller: "adminProductController",
+                controllerAs: "model",
+                resolve: {
+                    user: checkAdmin
+                }
             });
     }
 

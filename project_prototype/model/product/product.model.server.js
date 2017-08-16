@@ -11,6 +11,9 @@ productModel.findProductsByMovieId = findProductsByMovieId;
 productModel.userBuyProduct = userBuyProduct;
 productModel.findProductsByBuyer = findProductsByBuyer;
 
+productModel.getAllProducts = getAllProducts;
+productModel.updateProduct = updateProduct;
+
 
 module.exports = productModel;
 
@@ -55,4 +58,19 @@ function userBuyProduct(productId, userId) {
 function findProductsByBuyer(userId) {
     return productModel
         .find({buyer: userId});
+}
+
+function getAllProducts() {
+    return productModel
+        .find()
+        .populate("_userId", "_id username")
+        .exec();
+}
+
+function updateProduct(productId, product) {
+    return productModel
+        .update({_id: productId}, {$set: product})
+        .then((function (product) {
+            return productModel.findById(productId);
+        }));
 }

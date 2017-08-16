@@ -9,6 +9,8 @@ module.exports = function (app) {
     app.delete("/project-api/product/:productId", deleteProduct);
     app.get("/project-api/product/buy/", userBuyProduct);
     app.get("/project-api/products-bought/:userId", findProductsByBuyer);
+    app.get("/project-api/admin/product", getAllProducts);
+    app.put("/project-api/product/:productId", updateProduct);
 
     function createProduct(req, res) {
         var product = req.body;
@@ -93,6 +95,29 @@ module.exports = function (app) {
                 res.json(products);
             }, function (err) {
                 res.status(500).send(err);
+            });
+    }
+
+    function getAllProducts(req, res) {
+        productModel
+            .getAllProducts()
+            .then(function (products) {
+                res.json(products);
+            }, function (err) {
+                res.status(500).send(err);
+            });
+    }
+
+    function updateProduct(req, res) {
+        var productId = req.params.productId;
+        var product = req.body;
+
+        productModel
+            .updateProduct(productId, product)
+            .then(function (status) {
+                res.json(status);
+            }, function (err) {
+                res.sendStatus(404).send(err);
             });
     }
 };
