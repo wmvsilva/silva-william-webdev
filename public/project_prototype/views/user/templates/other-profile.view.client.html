@@ -2,17 +2,9 @@
     <div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
 
 
-    <div class="container-fluid">
+    <div class="container-fluid mi-container">
 
-        <div ng-show="model.updateMessage" class="alert alert-info">
-            {{model.updateMessage }}
-        </div>
-
-        <div ng-show="model.error" class="alert alert-danger">
-            {{model.error }}
-        </div>
-
-        <h3>You are logged in as {{model.user.username}}</h3>
+        <h3 class="btn btn-info" ng-if="model.user._id === model.otherUser._id">This is your profile</h3>
 
         <h3>Viewing user '{{model.otherUser.username}}'</h3>
 

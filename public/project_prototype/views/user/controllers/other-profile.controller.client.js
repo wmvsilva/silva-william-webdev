@@ -19,7 +19,7 @@
                 .findUserById(model.userId)
                 .then(function (response) {
                     model.user = response.data;
-                })
+                });
 
             UserService
                 .findUserById(model.otherUserId)
