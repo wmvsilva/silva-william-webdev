@@ -6,6 +6,10 @@ var reviewModel = mongoose.model("ProjectReviewModel", reviewSchema);
 reviewModel.createReview = createReview;
 reviewModel.findReviewsByMovieId = findReviewsByMovieId;
 reviewModel.findReviewsByUserId = findReviewsByUserId;
+reviewModel.getAllReviews = getAllReviews;
+reviewModel.findReviewById = findReviewById;
+reviewModel.deleteReview = deleteReview;
+reviewModel.updateReview = updateReview;
 
 module.exports = reviewModel;
 
@@ -19,7 +23,35 @@ function findReviewsByMovieId(movieId) {
         .find({_movieId: movieId});
 }
 
+function findReviewById(reviewId) {
+    return reviewModel
+        .findById(reviewId);
+}
+
 function findReviewsByUserId(userId) {
     return reviewModel
         .find({_userId: userId});
+}
+
+function getAllReviews() {
+    return reviewModel
+        .find()
+        .populate("_userId", "_id username")
+        .exec();
+}
+
+function deleteReview(reviewId) {
+    return reviewModel
+        .findReviewById(reviewId)
+        .then(function (review) {
+            return review.remove();
+        });
+}
+
+function updateReview(reviewId, review) {
+    return reviewModel
+        .update({_id: reviewId}, {$set: review})
+        .then((function (review) {
+            return reviewModel.findReviewById(reviewId);
+        }));
 }

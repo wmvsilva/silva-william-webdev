@@ -120,7 +120,15 @@
             resolve: {
                 user: checkAdmin
             }
-        });
+            })
+            .when("/admin/reviews", {
+                templateUrl: "views/admin/templates/admin-review.view.client.html",
+                controller: "adminReviewController",
+                controllerAs: "model",
+                resolve: {
+                    user: checkAdmin
+                }
+            });
     }
 
     function checkLogin(UserService, $q, $location) {

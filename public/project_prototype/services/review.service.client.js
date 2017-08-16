@@ -8,7 +8,10 @@
         var api = {
             "createReview": createReview,
             findReviewsByMovieId: findReviewsByMovieId,
-            findReviewsByUserId: findReviewsByUserId
+            findReviewsByUserId: findReviewsByUserId,
+            getAllReviews: getAllReviews,
+            deleteReview: deleteReview,
+            updateReview: updateReview
         };
         return api;
 
@@ -25,6 +28,21 @@
         function findReviewsByUserId(userId) {
             var url = "/project-api/review/user/" + userId;
             return $http.get(url);
+        }
+
+        function deleteReview(reviewId) {
+            var url = "/project-api/review/" + reviewId;
+            return $http.delete(url);
+        }
+
+        function getAllReviews() {
+            var url = "/project-api/admin/review";
+            return $http.get(url);
+        }
+
+        function updateReview(reviewId, review) {
+            var url = "/project-api/review/" + reviewId;
+            return $http.put(url, review);
         }
     }
 })();
