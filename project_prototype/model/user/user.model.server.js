@@ -17,6 +17,7 @@ userModel.whoFollows = whoFollows;
 userModel.searchUserByName = searchUserByName;
 
 userModel.findUserByGoogleId = findUserByGoogleId;
+userModel.getAllUsers = getAllUsers;
 
 module.exports = userModel;
 
@@ -87,4 +88,9 @@ function whoFollows(userId) {
 function searchUserByName(username) {
     return userModel
         .find({"username" : {$regex : ".*" + username + ".*"}});
+}
+
+function getAllUsers() {
+    return userModel
+        .find();
 }

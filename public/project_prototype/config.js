@@ -105,6 +105,22 @@
                     user: getLoggedInUser
                 }
             })
+            .when("/admin", {
+                templateUrl: "views/admin/templates/admin.view.client.html",
+                controller: "adminController",
+                controllerAs: "model",
+                resolve: {
+                    user: checkAdmin
+                }
+            })
+            .when("/admin/users", {
+            templateUrl: "views/admin/templates/admin-user.view.client.html",
+            controller: "adminUserController",
+            controllerAs: "model",
+            resolve: {
+                user: checkAdmin
+            }
+        });
     }
 
     function checkLogin(UserService, $q, $location) {
@@ -113,6 +129,21 @@
             .checkLogin()
             .then(function (user) {
                 if (user === '0') {
+                    deferred.reject();
+                    $location.url("/login");
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+        return deferred.promise;
+    }
+
+    function checkAdmin(UserService, $q, $location) {
+        var deferred = $q.defer();
+        UserService
+            .checkLogin()
+            .then(function (user) {
+                if (user === '0' || user.role !== "admin") {
                     deferred.reject();
                     $location.url("/login");
                 } else {

@@ -24,6 +24,8 @@ module.exports = function (app) {
 
     app.get("/project-api/search-user/", searchUserByName);
 
+    app.get("/project-api/admin/user", getAllUsers);
+
     app.get("/project-api/checkLogin", checkLogin);
 
     app.get("/project-api/auth/google", passport.authenticate('google', { scope : ['profile', 'email'] }));
@@ -113,6 +115,7 @@ module.exports = function (app) {
 
     function registerUser(req, res) {
         var user = req.body;
+        user.role = "user";
         userModel
             .createUser(user)
             .then(function (user) {
@@ -243,6 +246,17 @@ module.exports = function (app) {
 
         userModel
             .searchUserByName(username)
+            .then(function (users) {
+                res.json(users);
+            }, function (err) {
+                res.status(500).send(err);
+                return;
+            });
+    }
+
+    function getAllUsers(req, res) {
+        userModel
+            .getAllUsers()
             .then(function (users) {
                 res.json(users);
             }, function (err) {

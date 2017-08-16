@@ -17,7 +17,8 @@
             unfollowUser: unfollowUser,
             followedBy: followedBy,
             searchUserByName: searchUserByName,
-            checkLogin: checkLogin
+            checkLogin: checkLogin,
+            getAllUsers: getAllUsers
         };
         return api;
 
@@ -81,6 +82,11 @@
 
         function searchUserByName(username) {
             var url = "/project-api/search-user/?username=" + username;
+            return $http.get(url);
+        }
+
+        function getAllUsers() {
+            var url = "/project-api/admin/user";
             return $http.get(url);
         }
 

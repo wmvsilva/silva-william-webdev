@@ -1,0 +1,128 @@
+<div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
+
+<div class="mi-container container-fluid margin-top">
+    <h1>Admin - Users</h1>
+    <table class="table table-responsive">
+        <thead>
+        <tr>
+            <th>_id</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Following</th>
+            <th>Liked Movies</th>
+            <th>Role</th>
+            <td>Action</td>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td></td>
+            <td>
+                <input name="username"
+                       ng-model="model.newUser.username"
+                       placeholder="username"
+                       type="text"
+                       class="form-control"
+                       id="username"/>
+            </td>
+            <td>
+                <input name="password"
+                       ng-model="model.newUser.password"
+                       placeholder="password"
+                       type="text"
+                       class="form-control"
+                       id="password"/>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                <select ng-model="model.newUser.role">
+                    <option value="user">user</option>
+                    <option value="admin">admin</option>
+                </select>
+            </td>
+            <td>
+                <a class="btn btn-success" ng-click="model.createUser(model.newUser)">
+                    Create
+                </a>
+            </td>
+        </tr>
+        <tr ng-repeat="user in model.users">
+            <div ng-if="false">
+                <td>{{user._id}}</td>
+                <td>
+                    <div ng-if="model.selectedUserId !== user._id">
+                        {{user.username}}
+                    </div>
+                    <div ng-if="model.selectedUserId === user._id">
+                        <input name="username"
+                               ng-model="model.selectedUser.username"
+                               placeholder="username"
+                               type="text"
+                               class="form-control"
+                               />
+                    </div>
+                </td>
+                <td>
+                    <div ng-if="model.selectedUserId !== user._id">
+                        {{user.password}}
+                    </div>
+                    <div ng-if="model.selectedUserId === user._id">
+                        <input name="password"
+                               ng-model="model.selectedUser.password"
+                               placeholder="password"
+                               type="text"
+                               class="form-control"
+                        />
+                    </div>
+                </td>
+                <td>
+                    <div ng-if="model.selectedUserId !== user._id">
+                        {{user.following}}
+                    </div>
+                    <div ng-if="model.selectedUserId === user._id">
+                        <ul>
+                            <li ng-repeat="followed in model.selectedUser.following">
+                                {{followed}}
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    {{user.likedMovies}}
+                </td>
+                <td>
+                    <div ng-if="model.selectedUserId !== user._id">
+                        {{user.role}}
+                    </div>
+                    <div ng-if="model.selectedUserId === user._id">
+                        <select ng-model="model.selectedUser.role">
+                            <option value="user">user</option>
+                            <option value="admin">admin</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div ng-if="model.selectedUserId !== user._id">
+                        <a class="btn btn-info" ng-click="model.selectUser(user)">
+                            Edit
+                        </a>
+                        <a class="btn btn-danger">
+                            Delete
+                        </a>
+                    </div>
+                    <div ng-if="model.selectedUserId === user._id">
+                        <a class="btn btn-success">
+                            Confirm
+                        </a>
+                        <a class="btn btn-danger" ng-click="model.selectedUserId = null; model.selectedUser = null;">
+                            Cancel
+                        </a>
+                    </div>
+                </td>
+            </div>
+        </tr>
+        </tbody>
+    </table>
+</div>
