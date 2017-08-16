@@ -1,69 +1,94 @@
 <div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
 
-<h1>The Movie Database (TMDb) API</h1>
-<h2>Movie Details</h2>
-<h3>{{model.movie.title}}</h3>
-<h4>{{model.movie.tagline}}</h4>
-<img ng-src="https://image.tmdb.org/t/p/w185{{model.movie.poster_path}}"/>
-<div>
-    <div ng-switch="model.doesUserLikeMovie()">
-        <div ng-switch-when="true">
-            LIKED
+<div class="movie-detail-wrapper" style="background-image: url('http://image.tmdb.org/t/p/w1280{{model.movie.backdrop_path}}')">
+    <div class="container-fluid mi-container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>{{model.movie.title}}</h3>
+                <h4>{{model.movie.tagline}}</h4>
+            </div>
+            <div class="panel-body">
+                <div class="movie-detail-top">
+                    <img ng-src="https://image.tmdb.org/t/p/w185{{model.movie.poster_path}}"/>
+                    <div class="movie-detail-overview">
+                        Released: {{model.movie.release_date | date}}
+                        <div>
+                            {{model.movie.overview}}
+                        </div>
+                        <div>
+                            <a ng-if="!model.doesUserLikeMovie()" class="btn btn-info" ng-click="model.likeMovie(model.userId, model.movie.id)">
+                                Like Movie
+                            </a>
+                            <a ng-if="model.doesUserLikeMovie()" class="btn btn-success" ng-click="model.unlikeMovie(model.userId, model.movie.id)">
+                                    Liked
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div ng-switch-when="false">
-            NOT LIKED
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Cast</h4>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li ng-repeat="actor in model.actors.cast">
+                        {{actor.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Trailers</h4>
+            </div>
+            <div class="panel-body">
+                <iframe width="560" height="315" ng-src="{{model.videoUrl}}" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>Reviews</h2>
+            </div>
+            <div class="panel-body">
+                <div ng-repeat="review in model.reviews" class="wvs-widget-list-item">
+                    "{{review.text}}" says user {{review._userId}} <span ng-if="review.isRecommended" class="glyphicon glyphicon-ok"></span>
+                    <span ng-if="!review.isRecommended" class="glyphicon glyphicon-remove"></span>
+                </div>
+                <h3>Write Review</h3>
+                Is recommended? <input type="checkbox" ng-model="model.review.isRecommended">
+                <input ng-model="model.review.text">
+                <div class="btn btn-primary" ng-click="model.createReview(model.userId, model.id, model.review)">
+                    Submit Review
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Products for sale for this movie</h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li ng-repeat="product in model.products">
+                        <b>Category:</b> {{product.category}}
+                        <b>Description:</b> {{product.description}}
+                        <b>Price:</b> {{product.price}}
+                        <b>Image:</b> {{product.imageUrl}}
+                        <div ng-if="!product.purchased" class="btn btn-success" ng-click="model.buyProduct(product._id)">
+                            Buy
+                        </div>
+                        <div ng-if="product.purchased" class="btn btn-danger" >
+                            Purchased
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-    <a class="btn btn-info" ng-click="model.likeMovie(model.userId, model.movie.id)">
-        Like Movie
-    </a>
-    <div>
-        <a class="btn btn-warning" ng-click="model.unlikeMovie(model.userId, model.movie.id)">
-            Un-like Movie
-        </a>
-    </div>
 </div>
-
-<div>
-    {{model.movie.overview}}
-    <div>
-        <h5>Release Date</h5> {{model.movie.release_date}}
-    </div>
-    <h4>Cast</h4>
-    <ul>
-        <li ng-repeat="actor in model.actors.cast">
-            {{actor.name}}
-        </li>
-    </ul>
-    <h4>Trailer</h4>
-    <iframe width="560" height="315" ng-src="{{model.videoUrl}}" frameborder="0" allowfullscreen></iframe>
-</div>
-
-<h2>Reviews</h2>
-<div ng-repeat="review in model.reviews" class="wvs-widget-list-item">
-    "{{review.text}}" says user {{review._userId}} <span ng-if="review.isRecommended" class="glyphicon glyphicon-ok"></span>
-    <span ng-if="!review.isRecommended" class="glyphicon glyphicon-remove"></span>
-</div>
-
-<h3>Write Review</h3>
-Is recommended? <input type="checkbox" ng-model="model.review.isRecommended">
-<input ng-model="model.review.text">
-<div class="btn btn-primary" ng-click="model.createReview(model.userId, model.id, model.review)">
-    Submit Review
-</div>
-
-<h3>Products for sale for this movie</h3>
-<ul>
-    <li ng-repeat="product in model.products">
-        <b>Category:</b> {{product.category}}
-        <b>Description:</b> {{product.description}}
-        <b>Price:</b> {{product.price}}
-        <b>Image:</b> {{product.imageUrl}}
-        <div ng-if="!product.purchased" class="btn btn-success" ng-click="model.buyProduct(product._id)">
-            Buy
-        </div>
-        <div ng-if="product.purchased" class="btn btn-danger" >
-            Purchased
-        </div>
-    </li>
-</ul>

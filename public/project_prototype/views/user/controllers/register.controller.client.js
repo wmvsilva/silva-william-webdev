@@ -35,7 +35,7 @@
                 })
                 .then(function (response) {
                     var newUser = response.data;
-                    $location.url("/user/" + newUser._id);
+                    $location.url("/user");
                 })
                 .catch(function () {
                     model.error = "User already exists";

@@ -176,3 +176,22 @@ a:hover {
 .mi-search input {
     margin-bottom: 10px;
 }
+
+.movie-detail-top {
+    display: flex;
+}
+
+.movie-detail-overview {
+    margin-left: 10px;
+}
+
+.movie-detail-wrapper {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: transparent;
+    background-position: 50% 50%;
+}
+
+.movie-detail-wrapper {
+    padding-top: 15px;
+}

@@ -47,7 +47,7 @@
                 .findProductsByMovieId(model.id)
                 .then(function (response) {
                     model.products = response.data;
-                })
+                });
 
         }
 
@@ -55,6 +55,7 @@
 
         function renderMovie(movie) {
             model.movie = movie;
+            console.log(model.movie)
         }
 
         function renderActors(actors) {
