@@ -1,0 +1,149 @@
+body {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+input, textarea {
+    margin-bottom: 5px;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.wvs .navbar-default {
+    background-color: #428bca;
+    border-color: #7eacd4;
+}
+
+.wvs .navbar-default .navbar-brand {
+    color: white;
+    font-weight: bold;
+    padding: 15px 0;
+    margin-left: 0;
+}
+
+.wvs-plus-link {
+    color: white;
+}
+
+.wvs-nav-icon {
+    padding: 15px 0;
+    color: white;
+}
+
+.wvs-settings-icon {
+    color: #428bca;
+}
+
+.wvs-black {
+    color: black;
+}
+
+.wvs-split-view-left {
+    position: absolute;
+    top: 50px;
+    padding-top: 10px;
+    bottom: 0;
+    z-index: 1;
+    overflow-y: scroll;
+    border-right: #7eacd4 1px solid;
+}
+
+.wvs-split-view-left, .wvs-split-view-right {
+    padding-bottom: 60px;
+}
+
+@media (min-width: 992px) {
+    .wvs-split-view-right {
+        width: 75%;
+        position: absolute;
+        right: 0;
+        overflow-y: scroll;
+        top: 60px;
+        bottom: 0;
+    }
+}
+
+.wvs-websites .list-group-item {
+    border: none;
+}
+
+@media (min-width: 992px) {
+    .wvs-websites .list-group-item .col-xs-2 {
+        padding-right: 0;
+    }
+}
+
+.wvs-pages .navbar-default, .wvs-widget .navbar-default {
+    background-color: #f8f8f8;
+    border-color: #f4f4f4;
+}
+
+.wvs-pages .navbar-default .navbar-brand, .wvs-widget .navbar-default .navbar-brand {
+    color: #555555;
+}
+
+.wvs-pages .wvs-nav-icon, .wvs-widget .wvs-nav-icon {
+    color: #333;
+}
+
+.wvs-pages .wvs-profile-icon, .wvs-widget .wvs-profile-icon {
+    color: #428bca;
+}
+
+.wvs-pages .list-group-item {
+    border: none;
+}
+
+.wvs-pages .wvs-left-arrow, .wvs-widget .wvs-left-arrow, .wvs-websites .wvs-left-arrow {
+    margin-right: 15px;
+}
+
+.wvs-pages label {
+    font-weight: normal;
+}
+
+.wvs-widget-list-item {
+    position: relative;
+}
+
+.wvs-widget-option {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: white;
+    border-bottom-left-radius: 4px;
+    padding-bottom: 2px;
+    padding-left: 3px;
+}
+
+.wvs-widget-option .wvs-gear {
+    color: #428bca;
+}
+
+.wvs-widget .wvs-play-icon {
+    padding-right: 10px;
+}
+
+.wvs-display-none {
+    display: none;
+}
+
+.youtube-widget {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+}
+
+.youtube-widget iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.wvs-formatted-box:read-only {
+    background-color: white;
+}
