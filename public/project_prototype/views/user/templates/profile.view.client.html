@@ -102,25 +102,9 @@
             <span ng-if="!review.isRecommended" class="glyphicon glyphicon-remove"></span>
         </div>
 
-        <a class="btn btn-default btn-primary btn-block"
-           href="#!/search"
-           role="button">Search for Movies</a>
-
-        <a class="btn btn-default btn-primary btn-block"
-           href="#!/search-user"
-           role="button">Search for Users</a>
-
-        <a class="btn btn-default btn-primary btn-block"
-           href="#!/sell"
-           role="button">Enter Sell Mode</a>
-
         <a ng-click="model.updateUser(model.user._id, model.user)" class="btn btn-info btn-block">
             Update User
         </a>
-
-        <a class="btn btn-default btn-danger btn-block"
-           ng-click="model.logout()"
-           role="button">Logout</a>
 
         <a class="btn btn-default btn-danger btn-block"
            ng-click="model.deleteUser(model.user._id)"

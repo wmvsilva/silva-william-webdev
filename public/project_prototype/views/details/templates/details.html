@@ -4,7 +4,7 @@
     <div class="container-fluid mi-container">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>{{model.movie.title}}</h3>
+                <h1>{{model.movie.title}}</h1>
                 <h4>{{model.movie.tagline}}</h4>
             </div>
             <div class="panel-body">
@@ -57,8 +57,9 @@
             </div>
             <div class="panel-body">
                 <div ng-repeat="review in model.reviews" class="wvs-widget-list-item">
-                    "{{review.text}}" says user {{review._userId}} <span ng-if="review.isRecommended" class="glyphicon glyphicon-ok"></span>
-                    <span ng-if="!review.isRecommended" class="glyphicon glyphicon-remove"></span>
+                    "{{review.text}}" says user {{review._userId}}
+                    <i ng-if="review.isRecommended" class="fa fa-check" aria-hidden="true"></i>
+                    <i ng-if="!review.isRecommended" class="fa fa-times" aria-hidden="true"></i>
                 </div>
                 <h3>Write Review</h3>
                 Is recommended? <input type="checkbox" ng-model="model.review.isRecommended">

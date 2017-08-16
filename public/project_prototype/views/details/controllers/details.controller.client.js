@@ -19,13 +19,8 @@
             model.id = $routeParams.id;
             if (user) {
                 model.userId = user._id;
+                model.user = user;
             }
-
-            UserService
-                .findUserById(model.userId)
-                .then(function (response) {
-                    model.user = response.data;
-                });
 
             ReviewService
                 .findReviewsByMovieId(model.id)
@@ -74,6 +69,9 @@
         }
 
         function likeMovie(userId, movieId) {
+            if (!model.user) {
+                $location.url("/login");
+            }
             var user = model.user;
             user.likedMovies.push(movieId);
             UserService.updateUser(userId, user)
@@ -83,6 +81,9 @@
         }
 
         function unlikeMovie(userId, movieId) {
+            if (!model.user) {
+                $location.url("/login");
+            }
             var user = model.user;
             var index = user.likedMovies.indexOf(movieId);
             user.likedMovies.splice(index, 1);
@@ -102,6 +103,9 @@
         }
 
         function createReview(userId, movieId, review) {
+            if (!model.user) {
+                $location.url("/login");
+            }
             review._userId = userId;
             review._movieId = movieId;
             ReviewService.createReview(review)
@@ -115,6 +119,9 @@
         }
 
         function buyProduct(productId) {
+            if (!model.user) {
+                $location.url("/login");
+            }
             console.log("Buying " +productId);
             $location.url("/product/" + productId);
         }
