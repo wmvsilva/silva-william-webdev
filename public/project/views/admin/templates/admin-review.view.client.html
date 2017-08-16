@@ -1,0 +1,133 @@
+<div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
+
+<div class="mi-container container-fluid margin-top">
+    <h1>Admin - Reviews</h1>
+    <table class="table table-responsive">
+        <thead>
+        <tr>
+            <th>_id</th>
+            <th>User Id</th>
+            <th>Username</th>
+            <th>Movie Id</th>
+            <th>Text</th>
+            <th>Is Recommended?</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td></td>
+            <td>
+                <input name="userId"
+                       ng-model="model.newReview._userId"
+                       placeholder="user id"
+                       type="text"
+                       class="form-control"
+                       id="userId"/>
+            </td>
+            <td></td>
+            <td>
+                <input name="movieId"
+                       ng-model="model.newReview._movieId"
+                       placeholder="movie id"
+                       type="text"
+                       class="form-control"
+                       id="movieId"/>
+            </td>
+            <td>
+                <input name="reviewText"
+                       ng-model="model.newReview.text"
+                       placeholder="review text"
+                       type="text"
+                       class="form-control"
+                       id="reviewText"/>
+            </td>
+            <td>
+                <input type="checkbox" ng-model="model.newReview.isRecommended">
+            </td>
+            <td>
+                <a class="btn btn-success" ng-click="model.createReview(model.newReview)">
+                    Create
+                </a>
+            </td>
+        </tr>
+        <tr ng-repeat="review in model.reviews">
+            <td>{{review._id}}</td>
+            <td>
+                <div ng-if="model.selectedReviewId !== review._id">
+                    {{review._userId._id}}
+                </div>
+                <div ng-if="model.selectedReviewId === review._id">
+                    <input name="user id"
+                           ng-model="model.selectedReview._userId._id"
+                           placeholder="user id"
+                           type="text"
+                           class="form-control"
+                    />
+                </div>
+            </td>
+            <td>
+                <div ng-if="model.selectedReviewId !== review._id">
+                    {{review._userId.username}}
+                </div>
+                <div ng-if="model.selectedReviewId === review._id">
+
+                </div>
+            </td>
+            <td>
+                <div ng-if="model.selectedReviewId !== review._id">
+                    {{review._movieId}}
+                </div>
+                <div ng-if="model.selectedReviewId === review._id">
+                    <input name="movieId"
+                           ng-model="model.selectedReview._movieId"
+                           placeholder="movie Id"
+                           type="text"
+                           class="form-control"
+                    />
+                </div>
+            </td>
+            <td>
+                <div ng-if="model.selectedReviewId !== review._id">
+                {{review.text}}
+            </div>
+                <div ng-if="model.selectedReviewId === review._id">
+                    <input name="reviewText"
+                           ng-model="model.selectedReview.text"
+                           placeholder="review text"
+                           type="text"
+                           class="form-control"
+                    />
+                </div>
+            </td>
+            <td>
+                <div ng-if="model.selectedReviewId !== review._id">
+                    {{review.isRecommended}}
+                </div>
+                <div ng-if="model.selectedReviewId === review._id">
+                    <input type="checkbox" ng-model="model.selectedReview.isRecommended">
+                </div>
+            </td>
+            <td>
+                <div ng-if="model.selectedReviewId !== review._id">
+                    <a class="btn btn-info" ng-click="model.selectReview(review)">
+                        Edit
+                    </a>
+                    <a class="btn btn-danger" ng-click="model.deleteReview(review._id)">
+                        Delete
+                    </a>
+                </div>
+                <div ng-if="model.selectedReviewId === review._id">
+                    <a class="btn btn-success" ng-click="model.updateReview(review._id, model.selectedReview)">
+                        Confirm
+                    </a>
+                    <a class="btn btn-danger" ng-click="model.selectedReviewId = null; model.selectedReview = null;">
+                        Cancel
+                    </a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

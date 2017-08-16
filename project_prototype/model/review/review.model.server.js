@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var reviewSchema = require("./review.schema.server");
 
-var reviewModel = mongoose.model("ProjectReviewModel", reviewSchema);
+var reviewModel = mongoose.model("ProjectPrototypeReviewModel", reviewSchema);
 
 reviewModel.createReview = createReview;
 reviewModel.findReviewsByMovieId = findReviewsByMovieId;

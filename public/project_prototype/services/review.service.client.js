@@ -13,17 +13,17 @@
         return api;
 
         function createReview(review) {
-            var url = "/project-api/review";
+            var url = "/project-prototype-api/review";
             return $http.post(url, review);
         }
 
         function findReviewsByMovieId(movieId) {
-            var url = "/project-api/review/" + movieId;
+            var url = "/project-prototype-api/review/" + movieId;
             return $http.get(url);
         }
 
         function findReviewsByUserId(userId) {
-            var url = "/project-api/review/user/" + userId;
+            var url = "/project-prototype-api/review/user/" + userId;
             return $http.get(url);
         }
     }

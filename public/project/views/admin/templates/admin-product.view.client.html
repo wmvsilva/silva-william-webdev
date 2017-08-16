@@ -1,0 +1,187 @@
+<div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
+
+<div class="mi-container container-fluid margin-top">
+    <h1>Admin - Products</h1>
+    <table class="table table-responsive">
+        <thead>
+        <tr>
+            <th>_id</th>
+            <th>User Id</th>
+            <th>Username</th>
+            <th>Movie Id</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Image Url</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td></td>
+            <td>
+                <input name="userId"
+                       ng-model="model.newProduct._userId"
+                       placeholder="user id"
+                       type="text"
+                       class="form-control"
+                       id="userId"/>
+            </td>
+            <td></td>
+            <td>
+                <input name="movieId"
+                       ng-model="model.newProduct._movieId"
+                       placeholder="movie id"
+                       type="text"
+                       class="form-control"
+                       id="movieId"/>
+            </td>
+            <td>
+                <input name="categoryText"
+                       ng-model="model.newProduct.category"
+                       placeholder="category"
+                       type="text"
+                       class="form-control"
+                       id="categoryText"/>
+            </td>
+            <td>
+                <input name="descriptionText"
+                       ng-model="model.newProduct.description"
+                       placeholder="description"
+                       type="text"
+                       class="form-control"
+                       id="description"/>
+            </td>
+            <td>
+                <input name="price"
+                       ng-model="model.newProduct.price"
+                       placeholder="price"
+                       type="text"
+                       class="form-control"
+                       id="price"/>
+            </td>
+            <td>
+                <input name="imageUrl"
+                       ng-model="model.newProduct.imageUrl"
+                       placeholder="imageUrl"
+                       type="text"
+                       class="form-control"
+                       id="imageUrl"/>
+            </td>
+            <td>
+                <a class="btn btn-success" ng-click="model.createProduct(model.newProduct)">
+                    Create
+                </a>
+            </td>
+        </tr>
+        <tr ng-repeat="product in model.products">
+            <td>{{product._id}}</td>
+            <td>
+                <div ng-if="model.selectedProductId !== product._id">
+                    {{product._userId._id}}
+                </div>
+                <div ng-if="model.selectedProductId === product._id">
+                    <input name="user id"
+                           ng-model="model.selectedProduct._userId._id"
+                           placeholder="user id"
+                           type="text"
+                           class="form-control"
+                    />
+                </div>
+            </td>
+            <td>
+                <div ng-if="model.selectedProductId !== product._id">
+                    {{product._userId.username}}
+                </div>
+                <div ng-if="model.selectedProductId === product._id">
+
+                </div>
+            </td>
+            <td>
+                <div ng-if="model.selectedProductId !== product._id">
+                    {{product._movieId}}
+                </div>
+                <div ng-if="model.selectedProductId === product._id">
+                    <input name="movieId"
+                           ng-model="model.selectedProduct._movieId"
+                           placeholder="movie Id"
+                           type="text"
+                           class="form-control"
+                    />
+                </div>
+            </td>
+            <td>
+                <div ng-if="model.selectedProductId !== product._id">
+                    {{product.category}}
+                </div>
+                <div ng-if="model.selectedProductId === product._id">
+                    <input name="category"
+                           ng-model="model.selectedProduct.category"
+                           placeholder="category"
+                           type="text"
+                           class="form-control"
+                    />
+                </div>
+            </td>
+            <td>
+                <div ng-if="model.selectedProductId !== product._id">
+                    {{product.description}}
+                </div>
+                <div ng-if="model.selectedProductId === product._id">
+                    <input name="description"
+                           ng-model="model.selectedProduct.description"
+                           placeholder="description"
+                           type="text"
+                           class="form-control"
+                    />
+                </div>
+            </td>
+            <td>
+                <div ng-if="model.selectedProductId !== product._id">
+                    {{product.price}}
+                </div>
+                <div ng-if="model.selectedProductId === product._id">
+                    <input name="price"
+                           ng-model="model.selectedProduct.price"
+                           placeholder="price"
+                           type="text"
+                           class="form-control"
+                    />
+                </div>
+            </td>
+            <td>
+                <div ng-if="model.selectedProductId !== product._id">
+                    {{product.imageUrl}}
+                </div>
+                <div ng-if="model.selectedProductId === product._id">
+                    <input name="imageUrl"
+                           ng-model="model.selectedProduct.imageUrl"
+                           placeholder="imageUrl"
+                           type="text"
+                           class="form-control"
+                    />
+                </div>
+            </td>
+            <td>
+                <div ng-if="model.selectedProductId !== product._id">
+                    <a class="btn btn-info" ng-click="model.selectProduct(product)">
+                        Edit
+                    </a>
+                    <a class="btn btn-danger" ng-click="model.deleteProduct(product._id)">
+                        Delete
+                    </a>
+                </div>
+                <div ng-if="model.selectedProductId === product._id">
+                    <a class="btn btn-success" ng-click="model.updateProduct(product._id, model.selectedProduct)">
+                        Confirm
+                    </a>
+                    <a class="btn btn-danger" ng-click="model.selectedProductId = null; model.selectedProduct = null;">
+                        Cancel
+                    </a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

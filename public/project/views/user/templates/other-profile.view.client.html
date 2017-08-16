@@ -1,0 +1,56 @@
+<div class="wvs wvs-profile">
+    <div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
+
+
+    <div class="container-fluid mi-container">
+
+        <h3 class="btn btn-info" ng-if="model.user._id === model.otherUser._id">This is your profile</h3>
+
+        <h3>Viewing user '{{model.otherUser.username}}'</h3>
+
+        <h4>Follows</h4>
+        {{model.otherUser.following}}
+
+        <h4>Is Followed By</h4>
+        <ul>
+            <li ng-repeat="user in model.followedBy">
+                <a href="#!/profile/{{user._id}}">
+                    {{user.username}}
+                </a>
+            </li>
+        </ul>
+
+        <h4>Liked Movies</h4>
+        <ul>
+            <li ng-repeat="movie in model.otherUser.likedMoviesFull">
+                <a href="#!/details/{{movie.id}}">
+                    {{movie.title}}
+                </a>
+            </li>
+        </ul>
+
+        <h4>Reviews</h4>
+        <div ng-repeat="review in model.reviews" class="wvs-widget-list-item">
+            "{{review.text}}" for Movie {{review.movieTitle}} <span ng-if="review.isRecommended" class="glyphicon glyphicon-ok"></span>
+            <span ng-if="!review.isRecommended" class="glyphicon glyphicon-remove"></span>
+        </div>
+
+        <a ng-if="!model.isUserFollowing(model.user, model.otherUserId)"
+           class="btn btn-default btn-info btn-block"
+           ng-click="model.followUser(model.userId, model.otherUserId)"
+           role="button">Follow user</a>
+        <a ng-if="model.isUserFollowing(model.user, model.otherUserId)"
+           class="btn btn-default btn-danger btn-block"
+           ng-click="model.unfollowUser(model.userId, model.otherUserId)"
+           role="button">Un-follow user</a>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <a href="#!/user/{{model.user._id}}">
+                <span class="pull-right glyphicon glyphicon-user wvs-nav-icon"></span>
+            </a>
+        </div>
+    </nav>
+
+</div>

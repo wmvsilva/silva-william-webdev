@@ -6,6 +6,6 @@ var reviewSchema = mongoose.Schema({
         isRecommended: Boolean,
     text: String
     },
-    {collection: "project-review"});
+    {collection: "project-prototype-review"});
 
 module.exports = reviewSchema;

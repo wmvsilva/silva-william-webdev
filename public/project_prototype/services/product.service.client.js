@@ -17,37 +17,37 @@
         return api;
 
         function createProduct(product) {
-            var url = "/project-api/product";
+            var url = "/project-prototype-api/product";
             return $http.post(url, product);
         }
 
         function findProductById(productId) {
-            var url = "/project-api/product/id/" + productId;
+            var url = "/project-prototype-api/product/id/" + productId;
             return $http.get(url);
         }
 
         function findProductsByUserId(userId) {
-            var url = "/project-api/product/user/" + userId;
+            var url = "/project-prototype-api/product/user/" + userId;
             return $http.get(url);
         }
 
         function findProductsByMovieId(movieId) {
-            var url = "/project-api/product/movie/" + movieId;
+            var url = "/project-prototype-api/product/movie/" + movieId;
             return $http.get(url);
         }
 
         function deleteProduct(productId) {
-            var url = "/project-api/product/" + productId;
+            var url = "/project-prototype-api/product/" + productId;
             return $http.delete(url);
         }
 
         function userBuyProduct(userId, productId) {
-            var url = "/project-api/product/buy?productId=" + productId + "&userId=" + userId;
+            var url = "/project-prototype-api/product/buy?productId=" + productId + "&userId=" + userId;
             return $http.get(url);
         }
 
         function findProductsByBuyer(userId) {
-            var url = "/project-api/products-bought/" + userId;
+            var url = "/project-prototype-api/products-bought/" + userId;
             return $http.get(url);
         }
     }

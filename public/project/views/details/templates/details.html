@@ -1,0 +1,137 @@
+<div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
+
+<div class="movie-detail-wrapper" style="background-image: url('http://image.tmdb.org/t/p/w1280{{model.movie.backdrop_path}}')">
+    <div class="container-fluid mi-container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1>{{model.movie.title}}</h1>
+                <h4>{{model.movie.tagline}}</h4>
+            </div>
+            <div class="panel-body">
+                <div class="movie-detail-top">
+                    <img ng-src="https://image.tmdb.org/t/p/w185{{model.movie.poster_path}}"/>
+                    <div class="movie-detail-overview">
+                        Released: {{model.movie.release_date | date}}
+                        <div>
+                            Runtime: {{model.movie.runtime}} minutes
+                        </div>
+                        <div>
+                            {{model.movie.overview}}
+                        </div>
+                        <div>
+                            <a ng-if="!model.doesUserLikeMovie()" class="btn btn-info" ng-click="model.likeMovie(model.userId, model.movie.id)">
+                                Like Movie
+                            </a>
+                            <a ng-if="model.doesUserLikeMovie()" class="btn btn-success" ng-click="model.unlikeMovie(model.userId, model.movie.id)">
+                                    Liked
+                            </a>
+                        </div>
+                        <div class="movie-detail-categories">
+                            <span ng-repeat="genre in model.movie.genres">
+                                #{{genre.name}}
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Cast</h4>
+            </div>
+            <div class="panel-body">
+                <div class="mi-horizontal-scroll cast">
+                    <div ng-repeat="actor in model.actors.cast" class="horizontal-scroll-cast">
+                        <img ng-src="http://image.tmdb.org/t/p/w185{{actor.profile_path}}" />
+                        <div>
+                            {{actor.character}}
+                            <div>
+                                {{actor.name}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Trailer</h4>
+            </div>
+            <div class="panel-body movie-detail-trailer-wrapper">
+                <iframe class="movie-detail-trailer" ng-src="{{model.videoUrl}}" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>Reviews</h2>
+            </div>
+            <div class="panel-body">
+                <div ng-repeat="review in model.reviews" class="mi-movie-detail-review">
+                    <div class="container-fluid">
+                        <div class="btn btn-success" ng-if="review.isRecommended" >
+                            <i class="fa fa-check" aria-hidden="true"></i> Recommended
+                        </div>
+                        <div class="btn btn-danger" ng-if="!review.isRecommended">
+                            <i class="fa fa-times" aria-hidden="true"></i> Not Recommended
+                        </div>
+                        <div>
+                            "{{review.text}}"
+                        </div>
+                        <div class="movie-detail-review-author">
+                            - Submitted by {{review._userId.username}}
+                        </div>
+                    </div>
+                </div>
+                <h3>Write Review</h3>
+                <textarea rows="4" cols="50" ng-model="model.review.text"></textarea>
+                <div>
+                    Recommended? <input type="checkbox" ng-model="model.review.isRecommended">
+                </div>
+                <div class="btn btn-primary" ng-click="model.createReview(model.userId, model.id, model.review)">
+                    Submit Review
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Products for sale for this movie</h3>
+            </div>
+            <div class="panel-body">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Image</th>
+                        <th>State</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="product in model.products">
+                        <td>{{product.category}}</td>
+                        <td>{{product.description}}</td>
+                        <td>{{product.price}}</td>
+                        <td><img ng-src="{{product.imageUrl}}" /></td>
+                        <td>
+                            <div ng-if="!product.purchased" class="btn btn-success" ng-click="model.buyProduct(product._id)">
+                                Buy
+                            </div>
+                            <div ng-if="product.purchased" class="btn btn-danger" >
+                                Purchased
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

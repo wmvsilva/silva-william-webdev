@@ -2,9 +2,9 @@ module.exports = function (app) {
 
     var reviewModel = require("../model/review/review.model.server");
 
-    app.post("/project-api/review", createReview);
-    app.get("/project-api/review/:movieId", findReviewsByMovieId);
-    app.get("/project-api/review/user/:userId", findReviewsByUserId);
+    app.post("/project-prototype-api/review", createReview);
+    app.get("/project-prototype-api/review/:movieId", findReviewsByMovieId);
+    app.get("/project-prototype-api/review/user/:userId", findReviewsByUserId);
 
 
     function createReview(req, res) {

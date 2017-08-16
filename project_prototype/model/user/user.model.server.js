@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var userSchema = require("./user.schema.server");
 
-var userModel = mongoose.model("ProjectUserModel", userSchema);
+var userModel = mongoose.model("ProjectPrototypeUserModel", userSchema);
 
 userModel.createUser = createUser;
 userModel.findUserById = findUserById;

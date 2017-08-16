@@ -9,7 +9,7 @@ var userSchema = mongoose.Schema({
         likedMovies: [Number],
     following: [{type: mongoose.Schema.Types.ObjectId, ref: 'ProjectUserModel'}]
     },
-    {collection: "project-user"});
+    {collection: "project-prototype-user"});
 
 
 module.exports = userSchema;

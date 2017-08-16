@@ -10,6 +10,6 @@ var productSchema = mongoose.Schema({
     purchased: Boolean,
     buyer: {type: mongoose.Schema.Types.ObjectId, ref: 'ProjectUserModel'}
     },
-    {collection: "project-product"});
+    {collection: "project-prototype-product"});
 
 module.exports = productSchema;

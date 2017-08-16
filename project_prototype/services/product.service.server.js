@@ -2,13 +2,13 @@ module.exports = function (app) {
 
     var productModel = require("../model/product/product.model.server");
 
-    app.post("/project-api/product", createProduct);
-    app.get("/project-api/product/id/:productId", findProductById);
-    app.get("/project-api/product/user/:userId", findProductsByUserId);
-    app.get("/project-api/product/movie/:movieId", findProductsByMovieId);
-    app.delete("/project-api/product/:productId", deleteProduct);
-    app.get("/project-api/product/buy/", userBuyProduct);
-    app.get("/project-api/products-bought/:userId", findProductsByBuyer);
+    app.post("/project-prototype-api/product", createProduct);
+    app.get("/project-prototype-api/product/id/:productId", findProductById);
+    app.get("/project-prototype-api/product/user/:userId", findProductsByUserId);
+    app.get("/project-prototype-api/product/movie/:movieId", findProductsByMovieId);
+    app.delete("/project-prototype-api/product/:productId", deleteProduct);
+    app.get("/project-prototype-api/product/buy/", userBuyProduct);
+    app.get("/project-prototype-api/products-bought/:userId", findProductsByBuyer);
 
     function createProduct(req, res) {
         var product = req.body;

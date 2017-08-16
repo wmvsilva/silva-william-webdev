@@ -1,0 +1,47 @@
+.mi-navbar {
+    border-radius: 0;
+    max-width: 1200px;
+    flex: 1 auto;
+}
+
+.mi-navbar button, .mi-navbar a {
+    cursor: pointer;
+}
+
+.mi-nav-container {
+    background-color: #292b2c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer {
+    background: #eee;
+    min-height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 991px) {
+    .footer {
+        font-size: 12px;
+    }
+}
+
+.wrapper {
+    min-height: 100%;
+}
+
+.main {
+    overflow:auto;
+    padding-bottom:50px;
+}
+
+.footer {
+    position: relative;
+    margin-top: -46px;
+    height: 46px;
+    clear:both;
+}

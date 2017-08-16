@@ -1,0 +1,60 @@
+<div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
+
+<div class="mi-container container-fluid margin-top">
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h3>Playing Now</h3>
+            <div class="mi-horizontal-scroll">
+                <div ng-repeat="movie in model.moviesPlayingNow.results" class="hvr-curl-top-left">
+                    <a href="#!/details/{{movie.id}}">
+                        <img ng-src="https://image.tmdb.org/t/p/w154{{movie.poster_path}}"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-3">The Movie Index</h1>
+            <p class="lead">Welcome to the Movie Index! Here you can like, review, and sell products for your favorite
+                movies. Sign up today and follow some users.</p>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h3>Top Rated Movies</h3>
+            <div class="mi-horizontal-scroll">
+                <div ng-repeat="movie in model.topRatedMovies.results" class="hvr-curl-top-left">
+                    <a href="#!/details/{{movie.id}}">
+                        <img ng-src="https://image.tmdb.org/t/p/w154{{movie.poster_path}}"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h3>Entertainment Weekly News</h3>
+            <div class="articles">
+                <div ng-repeat="article in model.articles" class="news-story">
+                    <a href="{{article.url}}">
+                        <div class="article-image" style="background-image: url('{{article.urlToImage}}')">
+                        </div>
+                    </a>
+                    <div class="news-story-title">
+                        <a href="{{article.url}}">
+                            <h5>{{article.title}}</h5>
+                        </a>
+                        <p class="timestamp">Posted
+                            {{article.publishedAt | date}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

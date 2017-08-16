@@ -2,17 +2,17 @@ module.exports = function (app) {
 
     var userModel = require("../model/user/user.model.server");
 
-    app.post("/project-api/user", registerUser);
-    app.get("/project-api/user", findUser);
-    app.get("/project-api/user/:userId", getUserById);
-    app.put("/project-api/user/:userId", updateUser);
-    app.delete("/project-api/user/:userId", deleteUser);
+    app.post("/project-prototype-api/user", registerUser);
+    app.get("/project-prototype-api/user", findUser);
+    app.get("/project-prototype-api/user/:userId", getUserById);
+    app.put("/project-prototype-api/user/:userId", updateUser);
+    app.delete("/project-prototype-api/user/:userId", deleteUser);
 
-    app.get("/project-api/user-follow/", followUser);
-    app.get("/project-api/user-unfollow/", unfollowUser);
-    app.get("/project-api/user-who-follows/:userId", whoFollows);
+    app.get("/project-prototype-api/user-follow/", followUser);
+    app.get("/project-prototype-api/user-unfollow/", unfollowUser);
+    app.get("/project-prototype-api/user-who-follows/:userId", whoFollows);
 
-    app.get("/project-api/search-user/", searchUserByName);
+    app.get("/project-prototype-api/search-user/", searchUserByName);
 
 
     function registerUser(req, res) {
