@@ -79,18 +79,71 @@
                 </td>
                 <td>
                     <div ng-if="model.selectedUserId !== user._id">
-                        {{user.following}}
-                    </div>
-                    <div ng-if="model.selectedUserId === user._id">
                         <ul>
-                            <li ng-repeat="followed in model.selectedUser.following">
+                            <li ng-repeat="followed in user.following">
                                 {{followed}}
                             </li>
                         </ul>
                     </div>
+                    <div ng-if="model.selectedUserId === user._id">
+
+                        <ul>
+                            <li ng-repeat="followed in model.selectedUser.following">
+                                {{followed}}
+                                <span class="btn btn-warning"
+                                      ng-click="model.selectedUser.following.splice(model.selectedUser.following.indexOf(followed), 1)">
+                                    Delete
+                                </span>
+                            </li>
+                            <li>
+                                <input name="item"
+                                       ng-model="item"
+                                       placeholder="item"
+                                       type="text"
+                                       class="form-control"
+                                />
+                                <span class="btn btn-success"
+                                      ng-click="model.selectedUser.following.push(item)">
+                                    Add
+                                </span>
+                            </li>
+                        </ul>
+
+                    </div>
                 </td>
                 <td>
-                    {{user.likedMovies}}
+                    <div ng-if="model.selectedUserId !== user._id">
+                        <ul>
+                            <li ng-repeat="likedMovie in user.likedMovies">
+                                {{likedMovie}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div ng-if="model.selectedUserId === user._id">
+
+                        <ul>
+                            <li ng-repeat="likedMovie in model.selectedUser.likedMovies">
+                                {{likedMovie}}
+                                <span class="btn btn-warning"
+                                      ng-click="model.selectedUser.likedMovies.splice(model.selectedUser.likedMovies.indexOf(likedMovie), 1)">
+                                    Delete
+                                </span>
+                            </li>
+                            <li>
+                                <input name="item"
+                                       ng-model="item"
+                                       placeholder="item"
+                                       type="text"
+                                       class="form-control"
+                                />
+                                <span class="btn btn-success"
+                                      ng-click="model.selectedUser.likedMovies.push(item)">
+                                    Add
+                                </span>
+                            </li>
+                        </ul>
+
+                    </div>
                 </td>
                 <td>
                     <div ng-if="model.selectedUserId !== user._id">
@@ -108,12 +161,12 @@
                         <a class="btn btn-info" ng-click="model.selectUser(user)">
                             Edit
                         </a>
-                        <a class="btn btn-danger">
+                        <a class="btn btn-danger" ng-click="model.deleteUser(user._id)">
                             Delete
                         </a>
                     </div>
                     <div ng-if="model.selectedUserId === user._id">
-                        <a class="btn btn-success">
+                        <a class="btn btn-success" ng-click="model.updateUser(user._id, model.selectedUser)">
                             Confirm
                         </a>
                         <a class="btn btn-danger" ng-click="model.selectedUserId = null; model.selectedUser = null;">
