@@ -195,3 +195,45 @@ a:hover {
 .movie-detail-wrapper {
     padding-top: 15px;
 }
+
+.movie-detail-top {
+    position: relative;
+}
+
+.movie-detail-categories {
+    position: absolute;
+    bottom: 0;
+}
+
+.horizontal-scroll-cast {
+    height: 100%;
+}
+
+.mi-horizontal-scroll.cast .horizontal-scroll-cast {
+    height: 200px;
+}
+
+.mi-horizontal-scroll.cast {
+    height: 300px;
+}
+
+.movie-detail-trailer {
+    width: 560px;
+    height: 315px;
+}
+
+@media (max-width: 991px) {
+    .movie-detail-trailer-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 */
+        height: 0;
+    }
+
+    .movie-detail-trailer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
