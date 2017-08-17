@@ -18,7 +18,7 @@
                 }
             })
             .when("/search", {
-                templateUrl: "views/search/templates/search.html",
+                templateUrl: "views/search/templates/search.view.client.html",
                 controller: "searchController",
                 controllerAs: "model",
                 resolve: {
@@ -26,7 +26,7 @@
                 }
             })
             .when("/details/:id", {
-                templateUrl: "views/details/templates/details.html",
+                templateUrl: "views/details/templates/details.view.client.html",
                 controller: "detailsController",
                 controllerAs: "model",
                 resolve: {
