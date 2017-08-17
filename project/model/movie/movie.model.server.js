@@ -1,6 +1,8 @@
 var mongoose = require("mongoose");
 var movieSchema = require("./movie.schema.server");
 var rp = require('request-promise');
+var request = require('request');
+
 
 
 
@@ -22,7 +24,10 @@ function createMovie(movie) {
 
 function findMoviesThatMatchIds(ids) {
     return movieModel
-        .find({'_id': {$in: ids}});
+        .find({'_id': {$in: ids}})
+        .lean()
+        .distinct('_id');
+
 }
 
 function addMovieIfMissing(potentiallyMissingMovieId) {
@@ -56,9 +61,9 @@ function addMoviesIfMissing(potentiallyMissingMovieIds) {
         .findMoviesThatMatchIds(potentiallyMissingMovieIds)
         .then(function (movies) {
             var missingMovieIds = [];
-            for (var m in potentiallyMissingMovieIds) {
-                if (movies.indexOf(potentiallyMissingMovieIds[m]) === -1) {
-                    missingMovieIds.push(potentiallyMissingMovieIds[m]);
+            for (var i = 0; i < potentiallyMissingMovieIds.length; i++) {
+                if (movies.indexOf(potentiallyMissingMovieIds[i]) === -1) {
+                    missingMovieIds.push(potentiallyMissingMovieIds[i]);
                 }
             }
 
