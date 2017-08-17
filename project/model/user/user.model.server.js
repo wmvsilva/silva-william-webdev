@@ -76,7 +76,7 @@ function deleteUser(userId) {
         .findUserById(userId)
         .then(function (user) {
             return user.remove();
-        });
+        })
 }
 
 function followUser(userId, otherUserId) {
@@ -105,7 +105,7 @@ function whoFollows(userId) {
 
 function searchUserByName(username) {
     return userModel
-        .find({"username": {$regex: ".*" + username + ".*"}});
+        .find({"username": {$regex: ".*" + username + ".*", $options:'i'}});
 }
 
 function getAllUsers() {
