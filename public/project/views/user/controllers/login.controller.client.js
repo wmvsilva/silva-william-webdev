@@ -17,7 +17,7 @@
 
         function login(user) {
             if (!user) {
-                model.errorMessage = "User not found";
+                model.errorMessage = "Please enter all fields";
                 return;
             }
             UserService
