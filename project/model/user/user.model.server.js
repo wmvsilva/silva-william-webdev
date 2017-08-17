@@ -103,7 +103,7 @@ function whoFollows(userId) {
 
 function searchUserByName(username) {
     return userModel
-        .find({"username" : {$regex : ".*" + username + ".*"}});
+        .find({"username": {$regex: ".*" + username + ".*"}});
 }
 
 function getAllUsers() {

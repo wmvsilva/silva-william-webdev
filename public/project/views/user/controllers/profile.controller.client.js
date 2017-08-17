@@ -32,13 +32,13 @@
             ProductService
                 .findProductsByUserIdPopulated(model.userId)
                 .then(function (response) {
-                   model.products = response.data;
+                    model.products = response.data;
                 });
 
             ProductService
                 .findProductsByBuyer(model.userId)
                 .then(function (response) {
-                   model.productsPurchased = response.data;
+                    model.productsPurchased = response.data;
                 });
 
 

@@ -114,12 +114,12 @@
                 }
             })
             .when("/admin/users", {
-            templateUrl: "views/admin/templates/admin-user.view.client.html",
-            controller: "adminUserController",
-            controllerAs: "model",
-            resolve: {
-                user: checkAdmin
-            }
+                templateUrl: "views/admin/templates/admin-user.view.client.html",
+                controller: "adminUserController",
+                controllerAs: "model",
+                resolve: {
+                    user: checkAdmin
+                }
             })
             .when("/admin/reviews", {
                 templateUrl: "views/admin/templates/admin-review.view.client.html",

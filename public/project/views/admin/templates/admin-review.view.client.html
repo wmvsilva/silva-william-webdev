@@ -90,8 +90,8 @@
             </td>
             <td>
                 <div ng-if="model.selectedReviewId !== review._id">
-                {{review.text}}
-            </div>
+                    {{review.text}}
+                </div>
                 <div ng-if="model.selectedReviewId === review._id">
                     <input name="reviewText"
                            ng-model="model.selectedReview.text"

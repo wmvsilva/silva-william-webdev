@@ -1,39 +1,38 @@
+<div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
 
-    <div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
+<div class="container-fluid mi-container margin-top mi-inputs">
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
 
-    <div class="container-fluid mi-container margin-top mi-inputs">
-        <div ng-show="model.error" class="alert alert-danger">
-            {{model.error}}
-        </div>
+    <h2>Register</h2>
 
-        <h2>Register</h2>
+    <input name="username"
+           ng-model="user.username"
+           placeholder="username"
+           type="text"
+           class="form-control"
+           id="username"/>
 
-        <input name="username"
-               ng-model="user.username"
-               placeholder="username"
-               type="text"
-               class="form-control"
-               id="username"/>
+    <input name="password"
+           ng-model="user.password"
+           placeholder="password"
+           type="password"
+           class="form-control"
+           id="password"/>
 
-        <input name="password"
-               ng-model="user.password"
-               placeholder="password"
-               type="password"
-               class="form-control"
-               id="password"/>
+    <input name="password2"
+           ng-model="user.password2"
+           placeholder="verify password"
+           type="password"
+           class="form-control"
+           id="password2"/>
 
-        <input name="password2"
-               ng-model="user.password2"
-               placeholder="verify password"
-               type="password"
-               class="form-control"
-               id="password2"/>
+    <a class="btn btn-default btn-primary btn-block"
+       ng-click="model.registerUser(user)"
+       role="button">Register</a>
 
-        <a class="btn btn-default btn-primary btn-block"
-           ng-click="model.registerUser(user)"
-           role="button">Register</a>
-
-        <a class="btn btn-default btn-danger btn-block"
-           href="#!/login"
-           role="button">Cancel</a>
+    <a class="btn btn-default btn-danger btn-block"
+       href="#!/login"
+       role="button">Cancel</a>
 </div>

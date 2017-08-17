@@ -36,7 +36,7 @@
             ProductService
                 .findProductsByUserIdPopulated(model.otherUserId)
                 .then(function (response) {
-                   model.products = response.data;
+                    model.products = response.data;
                 });
         }
 

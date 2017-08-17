@@ -147,18 +147,18 @@ module.exports = function (app) {
         userModel
             .findUserByFacebookId(profile.id)
             .then(
-                function(user) {
-                    if(user) {
+                function (user) {
+                    if (user) {
                         return done(null, user);
                     } else {
                         var names = profile.displayName.split(" ");
                         var newFacebookUser = {
                             username: "FB-" + names[0] + "-" + names[1],
-                            lastName:  names[1],
+                            lastName: names[1],
                             firstName: names[0],
-                            email:     profile.emails ? profile.emails[0].value: "",
+                            email: profile.emails ? profile.emails[0].value : "",
                             facebook: {
-                                id:    profile.id,
+                                id: profile.id,
                                 token: token
                             }
                         };
@@ -166,16 +166,20 @@ module.exports = function (app) {
                             .createUser(newFacebookUser);
                     }
                 },
-                function(err) {
-                    if (err) { return done(err); }
+                function (err) {
+                    if (err) {
+                        return done(err);
+                    }
                 }
             )
             .then(
-                function(user){
+                function (user) {
                     return done(null, user);
                 },
-                function(err){
-                    if (err) { return done(err); }
+                function (err) {
+                    if (err) {
+                        return done(err);
+                    }
                 }
             );
     }
@@ -231,7 +235,7 @@ module.exports = function (app) {
             .findUserByUsername(username)
             .then(
                 function (user) {
-                    if(user && bcrypt.compareSync(password, user.password)) {
+                    if (user && bcrypt.compareSync(password, user.password)) {
                         return done(null, user);
                     } else {
                         return done(null, false);

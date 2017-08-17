@@ -50,10 +50,10 @@
                 <div class="mi-horizontal-scroll cast">
                     <div ng-repeat="actor in model.actors.cast" class="horizontal-scroll-cast">
                         <div ng-if="actor.profile_path">
-                            <img ng-src="http://image.tmdb.org/t/p/w185{{actor.profile_path}}" />
+                            <img ng-src="http://image.tmdb.org/t/p/w185{{actor.profile_path}}"/>
                         </div>
                         <div ng-if="!actor.profile_path">
-                            <img ng-src="img/img-404.jpg" />
+                            <img ng-src="img/img-404.jpg"/>
                         </div>
                         <div>
                             {{actor.character}}
