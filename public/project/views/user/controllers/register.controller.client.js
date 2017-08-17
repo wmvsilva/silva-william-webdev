@@ -15,7 +15,7 @@
         init();
 
         function registerUser(user) {
-            if (!user || !user.username || !user.password || !user.password2) {
+            if (!user || !user.username || !user.password || !user.password2 || !user.email) {
                 model.error = "Please enter in all the fields";
                 return;
             }
