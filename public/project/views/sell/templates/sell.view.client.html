@@ -24,33 +24,115 @@
                         <th>Description</th>
                         <th>Price</th>
                         <th>Image</th>
-                        <th>Status</th>
+                        <th>Buyer</th>
                         <th>Action</th>
                     </tr>
                     </thead>
 
                     <tbody>
+
                     <tr ng-repeat="product in model.products">
-                        <td>{{product._movieId.title}}</td>
-                        <td>{{product.category}}</td>
-                        <td>{{product.description}}</td>
-                        <td>{{product.price}}</td>
                         <td>
-                            <img class="sale-image"
-                                 ng-src="{{product.imageUrl}}"
-                                 onerror="if (this.src != 'img/img-404.jpg') this.src = 'img/img-404.jpg';"/>
-                        </td>
-                        <td>
-                            <div ng-if="product.buyer" class="btn btn-info">
-                                Sold to {{product.buyer}}
+                            <div ng-if="model.selectedProductId !== product._id">
+                                {{product._movieId.title}}
                             </div>
-                            <div ng-if="!product.buyer" class="btn btn-warning">
-                                Not sold
+                            <div ng-if="model.selectedProductId === product._id">
+                                <input name="movieId"
+                                       ng-model="model.selectedProduct._movieId"
+                                       placeholder="movie Id"
+                                       type="text"
+                                       class="form-control"
+                                />
                             </div>
                         </td>
                         <td>
-                            <div class="btn btn-danger" ng-click="model.deleteProduct(product._id)">
-                                Delete
+                            <div ng-if="model.selectedProductId !== product._id">
+                                {{product.category}}
+                            </div>
+                            <div ng-if="model.selectedProductId === product._id">
+                                <input name="category"
+                                       ng-model="model.selectedProduct.category"
+                                       placeholder="category"
+                                       type="text"
+                                       class="form-control"
+                                />
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-if="model.selectedProductId !== product._id">
+                                {{product.description}}
+                            </div>
+                            <div ng-if="model.selectedProductId === product._id">
+                                <input name="description"
+                                       ng-model="model.selectedProduct.description"
+                                       placeholder="description"
+                                       type="text"
+                                       class="form-control"
+                                />
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-if="model.selectedProductId !== product._id">
+                                {{product.price}}
+                            </div>
+                            <div ng-if="model.selectedProductId === product._id">
+                                <input name="price"
+                                       ng-model="model.selectedProduct.price"
+                                       placeholder="price"
+                                       type="text"
+                                       class="form-control"
+                                />
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-if="model.selectedProductId !== product._id">
+                                <img class="sale-image"
+                                     ng-src="{{product.imageUrl}}"
+                                     onerror="if (this.src != 'img/img-404.jpg') this.src = 'img/img-404.jpg';"/>
+                            </div>
+                            <div ng-if="model.selectedProductId === product._id">
+                                <input name="imageUrl"
+                                       ng-model="model.selectedProduct.imageUrl"
+                                       placeholder="imageUrl"
+                                       type="text"
+                                       class="form-control"
+                                />
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-if="model.selectedProductId !== product._id">
+                                <div ng-if="product.buyer" class="btn btn-info">
+                                    Sold to {{product.buyer.username}}
+                                </div>
+                                <div ng-if="!product.buyer" class="btn btn-warning">
+                                    Not sold
+                                </div>
+                            </div>
+                            <div ng-if="model.selectedProductId === product._id">
+                                <input name="buyer id"
+                                       ng-model="model.selectedProduct.buyer"
+                                       placeholder="buyer id"
+                                       type="text"
+                                       class="form-control"
+                                />
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-if="model.selectedProductId !== product._id">
+                                <a class="btn btn-info" ng-click="model.selectProduct(product)">
+                                    Edit
+                                </a>
+                                <a class="btn btn-danger" ng-click="model.deleteProduct(product._id)">
+                                    Delete
+                                </a>
+                            </div>
+                            <div ng-if="model.selectedProductId === product._id">
+                                <a class="btn btn-success" ng-click="model.updateProduct(product._id, model.selectedProduct)">
+                                    Confirm
+                                </a>
+                                <a class="btn btn-danger" ng-click="model.selectedProductId = null; model.selectedProduct = null;">
+                                    Cancel
+                                </a>
                             </div>
                         </td>
                     </tr>

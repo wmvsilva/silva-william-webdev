@@ -10,6 +10,8 @@
         this.searchMovieByTitle = searchMovieByTitle;
         this.createProduct = createProduct;
         this.deleteProduct = deleteProduct;
+        this.selectProduct = selectProduct;
+        this.updateProduct = updateProduct;
 
         function init() {
             model.movieId = $routeParams.movieId;
@@ -24,11 +26,30 @@
 
         init();
 
+        function updateProduct(productId, product) {
+            ProductService
+                .updateProduct(productId, product)
+                .then(function (response) {
+                    return grabProducts();
+                });
+            model.selectedProductId = null;
+            model.selectedProduct = null;
+        }
+
+        function selectProduct(product) {
+            model.selectedProductId = product._id;
+            ProductService.findProductById(product._id)
+                .then(function (response) {
+                    model.selectedProduct = response.data;
+                })
+        }
+
         function grabProducts() {
             ProductService
                 .findProductsByUserIdPopulated(model.userId)
                 .then(function (response) {
                     model.products = response.data;
+                    console.log(model.products);
                 });
         }
 
