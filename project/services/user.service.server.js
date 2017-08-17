@@ -112,7 +112,6 @@ module.exports = function (app) {
         userModel
             .createUser(user)
             .then(function (user) {
-                console.log(user);
                 if (user) {
                     req.login(user, function (err) {
                         if (err) {

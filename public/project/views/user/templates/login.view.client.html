@@ -7,23 +7,27 @@
 
     <h2>Login</h2>
 
-    <input name="username"
-           ng-model="model.loggingInUser.username"
-           placeholder="username"
-           type="text"
-           class="form-control"
-           id="username"/>
+    <form class="margin-bottom">
+        <input name="username"
+               ng-model="model.loggingInUser.username"
+               placeholder="username"
+               type="text"
+               class="form-control"
+               id="username"/>
 
-    <input name="password"
-           ng-model="model.loggingInUser.password"
-           placeholder="password"
-           type="password"
-           class="form-control"
-           id="password"/>
+        <input name="password"
+               ng-model="model.loggingInUser.password"
+               placeholder="password"
+               type="password"
+               class="form-control"
+               id="password"/>
 
-    <a class="btn btn-default btn-primary btn-block"
-       ng-click="model.login(model.loggingInUser)"
-       role="button">Login</a>
+        <button class="btn btn-primary btn-block"
+           ng-click="model.login(model.loggingInUser)"
+        type="submit">
+            Login
+        </button>
+    </form>
 
     <a href="/project-api/auth/google" class="btn btn-danger btn-block">
         <span class="fa fa-google-plus"></span>

@@ -249,6 +249,10 @@ a:hover {
     margin-top: 15px;
 }
 
+.margin-bottom {
+    margin-bottom: 8px;
+}
+
 .mi-inputs input {
     margin-bottom: 8px;
 }

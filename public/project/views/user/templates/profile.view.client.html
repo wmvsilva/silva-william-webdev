@@ -1,6 +1,6 @@
 <div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
 
-<div class="mi-container container-fluid margin-top">
+<div class="mi-container container-fluid margin-top mi-inputs">
 
     <div ng-show="model.updateMessage" class="alert alert-info">
         {{model.updateMessage }}
@@ -43,14 +43,20 @@
            class="form-control"
            id="lastName"/>
 
-    <h4>You are following</h4>
-    <ul>
-        <li ng-repeat="user in model.user.following">
-            <a href="#!/profile/{{user._id}}">
-                {{user.username}}
-            </a>
-        </li>
-    </ul>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2>You are following</h2>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                <li ng-repeat="user in model.user.following" class="list-group-item">
+                    <a href="#!/profile/{{user._id}}">
+                        {{user.username}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
     <h4>You are being followed by</h4>
     <ul>
