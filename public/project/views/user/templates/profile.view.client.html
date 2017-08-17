@@ -62,7 +62,7 @@
         <div class="panel-body">
             <div class="mi-horizontal-scroll">
                 <div ng-repeat="movie in model.user.likedMovies" class="hvr-curl-top-left">
-                    <a href="#!/details/{{movie.id}}">
+                    <a href="#!/details/{{movie._id}}">
                         <img ng-src="https://image.tmdb.org/t/p/w154{{movie.poster_path}}"/>
                     </a>
                 </div>
@@ -140,40 +140,7 @@
             <h2>Products for sale</h2>
         </div>
         <div class="panel-body">
-            <table class="table table-responsive">
-                <thead>
-                <tr>
-                    <th>Movie</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Image</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <tr ng-repeat="product in model.products">
-                    <td>{{product._movieId.title}}</td>
-                    <td>{{product.category}}</td>
-                    <td>{{product.description}}</td>
-                    <td>{{product.price}}</td>
-                    <td>
-                        <img class="sale-image"
-                             ng-src="{{product.imageUrl}}"
-                             onerror="if (this.src != 'img/img-404.jpg') this.src = 'img/img-404.jpg';"/>
-                    </td>
-                    <td>
-                        <div ng-if="product.buyer" class="btn btn-info">
-                            Sold to {{product.buyer}}
-                        </div>
-                        <div ng-if="!product.buyer" class="btn btn-warning">
-                            Not sold
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div ng-include src="'views/sell/templates/sell-table.component.client.html'"></div>
         </div>
     </div>
 
@@ -194,6 +161,9 @@
                     <div>
                         "{{review.text}}"
                     </div>
+                </div>
+                <div class="btn-warning btn" ng-click="model.deleteReview(review._id)">
+                    Delete
                 </div>
             </div>
         </div>

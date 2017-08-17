@@ -9,6 +9,11 @@
 
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
+        model.deleteReview = deleteReview;
+        model.updateProduct = updateProduct;
+        model.selectProduct = selectProduct;
+        model.deleteProduct = deleteProduct;
+
 
         function init() {
             UserService
@@ -87,5 +92,49 @@
                     $location.url("login");
                 });
         }
+
+        function deleteReview(reviewId) {
+            ReviewService
+                .deleteReview(reviewId)
+                .then(function (response) {
+                    ReviewService
+                        .findReviewsByUserIdPopulated(model.userId)
+                        .then(function (response) {
+                            model.reviews = response.data;
+                        });
+                })
+        }
+
+        function updateProduct(productId, product) {
+            ProductService
+                .updateProduct(productId, product)
+                .then(function (response) {
+                    return grabProducts();
+                });
+            model.selectedProductId = null;
+            model.selectedProduct = null;
+        }
+
+        function selectProduct(product) {
+            model.selectedProductId = product._id;
+            ProductService.findProductById(product._id)
+                .then(function (response) {
+                    model.selectedProduct = response.data;
+                })
+        }
+
+
+        function deleteProduct(productId) {
+            ProductService
+                .deleteProduct(productId)
+                .then(function (status) {
+                    ProductService
+                        .findProductsByUserIdPopulated(model.userId)
+                        .then(function (response) {
+                            model.products = response.data;
+                        });
+                })
+        }
+
     }
 })();
