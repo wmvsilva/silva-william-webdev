@@ -74,8 +74,10 @@ module.exports = function (app) {
         productModel
             .createProduct(product)
             .then(function (product) {
-                movieModel.addMoviesIfMissing([product._movieId]);
-                res.json(product);
+                movieModel.addMovieIfMissing(product._movieId)
+                    .then(function (response) {
+                        res.json(product);
+                    });
             }, function (err) {
                 res.status(500).send(err);
             });
@@ -185,8 +187,10 @@ module.exports = function (app) {
         productModel
             .updateProduct(productId, product)
             .then(function (status) {
-                movieModel.addMoviesIfMissing([product._movieId]);
-                res.json(status);
+                movieModel.addMovieIfMissing(product._movieId)
+                    .then(function (response) {
+                        res.json(status);
+                    });
             }, function (err) {
                 res.sendStatus(404).send(err);
             });

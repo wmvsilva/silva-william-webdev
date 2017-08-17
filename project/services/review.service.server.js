@@ -62,8 +62,12 @@ module.exports = function (app) {
         reviewModel
             .createReview(review)
             .then(function (review) {
-                movieModel.addMoviesIfMissing([review._movieId]);
-                res.json(review);
+                movieModel.addMovieIfMissing(review._movieId)
+                    .then(function (response) {
+                        res.json(review);
+                    }, function (err) {
+                        res.status(500).send(err);
+                    });
             }, function (err) {
                 res.status(500).send(err);
             });
@@ -136,7 +140,7 @@ module.exports = function (app) {
         reviewModel
             .updateReview(reviewId, review)
             .then(function (status) {
-                movieModel.addMoviesIfMissing([review._movieId]);
+                movieModel.addMovieIfMissing(review._movieId);
                 res.json(status);
             }, function (err) {
                 res.sendStatus(404).send(err);

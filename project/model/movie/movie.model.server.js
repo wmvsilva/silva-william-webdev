@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var movieSchema = require("./movie.schema.server");
-var request = require('request');
+var rp = require('request-promise');
+
 
 
 var movieModel = mongoose.model("ProjectMovieModel", movieSchema);
@@ -10,6 +11,7 @@ movieModel.findMoviesThatMatchIds = findMoviesThatMatchIds;
 movieModel.addMoviesIfMissing = addMoviesIfMissing;
 movieModel.deleteMovie = deleteMovie;
 movieModel.updateMovie = updateMovie;
+movieModel.addMovieIfMissing = addMovieIfMissing;
 
 module.exports = movieModel;
 
@@ -21,6 +23,32 @@ function createMovie(movie) {
 function findMoviesThatMatchIds(ids) {
     return movieModel
         .find({'_id': {$in: ids}});
+}
+
+function addMovieIfMissing(potentiallyMissingMovieId) {
+    return movieModel
+        .findById(potentiallyMissingMovieId)
+        .then(function (movie) {
+            if (movie) {
+                return Promise.resolve({});
+            }
+
+            return rp("https://api.themoviedb.org/3/movie/" + potentiallyMissingMovieId + "?api_key=9a1db3dd9659485ffb9d482a484908e0")
+                .then(function (body) {
+                    console.log(body);
+                    var jsonMovie = JSON.parse(body);
+                    var abridgedMovie = {
+                        _id: jsonMovie.id,
+                        title: jsonMovie.title,
+                        poster_path: jsonMovie.poster_path
+                    };
+                    return movieModel
+                        .createMovie(abridgedMovie);
+                })
+                .catch(function (err) {
+                    console.log("sad");
+                })
+        });
 }
 
 function addMoviesIfMissing(potentiallyMissingMovieIds) {
