@@ -2,14 +2,20 @@
     <div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
 
 
-    <div class="container-fluid mi-container">
+    <div class="container-fluid mi-container margin-top">
 
         <h3 class="btn btn-info" ng-if="model.user._id === model.otherUser._id">This is your profile</h3>
 
         <h3>Viewing user '{{model.otherUser.username}}'</h3>
 
         <h4>Follows</h4>
-        {{model.otherUser.following}}
+        <ul>
+            <li ng-repeat="user in model.otherUser.following">
+                <a href="#!/profile/{{user._id}}">
+                    {{user.username}}
+                </a>
+            </li>
+        </ul>
 
         <h4>Is Followed By</h4>
         <ul>
@@ -22,7 +28,7 @@
 
         <h4>Liked Movies</h4>
         <ul>
-            <li ng-repeat="movie in model.otherUser.likedMoviesFull">
+            <li ng-repeat="movie in model.otherUser.likedMovies">
                 <a href="#!/details/{{movie.id}}">
                     {{movie.title}}
                 </a>
@@ -31,7 +37,7 @@
 
         <h4>Reviews</h4>
         <div ng-repeat="review in model.reviews" class="wvs-widget-list-item">
-            "{{review.text}}" for Movie {{review.movieTitle}} <span ng-if="review.isRecommended" class="glyphicon glyphicon-ok"></span>
+            "{{review.text}}" for Movie {{review._movieId.title}} <span ng-if="review.isRecommended" class="glyphicon glyphicon-ok"></span>
             <span ng-if="!review.isRecommended" class="glyphicon glyphicon-remove"></span>
         </div>
 
@@ -44,13 +50,5 @@
            ng-click="model.unfollowUser(model.userId, model.otherUserId)"
            role="button">Un-follow user</a>
     </div>
-
-    <nav class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container-fluid">
-            <a href="#!/user/{{model.user._id}}">
-                <span class="pull-right glyphicon glyphicon-user wvs-nav-icon"></span>
-            </a>
-        </div>
-    </nav>
 
 </div>

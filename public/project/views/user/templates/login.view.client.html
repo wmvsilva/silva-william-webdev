@@ -1,47 +1,45 @@
-<div>
-    <div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
+<div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
 
-    <div class="container-fluid">
-        <div ng-show="model.errorMessage" class="alert alert-danger">
-            {{model.errorMessage}}
-        </div>
-
-        <h2>Login</h2>
-
-        <input name="username"
-               ng-model="model.loggingInUser.username"
-               placeholder="username"
-               type="text"
-               class="form-control"
-               id="username"/>
-
-        <input name="password"
-               ng-model="model.loggingInUser.password"
-               placeholder="password"
-               type="password"
-               class="form-control"
-               id="password"/>
-
-        <a class="btn btn-default btn-primary btn-block"
-           ng-click="model.login(model.loggingInUser)"
-           role="button">Login</a>
-
-        <a href="/project-api/auth/google" class="btn btn-danger btn-block">
-            <span class="fa fa-google-plus"></span>
-            Google
-        </a>
-
-
-        <a href="/project-api/auth/facebook" class="btn btn-primary btn-block">
-            <span class="fa fa-facebook"></span>
-            Facebook
-        </a>
-
-
-        <a class="btn btn-default btn-success btn-block"
-           href="#!/register"
-           role="button">Register</a>
-
+<div class="mi-container container-fluid margin-top mi-inputs">
+    <div ng-show="model.errorMessage" class="alert alert-danger">
+        {{model.errorMessage}}
     </div>
+
+    <h2>Login</h2>
+
+    <input name="username"
+           ng-model="model.loggingInUser.username"
+           placeholder="username"
+           type="text"
+           class="form-control"
+           id="username"/>
+
+    <input name="password"
+           ng-model="model.loggingInUser.password"
+           placeholder="password"
+           type="password"
+           class="form-control"
+           id="password"/>
+
+    <a class="btn btn-default btn-primary btn-block"
+       ng-click="model.login(model.loggingInUser)"
+       role="button">Login</a>
+
+    <a href="/project-api/auth/google" class="btn btn-danger btn-block">
+        <span class="fa fa-google-plus"></span>
+        Google
+    </a>
+
+
+    <a href="/project-api/auth/facebook" class="btn btn-primary btn-block">
+        <span class="fa fa-facebook"></span>
+        Facebook
+    </a>
+
+
+    <a class="btn btn-default btn-success btn-block"
+       href="#!/register"
+       role="button">Register</a>
+
 
 </div>
