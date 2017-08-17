@@ -20,7 +20,8 @@
             checkLogin: checkLogin,
             getAllUsers: getAllUsers,
             findUserByIdPopulated: findUserByIdPopulated,
-            register: register
+            register: register,
+            updateUserAndEncryptPassword: updateUserAndEncryptPassword
         };
         return api;
 
@@ -68,6 +69,11 @@
 
         function updateUser(userId, user) {
             var url = "/project-api/user/" + userId;
+            return $http.put(url, user);
+        }
+
+        function updateUserAndEncryptPassword(userId, user) {
+            var url = "/project-api/user/" + userId + "?encrypt=yes";
             return $http.put(url, user);
         }
 

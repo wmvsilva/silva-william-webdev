@@ -52,15 +52,28 @@
         }
 
         function updateUser(userId, user) {
-            UserService
-                .updateUser(userId, user)
-                .then(function (response) {
-                    UserService
-                        .getAllUsers()
-                        .then(function (response) {
-                            model.users = response.data;
-                        });
-                });
+            if (user.newPassword) {
+                user.password = user.newPassword;
+                UserService
+                    .updateUserAndEncryptPassword(userId, user)
+                    .then(function (response) {
+                        UserService
+                            .getAllUsers()
+                            .then(function (response) {
+                                model.users = response.data;
+                            });
+                    });
+            } else {
+                UserService
+                    .updateUser(userId, user)
+                    .then(function (response) {
+                        UserService
+                            .getAllUsers()
+                            .then(function (response) {
+                                model.users = response.data;
+                            });
+                    });
+            }
             model.selectedUserId = null;
             model.selectedUser = null;
         }

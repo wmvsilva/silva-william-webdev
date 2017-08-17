@@ -257,6 +257,7 @@ module.exports = function (app) {
 
     function registerUser(req, res) {
         var user = req.body;
+        user.password = bcrypt.hashSync(user.password);
         userModel
             .createUser(user)
             .then(function (user) {
@@ -328,6 +329,10 @@ module.exports = function (app) {
     function updateUser(req, res) {
         var userId = req.params.userId;
         var user = req.body;
+
+        if (req.query.encrypt) {
+            user.password = bcrypt.hashSync(user.password);
+        }
 
         return userModel
             .updateUser(userId, user)
