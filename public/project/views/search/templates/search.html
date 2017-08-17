@@ -13,6 +13,9 @@
         </button>
     </form>
 
+    <div ng-if="model.movies.results.length === 0" class="margin-top">
+        <h3>No results found</h3>
+    </div>
     <ul class="item-list">
         <li ng-repeat="movie in model.movies.results">
             <a href="#!/details/{{movie.id}}" class="hvr-shrink movie-search-result">
