@@ -4,7 +4,7 @@
 
     <div class="container-fluid mi-container margin-top">
 
-        <h3 class="btn btn-info" ng-if="model.user._id === model.otherUser._id">This is your profile</h3>
+        <h3 class="btn btn-info" ng-if="model.user._id === model.otherUser._id">This is your public profile</h3>
 
         <h2>{{model.otherUser.username}}'s Profile</h2>
 
@@ -60,7 +60,11 @@
             <div class="panel-body">
                 <div ng-repeat="review in model.reviews" class="mi-movie-detail-review">
                     <div class="container-fluid">
-                        <h6>{{review._movieId.title}}</h6>
+                        <h6>
+                            <a href="#!/details/{{review._movieId._id}}">
+                            {{review._movieId.title}}
+                            </a>
+                        </h6>
                         <div class="btn btn-success" ng-if="review.isRecommended">
                             <i class="fa fa-check" aria-hidden="true"></i> Recommended
                         </div>

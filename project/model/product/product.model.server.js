@@ -44,7 +44,9 @@ function findProductsByUserIdPopulated(userId) {
 
 function findProductsByMovieId(movieId) {
     return productModel
-        .find({_movieId: movieId});
+        .find({_movieId: movieId})
+        .populate("_userId", "_id username email")
+        .exec();
 }
 
 function deleteProduct(productId) {

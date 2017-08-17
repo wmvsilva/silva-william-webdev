@@ -121,6 +121,7 @@
                         <th>Description</th>
                         <th>Price</th>
                         <th>Image</th>
+                        <th>Seller</th>
                         <th>State</th>
                     </tr>
                     </thead>
@@ -133,6 +134,9 @@
                             <img class="sale-image"
                                  ng-src="{{product.imageUrl}}"
                                  onerror="if (this.src != 'img/img-404.jpg') this.src = 'img/img-404.jpg';"/>
+                        </td>
+                        <td>
+                            {{product._userId.username}}
                         </td>
                         <td>
                             <div ng-if="!product.purchased" class="btn btn-success"
