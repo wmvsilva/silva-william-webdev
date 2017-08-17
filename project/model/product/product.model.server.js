@@ -38,7 +38,7 @@ function findProductsByUserIdPopulated(userId) {
     return productModel
         .find({_userId: userId})
         .populate("_movieId")
-        .populate("buyer", "_id username")
+        .populate("buyer", "_id username email")
         .exec();
 }
 

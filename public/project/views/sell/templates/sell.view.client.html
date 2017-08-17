@@ -11,6 +11,7 @@
            href="#!/sell/search"
            role="button">Sell a product</a>
 
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h2>Your products for sale</h2>
@@ -101,8 +102,14 @@
                         </td>
                         <td>
                             <div ng-if="model.selectedProductId !== product._id">
-                                <div ng-if="product.buyer" class="btn btn-info">
+
+                                <div ng-if="product.buyer" class="btn btn-info"
+                                     ng-click="popover[product._id] = true">
                                     Sold to {{product.buyer.username}}
+                                    <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+                                    <div ng-if="popover[product._id]" >
+                                        Contact this user at {{product.buyer.email}}
+                                    </div>
                                 </div>
                                 <div ng-if="!product.buyer" class="btn btn-warning">
                                     Not sold

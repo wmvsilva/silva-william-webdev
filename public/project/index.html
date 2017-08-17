@@ -6,8 +6,9 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-            integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
             integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
@@ -19,7 +20,6 @@
     <link href="css/hover-min.css" rel="stylesheet"/>
     <link href="css/bootstrap-panel.css" rel="stylesheet"/>
 
-    <script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="../vendor/angular/angular.js"></script>
     <script src="../vendor/angular/angular-route.js"></script>
     <script src="app.js"></script>
@@ -54,6 +54,14 @@
     <link href="css/navbar.css" rel="stylesheet">
     <link href="css/home.css" rel="stylesheet">
     <link href="css/search.css" rel="stylesheet">
+
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover({
+                placement : 'top'
+            });
+        });
+    </script>
 
     <meta charset="UTF-8">
     <title>Title</title>

@@ -49,7 +49,6 @@
                 .findProductsByUserIdPopulated(model.userId)
                 .then(function (response) {
                     model.products = response.data;
-                    console.log(model.products);
                 });
         }
 
