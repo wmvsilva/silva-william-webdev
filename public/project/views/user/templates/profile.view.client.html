@@ -100,7 +100,11 @@
                     <td>{{product.category}}</td>
                     <td>{{product.description}}</td>
                     <td>{{product.price}}</td>
-                    <td>{{product.imageUrl}}</td>
+                    <td>
+                        <img class="sale-image"
+                             ng-src="{{product.imageUrl}}"
+                             onerror="if (this.src != 'img/img-404.jpg') this.src = 'img/img-404.jpg';"/>
+                    </td>
                     <td>{{product._userId.username}}</td>
                 </tr>
                 </tbody>
@@ -131,7 +135,11 @@
                     <td>{{product.category}}</td>
                     <td>{{product.description}}</td>
                     <td>{{product.price}}</td>
-                    <td>{{product.imageUrl}}</td>
+                    <td>
+                        <img class="sale-image"
+                             ng-src="{{product.imageUrl}}"
+                             onerror="if (this.src != 'img/img-404.jpg') this.src = 'img/img-404.jpg';"/>
+                    </td>
                     <td>
                         <div ng-if="product.buyer" class="btn btn-info">
                             Sold to {{product.buyer}}

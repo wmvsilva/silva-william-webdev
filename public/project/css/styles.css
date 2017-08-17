@@ -256,3 +256,7 @@ a:hover {
 .mi-inputs input {
     margin-bottom: 8px;
 }
+
+.sale-image {
+    height:200px;
+}
