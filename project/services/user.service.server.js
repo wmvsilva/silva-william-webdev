@@ -20,16 +20,16 @@ module.exports = function (app) {
     app.post("/project-api/user", registerUser);
     app.get("/project-api/user", findUser);
     app.get("/project-api/user/:userId", getUserById);
-    app.put("/project-api/user/:userId", updateUser);
-    app.delete("/project-api/user/:userId", deleteUser);
+    app.put("/project-api/user/:userId", authorizedUserIdParam, updateUser);
+    app.delete("/project-api/user/:userId", authorizedUserIdParam, deleteUser);
 
-    app.get("/project-api/user-follow/", followUser);
-    app.get("/project-api/user-unfollow/", unfollowUser);
+    app.get("/project-api/user-follow/", authorizedUserIdQuery, followUser);
+    app.get("/project-api/user-unfollow/", authorizedUserIdQuery, unfollowUser);
     app.get("/project-api/user-who-follows/:userId", whoFollows);
 
     app.get("/project-api/search-user/", searchUserByName);
 
-    app.get("/project-api/admin/user", getAllUsers);
+    app.get("/project-api/admin/user", authorizedAdmin, getAllUsers);
 
     app.get("/project-api/checkLogin", checkLogin);
 
@@ -42,6 +42,48 @@ module.exports = function (app) {
         }));
 
     app.get("/project-api/user-populate/:userId", getUserByIdPopulated);
+
+    function authorized (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else {
+            next();
+        }
+    };
+
+    function authorizedUserIdParam(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else if (req.user.role === "admin") {
+            next();
+        } else if (req.params.userId === req.user.id) {
+            next();
+        } else {
+            res.send(401);
+        }
+    }
+
+    function authorizedUserIdQuery(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else if (req.user.role === "admin") {
+            next();
+        } else if (req.query.userId === req.user.id) {
+            next();
+        } else {
+            res.send(401);
+        }
+    }
+
+    function authorizedAdmin(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else if (req.user.role !== "admin") {
+            res.send(401);
+        } else {
+            next();
+        }
+    };
 
     var googleConfig = {
         clientID     : process.env.GOOGLE_CLIENT_ID,
