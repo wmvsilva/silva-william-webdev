@@ -32,7 +32,10 @@
                     } else {
                         $location.url("/user");
                     }
-                });
+                })
+                .catch(function (response) {
+                    model.errorMessage = "Could not find username/password combination";
+                })
         }
     }
 })();
