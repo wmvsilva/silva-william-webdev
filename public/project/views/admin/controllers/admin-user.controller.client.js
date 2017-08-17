@@ -13,6 +13,8 @@
         this.updateUser = updateUser;
 
         function init() {
+            model.newUser = {};
+            model.newUser.role = "user";
             UserService
                 .getAllUsers()
                 .then(function (response) {
