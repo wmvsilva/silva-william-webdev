@@ -12,31 +12,23 @@
         this.deleteProduct = deleteProduct;
 
         function init() {
-            if (user) {
-                model.userId = user._id;
-            }
             model.movieId = $routeParams.movieId;
             grabProducts();
+
+            model.movieTitleParam = $routeParams.movieTitle;
+            if (model.movieTitleParam) {
+                model.movieTitle = model.movieTitleParam;
+                searchMovieByTitle(model.movieTitleParam);
+            }
         }
 
         init();
 
         function grabProducts() {
             ProductService
-                .findProductsByUserId(model.userId)
+                .findProductsByUserIdPopulated(model.userId)
                 .then(function (response) {
                     model.products = response.data;
-                    for (var i = 0; i < model.products.length; i++) {
-                        (function () {
-                            var movieId = model.products[i]._movieId;
-                            var product = model.products[i];
-                            movieService
-                                .searchMovieById(movieId)
-                                .then(function (movie) {
-                                    product.movieTitle = movie.title;
-                                });
-                        })();
-                    }
                 });
         }
 
@@ -46,6 +38,7 @@
                 .then(function (movies) {
                     model.movies = movies;
                 });
+            $location.url("/sell/search?movieTitle=" + movieTitle);
         }
 
         function createProduct(userId, movieId, product) {

@@ -1,12 +1,26 @@
 <div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
 
-<h3>Selling a product for a movie</h3>
+<div class="mi-container container-fluid margin-top mi-inputs">
+    <h3>Selling a product for a movie</h3>
 
-<input placeholder="category" ng-model="model.product.category">
-<input placeholder="description" ng-model="model.product.description">
-<input placeholder="price" ng-model="model.product.price">
-<input placeholder="imageUrl" ng-model="model.product.imageUrl">
+    <form>
+        <input placeholder="category"
+               ng-model="model.product.category"
+               class="form-control" >
+        <input placeholder="description"
+               ng-model="model.product.description"
+               class="form-control">
+        <input placeholder="price"
+               ng-model="model.product.price"
+               class="form-control">
+        <input placeholder="image url"
+               ng-model="model.product.imageUrl"
+               class="form-control">
 
-<div class="btn btn-primary" ng-click="model.createProduct(model.userId, model.movieId, model.product)">
-    Post Product
+        <button class="btn btn-primary btn-block"
+             ng-click="model.createProduct(model.userId, model.movieId, model.product)"
+             type="submit">
+            Post Product
+        </button>
+    </form>
 </div>

@@ -46,9 +46,9 @@ module.exports = function (app) {
             next();
         } else {
             productModel
-                .findReviewById(req.param.productId)
+                .findProductById(req.params.productId)
                 .then(function (product) {
-                    if (product._userId === req.user.id) {
+                    if (product._userId.toString() === req.user.id) {
                         next();
                     } else {
                         res.send(401);
