@@ -3,6 +3,8 @@ var request = require('request');
 module.exports = function (app) {
     var passport = require("passport");
     var userModel = require("../model/user/user.model.server");
+    var reviewModel = require("../model/review/review.model.server");
+    var productModel = require("../model/product/product.model.server");
     var movieModel = require("../model/movie/movie.model.server");
     var mongoose = require('mongoose');
 
@@ -354,6 +356,16 @@ module.exports = function (app) {
         userModel
             .deleteUser(userId)
             .then(function (status) {
+                reviewModel
+                    .remove({_userId: userId})
+                    .then(function (success) {
+
+                    });
+                productModel
+                    .remove({_userId: userId})
+                    .then(function (success) {
+
+                    });
                 res.sendStatus(200);
             }, function (err) {
                 res.status(500).send(err);
