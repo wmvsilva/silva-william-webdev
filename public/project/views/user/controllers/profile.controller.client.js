@@ -9,23 +9,17 @@
 
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
+        model.deleteReview = deleteReview;
+        model.updateProduct = updateProduct;
+        model.selectProduct = selectProduct;
+        model.deleteProduct = deleteProduct;
+
 
         function init() {
             UserService
-                .findUserById(model.userId)
+                .findUserByIdPopulated(model.userId)
                 .then(function (response) {
                     model.user = response.data;
-                    model.user.likedMoviesFull = [];
-                    for (var i = 0; i < model.user.likedMovies.length; i++) {
-                        (function () {
-                            var movieId = model.user.likedMovies[i];
-                            movieService
-                                .searchMovieById(movieId)
-                                .then(function (movie) {
-                                    model.user.likedMoviesFull.push(movie);
-                                });
-                        })();
-                    }
                 });
 
             UserService
@@ -35,43 +29,21 @@
                 });
 
             ReviewService
-                .findReviewsByUserId(model.userId)
+                .findReviewsByUserIdPopulated(model.userId)
                 .then(function (response) {
                     model.reviews = response.data;
-                    for (var i = 0; i < model.reviews.length; i++) {
-                        (function () {
-                            var movieId = model.reviews[i]._movieId;
-                            var review = model.reviews[i];
-                            movieService
-                                .searchMovieById(movieId)
-                                .then(function (movie) {
-                                    review.movieTitle = movie.title;
-                                });
-                        })();
-                    }
                 });
 
             ProductService
-                .findProductsByUserId(model.userId)
+                .findProductsByUserIdPopulated(model.userId)
                 .then(function (response) {
-                   model.products = response.data;
-                    for (var i = 0; i < model.products.length; i++) {
-                        (function () {
-                            var movieId = model.products[i]._movieId;
-                            var product = model.products[i];
-                            movieService
-                                .searchMovieById(movieId)
-                                .then(function (movie) {
-                                    product.movieTitle = movie.title;
-                                });
-                        })();
-                    }
+                    model.products = response.data;
                 });
 
             ProductService
                 .findProductsByBuyer(model.userId)
                 .then(function (response) {
-                   model.productsPurchased = response.data;
+                    model.productsPurchased = response.data;
                 });
 
 
@@ -86,6 +58,7 @@
                 model.error = "Please enter a username";
                 return;
             }
+
             UserService
                 .findUserByUsername(user.username)
                 .then(function (response) {
@@ -93,7 +66,16 @@
                     if (foundUser !== "0" && foundUser._id !== user._id) {
                         return Promise.reject({});
                     }
-                    return UserService.updateUser(userId, jQuery.extend(true, {}, user));
+
+                    if (user.newPassword) {
+                        user.password = user.newPassword;
+                        user.newPassword = null;
+                        return UserService
+                            .updateUserAndEncryptPassword(userId, user);
+                    } else {
+                        return UserService
+                            .updateUser(userId, jQuery.extend(true, {}, user));
+                    }
                 })
                 .then(function () {
                     model.updateMessage = "User was updated";
@@ -110,5 +92,49 @@
                     $location.url("login");
                 });
         }
+
+        function deleteReview(reviewId) {
+            ReviewService
+                .deleteReview(reviewId)
+                .then(function (response) {
+                    ReviewService
+                        .findReviewsByUserIdPopulated(model.userId)
+                        .then(function (response) {
+                            model.reviews = response.data;
+                        });
+                })
+        }
+
+        function updateProduct(productId, product) {
+            ProductService
+                .updateProduct(productId, product)
+                .then(function (response) {
+                    return grabProducts();
+                });
+            model.selectedProductId = null;
+            model.selectedProduct = null;
+        }
+
+        function selectProduct(product) {
+            model.selectedProductId = product._id;
+            ProductService.findProductById(product._id)
+                .then(function (response) {
+                    model.selectedProduct = response.data;
+                })
+        }
+
+
+        function deleteProduct(productId) {
+            ProductService
+                .deleteProduct(productId)
+                .then(function (status) {
+                    ProductService
+                        .findProductsByUserIdPopulated(model.userId)
+                        .then(function (response) {
+                            model.products = response.data;
+                        });
+                })
+        }
+
     }
 })();

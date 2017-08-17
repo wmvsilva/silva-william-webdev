@@ -14,6 +14,8 @@ productModel.findProductsByBuyer = findProductsByBuyer;
 productModel.getAllProducts = getAllProducts;
 productModel.updateProduct = updateProduct;
 
+productModel.findProductsByUserIdPopulated = findProductsByUserIdPopulated;
+
 
 module.exports = productModel;
 
@@ -32,9 +34,19 @@ function findProductsByUserId(userId) {
         .find({_userId: userId});
 }
 
+function findProductsByUserIdPopulated(userId) {
+    return productModel
+        .find({_userId: userId})
+        .populate("_movieId")
+        .populate("buyer", "_id username email")
+        .exec();
+}
+
 function findProductsByMovieId(movieId) {
     return productModel
-        .find({_movieId: movieId});
+        .find({_movieId: movieId})
+        .populate("_userId", "_id username email")
+        .exec();
 }
 
 function deleteProduct(productId) {
@@ -57,7 +69,10 @@ function userBuyProduct(productId, userId) {
 
 function findProductsByBuyer(userId) {
     return productModel
-        .find({buyer: userId});
+        .find({buyer: userId})
+        .populate("_userId", "_id username")
+        .populate("_movieId")
+        .exec();
 }
 
 function getAllProducts() {

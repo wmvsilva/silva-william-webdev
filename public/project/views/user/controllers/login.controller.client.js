@@ -4,20 +4,23 @@
         .module("tmdbApp")
         .controller("LoginController", LoginController);
 
-    function LoginController($location, UserService, user, InitializeService) {
+    function LoginController($location, UserService, user, InitializeService, $routeParams) {
         var model = this;
         InitializeService.initialize(model, LoginController, arguments);
 
         model.login = login;
 
         function init() {
+            if ($routeParams.ref) {
+                model.errorMessage = "Please login to perform action you requested";
+            }
         }
 
         init();
 
         function login(user) {
             if (!user) {
-                model.errorMessage = "User not found";
+                model.errorMessage = "Please enter all fields";
                 return;
             }
             UserService
@@ -29,7 +32,10 @@
                     } else {
                         $location.url("/user");
                     }
-                });
+                })
+                .catch(function (response) {
+                    model.errorMessage = "Could not find username/password combination";
+                })
         }
     }
 })();

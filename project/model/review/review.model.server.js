@@ -10,6 +10,7 @@ reviewModel.getAllReviews = getAllReviews;
 reviewModel.findReviewById = findReviewById;
 reviewModel.deleteReview = deleteReview;
 reviewModel.updateReview = updateReview;
+reviewModel.findReviewsByUserIdPopulated = findReviewsByUserIdPopulated;
 
 module.exports = reviewModel;
 
@@ -31,6 +32,13 @@ function findReviewById(reviewId) {
 function findReviewsByUserId(userId) {
     return reviewModel
         .find({_userId: userId});
+}
+
+function findReviewsByUserIdPopulated(userId) {
+    return reviewModel
+        .find({_userId: userId})
+        .populate("_movieId")
+        .exec();
 }
 
 function getAllReviews() {

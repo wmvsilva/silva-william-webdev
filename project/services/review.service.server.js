@@ -1,14 +1,60 @@
+var request = require('request');
+
+
 module.exports = function (app) {
 
     var reviewModel = require("../model/review/review.model.server");
+    var movieModel = require("../model/movie/movie.model.server");
 
-    app.post("/project-api/review", createReview);
+
+    app.post("/project-api/review", authorizedReviewBody, createReview);
     app.get("/project-api/review/:movieId", findReviewsByMovieId);
     app.get("/project-api/review/user/:userId", findReviewsByUserId);
-    app.get("/project-api/admin/review", getAllReviews);
+    app.get("/project-api/review-populate/user/:userId", findReviewsByUserIdPopulated);
+    app.get("/project-api/admin/review", authorizedAdmin, getAllReviews);
 
-    app.delete("/project-api/review/:reviewId", deleteReview);
-    app.put("/project-api/review/:reviewId", updateReview);
+    app.delete("/project-api/review/:reviewId", authorizedReviewIdParamUser, deleteReview);
+    app.put("/project-api/review/:reviewId", authorizedReviewIdParamUser, updateReview);
+
+    function authorizedAdmin(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else if (req.user.role !== "admin") {
+            res.send(401);
+        } else {
+            next();
+        }
+    }
+
+    function authorizedReviewBody(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else if (req.user.role === "admin") {
+            next();
+        } else if (req.body._userId === req.user.id) {
+            next();
+        } else {
+            res.send(401);
+        }
+    }
+
+    function authorizedReviewIdParamUser(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else if (req.user.role === "admin") {
+            next();
+        } else {
+            reviewModel
+                .findReviewById(req.param.reviewId)
+                .then(function (review) {
+                    if (review._userId === req.user.id) {
+                        next();
+                    } else {
+                        res.send(401);
+                    }
+                })
+        }
+    }
 
 
     function createReview(req, res) {
@@ -16,7 +62,12 @@ module.exports = function (app) {
         reviewModel
             .createReview(review)
             .then(function (review) {
-                res.json(review);
+                movieModel.addMovieIfMissing(review._movieId)
+                    .then(function (response) {
+                        res.json(review);
+                    }, function (err) {
+                        res.status(500).send(err);
+                    });
             }, function (err) {
                 res.status(500).send(err);
             });
@@ -40,6 +91,18 @@ module.exports = function (app) {
 
         return reviewModel
             .findReviewsByUserId(userId)
+            .then(function (reviews) {
+                res.json(reviews);
+            }, function (err) {
+                res.status(500).send(err);
+            });
+    }
+
+    function findReviewsByUserIdPopulated(req, res) {
+        var userId = req.params.userId;
+
+        return reviewModel
+            .findReviewsByUserIdPopulated(userId)
             .then(function (reviews) {
                 res.json(reviews);
             }, function (err) {
@@ -77,6 +140,7 @@ module.exports = function (app) {
         reviewModel
             .updateReview(reviewId, review)
             .then(function (status) {
+                movieModel.addMovieIfMissing(review._movieId);
                 res.json(status);
             }, function (err) {
                 res.sendStatus(404).send(err);

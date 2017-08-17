@@ -248,3 +248,16 @@ a:hover {
 .margin-top {
     margin-top: 15px;
 }
+
+.margin-bottom {
+    margin-bottom: 8px;
+}
+
+.mi-inputs input {
+    margin-bottom: 8px;
+}
+
+.sale-image {
+    height: 200px;
+}
+

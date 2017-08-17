@@ -11,7 +11,8 @@
             findReviewsByUserId: findReviewsByUserId,
             getAllReviews: getAllReviews,
             deleteReview: deleteReview,
-            updateReview: updateReview
+            updateReview: updateReview,
+            findReviewsByUserIdPopulated: findReviewsByUserIdPopulated
         };
         return api;
 
@@ -27,6 +28,11 @@
 
         function findReviewsByUserId(userId) {
             var url = "/project-api/review/user/" + userId;
+            return $http.get(url);
+        }
+
+        function findReviewsByUserIdPopulated(userId) {
+            var url = "/project-api/review-populate/user/" + userId;
             return $http.get(url);
         }
 

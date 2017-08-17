@@ -1,22 +1,28 @@
 <div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
 
-<h2>What movie do you want to sell a product for?</h2>
-<input placeholder="Batman"
-       ng-model="movieTitle"
-       class="form-control"/>
-<button ng-click="model.searchMovieByTitle(movieTitle)" class="btn btn-primary btn-block">
-    Search
-</button>
+<div class="mi-container container-fluid margin-top mi-inputs">
+    <h2>What movie do you want to sell a product for?</h2>
+    <form class="margin-bottom">
+        <input placeholder="Batman"
+               ng-model="model.movieTitle"
+               class="form-control"/>
+        <button ng-click="model.searchMovieByTitle(model.movieTitle)"
+                class="btn btn-primary btn-block"
+                type="submit">
+            Search
+        </button>
+    </form>
 
-<table class="table">
-    <tr ng-repeat="movie in model.movies.results">
-        <td>
-            <a href="#!/sell/movie/{{movie.id}}">
-                <h3>{{movie.title}}</h3>
+    <div ng-if="model.movies.results.length === 0" class="margin-top">
+        <h3>No results found</h3>
+    </div>
+    <ul class="item-list">
+        <li ng-repeat="movie in model.movies.results">
+            <a href="#!/sell/movie/{{movie.id}}" class="hvr-shrink movie-search-result">
+                <img ng-src="https://image.tmdb.org/t/p/w185{{movie.poster_path}}"
+                     onerror="if (this.src != 'img/img-404.jpg') this.src = 'img/img-404.jpg';"/>
+                <div class="movie-title-search">{{movie.title}}</div>
             </a>
-        </td>
-        <td>
-            <img ng-src="https://image.tmdb.org/t/p/w185{{movie.poster_path}}"/>
-        </td>
-    </tr>
-</table>
+        </li>
+    </ul>
+</div>

@@ -1,29 +1,25 @@
 <div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
 
-<div class="container-fluid">
+<div class="container-fluid mi-container margin-top">
 
     <div>
         <h2>Sell Mode</h2>
 
         <h3>What do you want to do?</h3>
 
-        <a class="btn btn-default btn-primary btn-block"
+        <a class="btn btn-default btn-primary btn-block margin-bottom"
            href="#!/sell/search"
            role="button">Sell a product</a>
 
-        <h3>Your products for sale</h3>
-        <ul>
-            <li ng-repeat="product in model.products">
-                <b>For Movie:</b> {{product.movieTitle}}
-                <b>Category:</b> {{product.category}}
-                <b>Description:</b> {{product.description}}
-                <b>Price:</b> {{product.price}}
-                <b>Image:</b> {{product.imageUrl}}
-                <div class="btn btn-danger" ng-click="model.deleteProduct(product._id)">
-                    Delete
-                </div>
-            </li>
-        </ul>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>Your products for sale</h2>
+            </div>
+            <div class="panel-body">
+                <div ng-include src="'views/sell/templates/sell-table.component.client.html'"></div>
+            </div>
+        </div>
 
     </div>
 

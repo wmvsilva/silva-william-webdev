@@ -7,12 +7,17 @@ var userSchema = mongoose.Schema({
         firstName: String,
         lastName: String,
         email: String,
-        likedMovies: [Number],
-    following: [{type: mongoose.Schema.Types.ObjectId, ref: 'ProjectUserModel'}],
-    google: {
+        likedMovies: [{type: Number, ref: 'ProjectMovieModel'}],
+        following: [{type: mongoose.Schema.Types.ObjectId, ref: 'ProjectUserModel'}],
+        google: {
             id: String,
-        token: String
-    }
+            token: String
+        },
+        facebook: {
+            id: String,
+            token: String
+        }
+
     },
     {collection: "project-user"});
 

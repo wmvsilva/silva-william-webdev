@@ -18,7 +18,7 @@
 
             ProductService
                 .findProductById(model.productId)
-                .then (function (response) {
+                .then(function (response) {
                     model.product = response.data;
                     var movieId = model.product._movieId;
                     movieService

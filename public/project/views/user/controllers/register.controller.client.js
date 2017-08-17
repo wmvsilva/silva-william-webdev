@@ -15,7 +15,7 @@
         init();
 
         function registerUser(user) {
-            if (!user || !user.username || !user.password || !user.password2) {
+            if (!user || !user.username || !user.password || !user.password2 || !user.email) {
                 model.error = "Please enter in all the fields";
                 return;
             }
@@ -28,7 +28,7 @@
                 .then(function (response) {
                     var _user = response.data;
                     if (_user === "0") {
-                        return UserService.createUser(user);
+                        return UserService.register(user);
                     } else {
                         return Promise.reject({});
                     }

@@ -50,7 +50,6 @@
 
         function renderMovie(movie) {
             model.movie = movie;
-            console.log(model.movie)
         }
 
         function renderActors(actors) {
@@ -74,7 +73,8 @@
             }
             var user = model.user;
             user.likedMovies.push(movieId);
-            UserService.updateUser(userId, user)
+            UserService
+                .updateUser(userId, user)
                 .then(function (response) {
                     model.user = response.data;
                 });
@@ -122,7 +122,6 @@
             if (!model.user) {
                 $location.url("/login");
             }
-            console.log("Buying " +productId);
             $location.url("/product/" + productId);
         }
     }

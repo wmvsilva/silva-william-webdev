@@ -3,6 +3,8 @@ var userSchema = require("./user.schema.server");
 
 var userModel = mongoose.model("ProjectUserModel", userSchema);
 
+
+
 userModel.createUser = createUser;
 userModel.findUserById = findUserById;
 userModel.findUserByUsername = findUserByUsername;
@@ -19,7 +21,15 @@ userModel.searchUserByName = searchUserByName;
 userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.getAllUsers = getAllUsers;
 
+userModel.findUserByIdPopulated = findUserByIdPopulated;
+userModel.findUserByFacebookId = findUserByFacebookId;
+
 module.exports = userModel;
+
+function findUserByFacebookId(facebookId) {
+    return userModel.findOne({'facebook.id': facebookId});
+}
+
 
 function findUserByGoogleId(googleId) {
     return userModel.findOne({'google.id': googleId});
@@ -33,6 +43,14 @@ function createUser(user) {
 function findUserById(userId) {
     return userModel
         .findById(userId);
+}
+
+function findUserByIdPopulated(userId) {
+    return userModel
+        .findById(userId)
+        .populate("likedMovies")
+        .populate("following", "username")
+        .exec();
 }
 
 function findUserByUsername(username) {
@@ -87,7 +105,7 @@ function whoFollows(userId) {
 
 function searchUserByName(username) {
     return userModel
-        .find({"username" : {$regex : ".*" + username + ".*"}});
+        .find({"username": {$regex: ".*" + username + ".*"}});
 }
 
 function getAllUsers() {

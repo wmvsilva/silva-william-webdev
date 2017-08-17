@@ -7,7 +7,10 @@
         <tr>
             <th>_id</th>
             <th>Username</th>
-            <th>Password</th>
+            <th>Encrypted Password</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
             <th>Following</th>
             <th>Liked Movies</th>
             <th>Role</th>
@@ -36,9 +39,12 @@
             </td>
             <td></td>
             <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td>
                 <select ng-model="model.newUser.role">
-                    <option value="user">user</option>
+                    <option selected value="user">user</option>
                     <option value="admin">admin</option>
                 </select>
             </td>
@@ -48,6 +54,9 @@
                 </a>
             </td>
         </tr>
+
+
+
         <tr ng-repeat="user in model.users">
             <div ng-if="false">
                 <td>{{user._id}}</td>
@@ -61,17 +70,56 @@
                                placeholder="username"
                                type="text"
                                class="form-control"
-                               />
+                        />
                     </div>
                 </td>
                 <td>
                     <div ng-if="model.selectedUserId !== user._id">
-                        {{user.password}}
+                        {{user.password.substring(0, 10)}}...
                     </div>
                     <div ng-if="model.selectedUserId === user._id">
                         <input name="password"
-                               ng-model="model.selectedUser.password"
+                               ng-model="model.selectedUser.newPassword"
                                placeholder="password"
+                               type="text"
+                               class="form-control"
+                        />
+                    </div>
+                </td>
+                <td>
+                    <div ng-if="model.selectedUserId !== user._id">
+                        {{user.firstName}}
+                    </div>
+                    <div ng-if="model.selectedUserId === user._id">
+                        <input name="firstName"
+                               ng-model="model.selectedUser.firstName"
+                               placeholder="firstName"
+                               type="text"
+                               class="form-control"
+                        />
+                    </div>
+                </td>
+                <td>
+                    <div ng-if="model.selectedUserId !== user._id">
+                        {{user.lastName}}
+                    </div>
+                    <div ng-if="model.selectedUserId === user._id">
+                        <input name="lastName"
+                               ng-model="model.selectedUser.lastName"
+                               placeholder="lastName"
+                               type="text"
+                               class="form-control"
+                        />
+                    </div>
+                </td>
+                <td>
+                    <div ng-if="model.selectedUserId !== user._id">
+                        {{user.email}}
+                    </div>
+                    <div ng-if="model.selectedUserId === user._id">
+                        <input name="email"
+                               ng-model="model.selectedUser.email"
+                               placeholder="email"
                                type="text"
                                class="form-control"
                         />

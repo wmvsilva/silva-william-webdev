@@ -18,9 +18,17 @@
             followedBy: followedBy,
             searchUserByName: searchUserByName,
             checkLogin: checkLogin,
-            getAllUsers: getAllUsers
+            getAllUsers: getAllUsers,
+            findUserByIdPopulated: findUserByIdPopulated,
+            register: register,
+            updateUserAndEncryptPassword: updateUserAndEncryptPassword
         };
         return api;
+
+        function register(user) {
+            var url = "/project-api/register";
+            return $http.post(url, user);
+        }
 
         function checkLogin() {
             return $http.get("/project-api/checkLogin")
@@ -36,6 +44,11 @@
 
         function findUserById(userId) {
             var url = "/project-api/user/" + userId;
+            return $http.get(url);
+        }
+
+        function findUserByIdPopulated(userId) {
+            var url = "/project-api/user-populate/" + userId;
             return $http.get(url);
         }
 
@@ -56,6 +69,11 @@
 
         function updateUser(userId, user) {
             var url = "/project-api/user/" + userId;
+            return $http.put(url, user);
+        }
+
+        function updateUserAndEncryptPassword(userId, user) {
+            var url = "/project-api/user/" + userId + "?encrypt=yes";
             return $http.put(url, user);
         }
 

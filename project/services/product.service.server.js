@@ -1,23 +1,83 @@
+var request = require('request');
+
 module.exports = function (app) {
 
     var productModel = require("../model/product/product.model.server");
+    var movieModel = require("../model/movie/movie.model.server");
 
-    app.post("/project-api/product", createProduct);
+
+    app.post("/project-api/product", authorizedProductBody, createProduct);
     app.get("/project-api/product/id/:productId", findProductById);
     app.get("/project-api/product/user/:userId", findProductsByUserId);
     app.get("/project-api/product/movie/:movieId", findProductsByMovieId);
-    app.delete("/project-api/product/:productId", deleteProduct);
-    app.get("/project-api/product/buy/", userBuyProduct);
+    app.delete("/project-api/product/:productId", authorizedProductIdParamUser, deleteProduct);
+    app.get("/project-api/product/buy/", authorizedUserIdQuery, userBuyProduct);
     app.get("/project-api/products-bought/:userId", findProductsByBuyer);
-    app.get("/project-api/admin/product", getAllProducts);
-    app.put("/project-api/product/:productId", updateProduct);
+    app.get("/project-api/admin/product", authorizedAdmin, getAllProducts);
+    app.put("/project-api/product/:productId", authorizedProductIdParamUser, updateProduct);
+    app.get("/project-api/product-populated/user/:userId", findProductsByUserIdPopulated);
+
+    function authorizedAdmin(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else if (req.user.role !== "admin") {
+            res.send(401);
+        } else {
+            next();
+        }
+    }
+
+    function authorizedProductBody(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else if (req.user.role === "admin") {
+            next();
+        } else if (req.body._userId === req.user.id) {
+            next();
+        } else {
+            res.send(401);
+        }
+    }
+
+    function authorizedProductIdParamUser(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else if (req.user.role === "admin") {
+            next();
+        } else {
+            productModel
+                .findProductById(req.params.productId)
+                .then(function (product) {
+                    if (product._userId.toString() === req.user.id) {
+                        next();
+                    } else {
+                        res.send(401);
+                    }
+                })
+        }
+    }
+
+    function authorizedUserIdQuery(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else if (req.user.role === "admin") {
+            next();
+        } else if (req.query.userId === req.user.id) {
+            next();
+        } else {
+            res.send(401);
+        }
+    }
 
     function createProduct(req, res) {
         var product = req.body;
         productModel
             .createProduct(product)
             .then(function (product) {
-                res.json(product);
+                movieModel.addMovieIfMissing(product._movieId)
+                    .then(function (response) {
+                        res.json(product);
+                    });
             }, function (err) {
                 res.status(500).send(err);
             });
@@ -40,6 +100,18 @@ module.exports = function (app) {
 
         return productModel
             .findProductsByUserId(userId)
+            .then(function (products) {
+                res.json(products);
+            }, function (err) {
+                res.status(500).send(err);
+            });
+    }
+
+    function findProductsByUserIdPopulated(req, res) {
+        var userId = req.params.userId;
+
+        return productModel
+            .findProductsByUserIdPopulated(userId)
             .then(function (products) {
                 res.json(products);
             }, function (err) {
@@ -115,7 +187,10 @@ module.exports = function (app) {
         productModel
             .updateProduct(productId, product)
             .then(function (status) {
-                res.json(status);
+                movieModel.addMovieIfMissing(product._movieId)
+                    .then(function (response) {
+                        res.json(status);
+                    });
             }, function (err) {
                 res.sendStatus(404).send(err);
             });

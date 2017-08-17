@@ -56,7 +56,6 @@
         }
 
         function deleteProduct(productId) {
-            console.log(productId);
             ProductService
                 .deleteProduct(productId)
                 .then(function (status) {

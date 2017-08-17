@@ -1,12 +1,19 @@
-<div>
-    <div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
+<div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
 
-    <div class="container-fluid">
-        <div ng-show="model.error" class="alert alert-danger">
-            {{model.error}}
-        </div>
+<div class="container-fluid mi-container margin-top mi-inputs">
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
 
-        <h2>Register</h2>
+    <h2>Register</h2>
+
+    <form class="margin-bottom">
+        <input name="email"
+               ng-model="user.email"
+               placeholder="email"
+               type="email"
+               class="form-control"
+               id="email"/>
 
         <input name="username"
                ng-model="user.username"
@@ -29,12 +36,15 @@
                class="form-control"
                id="password2"/>
 
-        <a class="btn btn-default btn-primary btn-block"
-           ng-click="model.registerUser(user)"
-           role="button">Register</a>
+        <button class="btn btn-default btn-primary btn-block"
+                ng-click="model.registerUser(user)"
+                role="button"
+                type="submit">
+            Register
+        </button>
+    </form>
 
-        <a class="btn btn-default btn-danger btn-block"
-           href="#!/login"
-           role="button">Cancel</a>
-    </div>
+    <a class="btn btn-default btn-danger btn-block"
+       href="#!/login"
+       role="button">Cancel</a>
 </div>

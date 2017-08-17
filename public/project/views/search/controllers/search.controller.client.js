@@ -3,7 +3,7 @@
         .module("tmdbApp")
         .controller("searchController", searchController);
 
-    function searchController(movieService, $routeParams, user, InitializeService) {
+    function searchController(movieService, $routeParams, user, InitializeService, $location) {
         var model = this;
         InitializeService.initialize(model, searchController, arguments);
 
@@ -23,6 +23,7 @@
             movieService
                 .searchMovieByTitle(movieTitle)
                 .then(renderMovies);
+            $location.url("/search?movieTitle=" + movieTitle);
         }
 
         function renderMovies(movies) {

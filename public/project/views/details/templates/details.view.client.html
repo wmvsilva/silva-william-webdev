@@ -1,6 +1,7 @@
 <div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
 
-<div class="movie-detail-wrapper" style="background-image: url('http://image.tmdb.org/t/p/w1280{{model.movie.backdrop_path}}')">
+<div class="movie-detail-wrapper"
+     ng-style="model.movie.backdrop_path ? {'background-image': 'url(http://image.tmdb.org/t/p/w1280' + model.movie.backdrop_path + ')' } : {}">
     <div class="container-fluid mi-container">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -9,7 +10,8 @@
             </div>
             <div class="panel-body">
                 <div class="movie-detail-top">
-                    <img ng-src="https://image.tmdb.org/t/p/w185{{model.movie.poster_path}}"/>
+                    <img ng-src="https://image.tmdb.org/t/p/w185{{model.movie.poster_path}}"
+                         onerror="if (this.src != 'img/img-404.jpg') this.src = 'img/img-404.jpg';"/>
                     <div class="movie-detail-overview">
                         Released: {{model.movie.release_date | date}}
                         <div>
@@ -19,11 +21,13 @@
                             {{model.movie.overview}}
                         </div>
                         <div>
-                            <a ng-if="!model.doesUserLikeMovie()" class="btn btn-info" ng-click="model.likeMovie(model.userId, model.movie.id)">
+                            <a ng-if="!model.doesUserLikeMovie()" class="btn btn-info"
+                               ng-click="model.likeMovie(model.userId, model.movie.id)">
                                 Like Movie
                             </a>
-                            <a ng-if="model.doesUserLikeMovie()" class="btn btn-success" ng-click="model.unlikeMovie(model.userId, model.movie.id)">
-                                    Liked
+                            <a ng-if="model.doesUserLikeMovie()" class="btn btn-success"
+                               ng-click="model.unlikeMovie(model.userId, model.movie.id)">
+                                Liked
                             </a>
                         </div>
                         <div class="movie-detail-categories">
@@ -45,7 +49,12 @@
             <div class="panel-body">
                 <div class="mi-horizontal-scroll cast">
                     <div ng-repeat="actor in model.actors.cast" class="horizontal-scroll-cast">
-                        <img ng-src="http://image.tmdb.org/t/p/w185{{actor.profile_path}}" />
+                        <div ng-if="actor.profile_path">
+                            <img ng-src="http://image.tmdb.org/t/p/w185{{actor.profile_path}}"/>
+                        </div>
+                        <div ng-if="!actor.profile_path">
+                            <img ng-src="img/img-404.jpg"/>
+                        </div>
                         <div>
                             {{actor.character}}
                             <div>
@@ -62,7 +71,8 @@
                 <h4>Trailer</h4>
             </div>
             <div class="panel-body movie-detail-trailer-wrapper">
-                <iframe class="movie-detail-trailer" ng-src="{{model.videoUrl}}" frameborder="0" allowfullscreen></iframe>
+                <iframe class="movie-detail-trailer" ng-src="{{model.videoUrl}}" frameborder="0"
+                        allowfullscreen></iframe>
             </div>
         </div>
 
@@ -73,7 +83,7 @@
             <div class="panel-body">
                 <div ng-repeat="review in model.reviews" class="mi-movie-detail-review">
                     <div class="container-fluid">
-                        <div class="btn btn-success" ng-if="review.isRecommended" >
+                        <div class="btn btn-success" ng-if="review.isRecommended">
                             <i class="fa fa-check" aria-hidden="true"></i> Recommended
                         </div>
                         <div class="btn btn-danger" ng-if="!review.isRecommended">
@@ -111,6 +121,7 @@
                         <th>Description</th>
                         <th>Price</th>
                         <th>Image</th>
+                        <th>Seller</th>
                         <th>State</th>
                     </tr>
                     </thead>
@@ -119,12 +130,20 @@
                         <td>{{product.category}}</td>
                         <td>{{product.description}}</td>
                         <td>{{product.price}}</td>
-                        <td><img ng-src="{{product.imageUrl}}" /></td>
                         <td>
-                            <div ng-if="!product.purchased" class="btn btn-success" ng-click="model.buyProduct(product._id)">
+                            <img class="sale-image"
+                                 ng-src="{{product.imageUrl}}"
+                                 onerror="if (this.src != 'img/img-404.jpg') this.src = 'img/img-404.jpg';"/>
+                        </td>
+                        <td>
+                            {{product._userId.username}}
+                        </td>
+                        <td>
+                            <div ng-if="!product.purchased" class="btn btn-success"
+                                 ng-click="model.buyProduct(product._id)">
                                 Buy
                             </div>
-                            <div ng-if="product.purchased" class="btn btn-danger" >
+                            <div ng-if="product.purchased" class="btn btn-danger">
                                 Purchased
                             </div>
                         </td>

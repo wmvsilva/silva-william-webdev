@@ -35,13 +35,13 @@
 }
 
 .main {
-    overflow:auto;
-    padding-bottom:50px;
+    overflow: auto;
+    padding-bottom: 50px;
 }
 
 .footer {
     position: relative;
     margin-top: -46px;
     height: 46px;
-    clear:both;
+    clear: both;
 }

@@ -18,7 +18,7 @@
                 }
             })
             .when("/search", {
-                templateUrl: "views/search/templates/search.html",
+                templateUrl: "views/search/templates/search.view.client.html",
                 controller: "searchController",
                 controllerAs: "model",
                 resolve: {
@@ -26,7 +26,7 @@
                 }
             })
             .when("/details/:id", {
-                templateUrl: "views/details/templates/details.html",
+                templateUrl: "views/details/templates/details.view.client.html",
                 controller: "detailsController",
                 controllerAs: "model",
                 resolve: {
@@ -114,12 +114,12 @@
                 }
             })
             .when("/admin/users", {
-            templateUrl: "views/admin/templates/admin-user.view.client.html",
-            controller: "adminUserController",
-            controllerAs: "model",
-            resolve: {
-                user: checkAdmin
-            }
+                templateUrl: "views/admin/templates/admin-user.view.client.html",
+                controller: "adminUserController",
+                controllerAs: "model",
+                resolve: {
+                    user: checkAdmin
+                }
             })
             .when("/admin/reviews", {
                 templateUrl: "views/admin/templates/admin-review.view.client.html",
@@ -146,7 +146,7 @@
             .then(function (user) {
                 if (user === '0') {
                     deferred.reject();
-                    $location.url("/login");
+                    $location.url("/login?ref=auth");
                 } else {
                     deferred.resolve(user);
                 }

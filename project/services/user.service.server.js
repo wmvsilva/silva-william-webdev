@@ -1,8 +1,20 @@
+var request = require('request');
+
 module.exports = function (app) {
     var passport = require("passport");
     var userModel = require("../model/user/user.model.server");
+    var reviewModel = require("../model/review/review.model.server");
+    var productModel = require("../model/product/product.model.server");
+    var movieModel = require("../model/movie/movie.model.server");
+    var mongoose = require('mongoose');
+
+    var bcrypt = require("bcrypt-nodejs");
+
+
     var LocalStrategy = require('passport-local').Strategy;
     var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+    var FacebookStrategy = require('passport-facebook').Strategy;
+
 
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
@@ -10,73 +22,208 @@ module.exports = function (app) {
 
 
     app.post("/project-api/login", passport.authenticate('local'), login);
-    app.post  ('/project-api/logout',         logout);
+    app.post('/project-api/logout', logout);
 
+    app.post("/project-api/register", register);
     app.post("/project-api/user", registerUser);
     app.get("/project-api/user", findUser);
     app.get("/project-api/user/:userId", getUserById);
-    app.put("/project-api/user/:userId", updateUser);
-    app.delete("/project-api/user/:userId", deleteUser);
+    app.put("/project-api/user/:userId", authorizedUserIdParam, updateUser);
+    app.delete("/project-api/user/:userId", authorizedUserIdParam, deleteUser);
 
-    app.get("/project-api/user-follow/", followUser);
-    app.get("/project-api/user-unfollow/", unfollowUser);
+    app.get("/project-api/user-follow/", authorizedUserIdQuery, followUser);
+    app.get("/project-api/user-unfollow/", authorizedUserIdQuery, unfollowUser);
     app.get("/project-api/user-who-follows/:userId", whoFollows);
 
     app.get("/project-api/search-user/", searchUserByName);
 
-    app.get("/project-api/admin/user", getAllUsers);
+    app.get("/project-api/admin/user", authorizedAdmin, getAllUsers);
 
     app.get("/project-api/checkLogin", checkLogin);
 
-    app.get("/project-api/auth/google", passport.authenticate('google', { scope : ['profile', 'email'] }));
+    app.get("/project-api/auth/google", passport.authenticate('google', {scope: ['profile', 'email']}));
+
+    app.get('/project-api/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
+
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect: '/project/index.html#!/user',
+            failureRedirect: '/project/index.html#!/login'
+        }));
 
     app.get('/google/oauth/callback',
         passport.authenticate('google', {
-            successRedirect: '/project_prototype/index.html#!/user',
-            failureRedirect: '/project_prototype/index.html#!/login'
+            successRedirect: '/project/index.html#!/user',
+            failureRedirect: '/project/index.html#!/login'
         }));
 
-    var googleConfig = {
-        clientID     : process.env.GOOGLE_CLIENT_ID,
-        clientSecret : process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL  : process.env.GOOGLE_CALLBACK_URL
+    app.get("/project-api/user-populate/:userId", getUserByIdPopulated);
+    app.get('/project-api/loggedin', loggedin);
+
+    function loggedin(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
+    }
+
+
+    function authorized(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else {
+            next();
+        }
     };
 
+    function authorizedUserIdParam(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else if (req.user.role === "admin") {
+            next();
+        } else if (req.params.userId === req.user.id) {
+            next();
+        } else {
+            res.send(401);
+        }
+    }
+
+    function authorizedUserIdQuery(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else if (req.user.role === "admin") {
+            next();
+        } else if (req.query.userId === req.user.id) {
+            next();
+        } else {
+            res.send(401);
+        }
+    }
+
+    function authorizedAdmin(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else if (req.user.role !== "admin") {
+            res.send(401);
+        } else {
+            next();
+        }
+    }
+
+    function register(req, res) {
+        var user = req.body;
+        user.password = bcrypt.hashSync(user.password);
+
+        userModel
+            .createUser(user)
+            .then(function (user) {
+                if (user) {
+                    req.login(user, function (err) {
+                        if (err) {
+                            res.status(400).send(err);
+                        } else {
+                            res.json(user);
+                        }
+                    });
+                }
+            }, function (err) {
+                res.status(500).send(err);
+            });
+    }
+
+    var googleConfig = {
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: process.env.GOOGLE_CALLBACK_URL
+    };
+
+    var facebookConfig = {
+        clientID: process.env.FACEBOOK_CLIENT_ID,
+        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL: process.env.FACEBOOK_CALLBACK_URL
+    };
+
+
     passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+        userModel
+            .findUserByFacebookId(profile.id)
+            .then(
+                function (user) {
+                    if (user) {
+                        return done(null, user);
+                    } else {
+                        var names = profile.displayName.split(" ");
+                        var newFacebookUser = {
+                            username: "FB-" + names[0] + "-" + names[1],
+                            lastName: names[1],
+                            firstName: names[0],
+                            email: profile.emails ? profile.emails[0].value : "",
+                            facebook: {
+                                id: profile.id,
+                                token: token
+                            }
+                        };
+                        return userModel
+                            .createUser(newFacebookUser);
+                    }
+                },
+                function (err) {
+                    if (err) {
+                        return done(err);
+                    }
+                }
+            )
+            .then(
+                function (user) {
+                    return done(null, user);
+                },
+                function (err) {
+                    if (err) {
+                        return done(err);
+                    }
+                }
+            );
+    }
+
 
     function googleStrategy(token, refreshToken, profile, done) {
         userModel
             .findUserByGoogleId(profile.id)
             .then(
-                function(user) {
-                    if(user) {
+                function (user) {
+                    if (user) {
                         return done(null, user);
                     } else {
                         var email = profile.emails[0].value;
                         var emailParts = email.split("@");
                         var newGoogleUser = {
-                            username:  emailParts[0],
+                            username: emailParts[0],
                             firstName: profile.name.givenName,
-                            lastName:  profile.name.familyName,
-                            email:     email,
+                            lastName: profile.name.familyName,
+                            email: email,
                             google: {
-                                id:    profile.id,
+                                id: profile.id,
                                 token: token
                             }
                         };
                         return userModel.createUser(newGoogleUser);
                     }
                 },
-                function(err) {
-                    if (err) { return done(err); }
+                function (err) {
+                    if (err) {
+                        return done(err);
+                    }
                 }
             )
             .then(
-                function(user){
+                function (user) {
                     return done(null, user);
                 },
-                function(err){
-                    if (err) { return done(err); }
+                function (err) {
+                    if (err) {
+                        return done(err);
+                    }
                 }
             );
     }
@@ -87,15 +234,16 @@ module.exports = function (app) {
 
     function localStrategy(username, password, done) {
         userModel
-            .findUserByCredentials(username, password)
+            .findUserByUsername(username)
             .then(
-                function(user) {
-                    if (!user) {
+                function (user) {
+                    if (user && bcrypt.compareSync(password, user.password)) {
+                        return done(null, user);
+                    } else {
                         return done(null, false);
                     }
-                    return done(null, user);
                 },
-                function(err) {
+                function (err) {
                     if (err) {
                         return done(err);
                     }
@@ -115,7 +263,7 @@ module.exports = function (app) {
 
     function registerUser(req, res) {
         var user = req.body;
-        user.role = "user";
+        user.password = bcrypt.hashSync(user.password);
         userModel
             .createUser(user)
             .then(function (user) {
@@ -174,14 +322,29 @@ module.exports = function (app) {
             });
     }
 
+    function getUserByIdPopulated(req, response) {
+        userModel
+            .findUserByIdPopulated(req.params.userId)
+            .then(function (user) {
+                response.json(user);
+            }, function (err) {
+                response.status(500).send(err);
+            });
+    }
+
     function updateUser(req, res) {
         var userId = req.params.userId;
         var user = req.body;
 
-        userModel
+        if (req.query.encrypt) {
+            user.password = bcrypt.hashSync(user.password);
+        }
+
+        return userModel
             .updateUser(userId, user)
-            .then(function (status) {
-                res.json(status);
+            .then(function (user) {
+                movieModel.addMoviesIfMissing(user.likedMovies);
+                res.json(user);
             }, function (err) {
                 res.sendStatus(404).send(err);
             });
@@ -193,6 +356,16 @@ module.exports = function (app) {
         userModel
             .deleteUser(userId)
             .then(function (status) {
+                reviewModel
+                    .remove({_userId: userId})
+                    .then(function (success) {
+
+                    });
+                productModel
+                    .remove({_userId: userId})
+                    .then(function (success) {
+
+                    });
                 res.sendStatus(200);
             }, function (err) {
                 res.status(500).send(err);
@@ -273,10 +446,10 @@ module.exports = function (app) {
         userModel
             .findUserById(user._id)
             .then(
-                function(user){
+                function (user) {
                     done(null, user);
                 },
-                function(err){
+                function (err) {
                     done(err, null);
                 }
             );
