@@ -7,13 +7,28 @@ module.exports = function (app) {
     var productModel = require("../model/product/product.model.server");
     var movieModel = require("../model/movie/movie.model.server");
     var mongoose = require('mongoose');
-
     var bcrypt = require("bcrypt-nodejs");
-
 
     var LocalStrategy = require('passport-local').Strategy;
     var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
+
+    userModel
+        .findUserByUsername("admin")
+        .then(function (user) {
+            if (!user) {
+                console.log("Making admin user");
+                userModel
+                    .create({
+                        username: "admin",
+                        password: bcrypt.hashSync("admin"),
+                        role: "admin",
+                        email: "silva.w@husky.neu.edu",
+                        firstName: "William",
+                        lastName: "Silva"
+                    });
+            }
+        });
 
 
     passport.use(new LocalStrategy(localStrategy));
