@@ -53,6 +53,7 @@
                 model.error = "Please enter a username";
                 return;
             }
+
             UserService
                 .findUserByUsername(user.username)
                 .then(function (response) {
@@ -60,7 +61,16 @@
                     if (foundUser !== "0" && foundUser._id !== user._id) {
                         return Promise.reject({});
                     }
-                    return UserService.updateUser(userId, jQuery.extend(true, {}, user));
+
+                    if (user.newPassword) {
+                        user.password = user.newPassword;
+                        user.newPassword = null;
+                        return UserService
+                            .updateUserAndEncryptPassword(userId, user);
+                    } else {
+                        return UserService
+                            .updateUser(userId, jQuery.extend(true, {}, user));
+                    }
                 })
                 .then(function () {
                     model.updateMessage = "User was updated";
