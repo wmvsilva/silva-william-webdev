@@ -119,7 +119,11 @@
                         <td>{{product.category}}</td>
                         <td>{{product.description}}</td>
                         <td>{{product.price}}</td>
-                        <td><img ng-src="{{product.imageUrl}}" /></td>
+                        <td>
+                            <img class="sale-image"
+                                 ng-src="{{product.imageUrl}}"
+                                 onerror="if (this.src != 'img/img-404.jpg') this.src = 'img/img-404.jpg';"/>
+                        </td>
                         <td>
                             <div ng-if="!product.purchased" class="btn btn-success" ng-click="model.buyProduct(product._id)">
                                 Buy

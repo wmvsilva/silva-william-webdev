@@ -49,6 +49,21 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
+            <h2>Liked Movies</h2>
+        </div>
+        <div class="panel-body">
+            <div class="mi-horizontal-scroll">
+                <div ng-repeat="movie in model.user.likedMovies" class="hvr-curl-top-left">
+                    <a href="#!/details/{{movie.id}}">
+                        <img ng-src="https://image.tmdb.org/t/p/w154{{movie.poster_path}}"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
             <h2>You are following</h2>
         </div>
         <div class="panel-body">
@@ -151,21 +166,6 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h2>Liked Movies</h2>
-        </div>
-        <div class="panel-body">
-            <div class="mi-horizontal-scroll">
-                <div ng-repeat="movie in model.user.likedMovies" class="hvr-curl-top-left">
-                    <a href="#!/details/{{movie.id}}">
-                        <img ng-src="https://image.tmdb.org/t/p/w154{{movie.poster_path}}"/>
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
 
