@@ -14,6 +14,8 @@ productModel.findProductsByBuyer = findProductsByBuyer;
 productModel.getAllProducts = getAllProducts;
 productModel.updateProduct = updateProduct;
 
+productModel.findProductsByUserIdPopulated = findProductsByUserIdPopulated;
+
 
 module.exports = productModel;
 
@@ -30,6 +32,12 @@ function findProductById(productId) {
 function findProductsByUserId(userId) {
     return productModel
         .find({_userId: userId});
+}
+
+function findProductsByUserIdPopulated(userId) {
+    return productModel
+        .find({_userId: userId})
+        .populate("_movieId");
 }
 
 function findProductsByMovieId(movieId) {

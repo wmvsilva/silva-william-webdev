@@ -1,10 +1,16 @@
+var request = require('request');
+
+
 module.exports = function (app) {
 
     var reviewModel = require("../model/review/review.model.server");
+    var movieModel = require("../model/movie/movie.model.server");
+
 
     app.post("/project-api/review", createReview);
     app.get("/project-api/review/:movieId", findReviewsByMovieId);
     app.get("/project-api/review/user/:userId", findReviewsByUserId);
+    app.get("/project-api/review-populate/user/:userId", findReviewsByUserIdPopulated);
     app.get("/project-api/admin/review", getAllReviews);
 
     app.delete("/project-api/review/:reviewId", deleteReview);
@@ -16,6 +22,7 @@ module.exports = function (app) {
         reviewModel
             .createReview(review)
             .then(function (review) {
+                movieModel.addMoviesIfMissing([review._movieId]);
                 res.json(review);
             }, function (err) {
                 res.status(500).send(err);
@@ -40,6 +47,18 @@ module.exports = function (app) {
 
         return reviewModel
             .findReviewsByUserId(userId)
+            .then(function (reviews) {
+                res.json(reviews);
+            }, function (err) {
+                res.status(500).send(err);
+            });
+    }
+
+    function findReviewsByUserIdPopulated(req, res) {
+        var userId = req.params.userId;
+
+        return reviewModel
+            .findReviewsByUserIdPopulated(userId)
             .then(function (reviews) {
                 res.json(reviews);
             }, function (err) {
@@ -77,6 +96,7 @@ module.exports = function (app) {
         reviewModel
             .updateReview(reviewId, review)
             .then(function (status) {
+                movieModel.addMoviesIfMissing([review._movieId]);
                 res.json(status);
             }, function (err) {
                 res.sendStatus(404).send(err);

@@ -18,7 +18,8 @@
             followedBy: followedBy,
             searchUserByName: searchUserByName,
             checkLogin: checkLogin,
-            getAllUsers: getAllUsers
+            getAllUsers: getAllUsers,
+            findUserByIdPopulated: findUserByIdPopulated
         };
         return api;
 
@@ -36,6 +37,11 @@
 
         function findUserById(userId) {
             var url = "/project-api/user/" + userId;
+            return $http.get(url);
+        }
+
+        function findUserByIdPopulated(userId) {
+            var url = "/project-api/user-populate/" + userId;
             return $http.get(url);
         }
 

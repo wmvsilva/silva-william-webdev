@@ -41,6 +41,8 @@ module.exports = function (app) {
             failureRedirect: '/project_prototype/index.html#!/login'
         }));
 
+    app.get("/project-api/user-populate/:userId", getUserByIdPopulated);
+
     var googleConfig = {
         clientID     : process.env.GOOGLE_CLIENT_ID,
         clientSecret : process.env.GOOGLE_CLIENT_SECRET,
@@ -179,6 +181,16 @@ module.exports = function (app) {
             });
     }
 
+    function getUserByIdPopulated(req, response) {
+        userModel
+            .findUserByIdPopulated(req.params.userId)
+            .then(function (user) {
+                response.json(user);
+            }, function (err) {
+                response.status(500).send(err);
+            });
+    }
+
     function updateUser(req, res) {
         var userId = req.params.userId;
         var user = req.body;
@@ -186,34 +198,8 @@ module.exports = function (app) {
         return userModel
             .updateUser(userId, user)
             .then(function (user) {
-                return movieModel
-                    .findMoviesThatMatchIds(user.likedMovies);
-            }, function (err) {
-                res.sendStatus(404).send(err);
-            })
-            .then(function (movies) {
-                var missingMovieIds = [];
-                for (var m in user.likedMovies) {
-                    if (movies.indexOf(user.likedMovies[m]) === -1) {
-                        missingMovieIds.push(user.likedMovies[m]);
-                    }
-                }
-
-                for (var m in missingMovieIds) {
-                    var movieId = missingMovieIds[m];
-                    request("https://api.themoviedb.org/3/movie/" + movieId + "?api_key=9a1db3dd9659485ffb9d482a484908e0",
-                        function (error, response, body) {
-                            var jsonMovie = JSON.parse(body);
-                            var abridgedMovie = {
-                                _id: jsonMovie.id,
-                                title: jsonMovie.title,
-                                poster_path: jsonMovie.poster_path
-                            };
-                            movieModel
-                                .createMovie(abridgedMovie);
-                        });
-                }
-                res.sendStatus(200);
+                movieModel.addMoviesIfMissing(user.likedMovies);
+                res.json(user);
             }, function (err) {
                 res.sendStatus(404).send(err);
             });

@@ -44,7 +44,13 @@
            id="lastName"/>
 
     <h4>You are following</h4>
-    {{model.user.following}}
+    <ul>
+        <li ng-repeat="user in model.user.following">
+            <a href="#!/profile/{{user._id}}">
+                {{user.username}}
+            </a>
+        </li>
+    </ul>
 
     <h4>You are being followed by</h4>
     <ul>
@@ -72,7 +78,7 @@
     <h4>Products for sale</h4>
     <ul>
         <li ng-repeat="product in model.products" class="wvs-widget-list-item">
-            <b>For Movie:</b> {{product.movieTitle}}
+            <b>For Movie:</b> {{product._movieId.title}}
             <b>Category:</b> {{product.category}}
             <b>Description:</b> {{product.description}}
             <b>Price:</b> {{product.price}}
@@ -98,7 +104,7 @@
 
     <h4>Reviews</h4>
     <div ng-repeat="review in model.reviews" class="wvs-widget-list-item">
-        "{{review.text}}" for Movie {{review.movieTitle}} <span ng-if="review.isRecommended"
+        "{{review.text}}" for Movie {{review._movieId.title}} <span ng-if="review.isRecommended"
                                                                 class="glyphicon glyphicon-ok"></span>
         <span ng-if="!review.isRecommended" class="glyphicon glyphicon-remove"></span>
     </div>

@@ -19,6 +19,8 @@ userModel.searchUserByName = searchUserByName;
 userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.getAllUsers = getAllUsers;
 
+userModel.findUserByIdPopulated = findUserByIdPopulated;
+
 module.exports = userModel;
 
 function findUserByGoogleId(googleId) {
@@ -32,8 +34,14 @@ function createUser(user) {
 
 function findUserById(userId) {
     return userModel
+        .findById(userId);
+}
+
+function findUserByIdPopulated(userId) {
+    return userModel
         .findById(userId)
         .populate("likedMovies")
+        .populate("following", "username")
         .exec();
 }
 

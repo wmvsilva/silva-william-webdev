@@ -12,10 +12,9 @@
 
         function init() {
             UserService
-                .findUserById(model.userId)
+                .findUserByIdPopulated(model.userId)
                 .then(function (response) {
                     model.user = response.data;
-                    console.log(model.user);
                 });
 
             UserService
@@ -25,37 +24,16 @@
                 });
 
             ReviewService
-                .findReviewsByUserId(model.userId)
+                .findReviewsByUserIdPopulated(model.userId)
                 .then(function (response) {
                     model.reviews = response.data;
-                    for (var i = 0; i < model.reviews.length; i++) {
-                        (function () {
-                            var movieId = model.reviews[i]._movieId;
-                            var review = model.reviews[i];
-                            movieService
-                                .searchMovieById(movieId)
-                                .then(function (movie) {
-                                    review.movieTitle = movie.title;
-                                });
-                        })();
-                    }
+                    console.log(model.reviews);
                 });
 
             ProductService
-                .findProductsByUserId(model.userId)
+                .findProductsByUserIdPopulated(model.userId)
                 .then(function (response) {
                    model.products = response.data;
-                    for (var i = 0; i < model.products.length; i++) {
-                        (function () {
-                            var movieId = model.products[i]._movieId;
-                            var product = model.products[i];
-                            movieService
-                                .searchMovieById(movieId)
-                                .then(function (movie) {
-                                    product.movieTitle = movie.title;
-                                });
-                        })();
-                    }
                 });
 
             ProductService
