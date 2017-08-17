@@ -17,6 +17,7 @@ module.exports = function (app) {
     app.post("/project-api/login", passport.authenticate('local'), login);
     app.post  ('/project-api/logout',         logout);
 
+    app.post("/project-api/register", register);
     app.post("/project-api/user", registerUser);
     app.get("/project-api/user", findUser);
     app.get("/project-api/user/:userId", getUserById);
@@ -42,6 +43,12 @@ module.exports = function (app) {
         }));
 
     app.get("/project-api/user-populate/:userId", getUserByIdPopulated);
+    app.get ('/project-api/loggedin', loggedin);
+
+    function loggedin(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
+    }
+
 
     function authorized (req, res, next) {
         if (!req.isAuthenticated()) {
@@ -83,7 +90,27 @@ module.exports = function (app) {
         } else {
             next();
         }
-    };
+    }
+
+    function register(req, res) {
+        var user = req.body;
+        userModel
+            .createUser(user)
+            .then(function(user){
+                console.log(user);
+                    if(user){
+                        req.login(user, function(err) {
+                            if(err) {
+                                res.status(400).send(err);
+                            } else {
+                                res.json(user);
+                            }
+                        });
+                    }
+                }, function (err) {
+                res.status(500).send(err);
+            });
+    }
 
     var googleConfig = {
         clientID     : process.env.GOOGLE_CLIENT_ID,
@@ -164,7 +191,6 @@ module.exports = function (app) {
 
     function registerUser(req, res) {
         var user = req.body;
-        user.role = "user";
         userModel
             .createUser(user)
             .then(function (user) {

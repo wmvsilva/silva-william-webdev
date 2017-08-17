@@ -19,9 +19,15 @@
             searchUserByName: searchUserByName,
             checkLogin: checkLogin,
             getAllUsers: getAllUsers,
-            findUserByIdPopulated: findUserByIdPopulated
+            findUserByIdPopulated: findUserByIdPopulated,
+            register: register
         };
         return api;
+
+        function register(user) {
+            var url = "/project-api/register";
+            return $http.post(url, user);
+        }
 
         function checkLogin() {
             return $http.get("/project-api/checkLogin")
