@@ -4,16 +4,19 @@
     <h2>Search for User</h2>
     <form>
         <input placeholder="Username"
-               ng-model="userName"
+               ng-model="model.username"
                class="form-control"/>
-        <button ng-click="model.searchUserByName(userName)"
+        <button ng-click="model.searchUserByName(model.username)"
                 class="btn btn-primary btn-block"
                 type="submit">
             Search
         </button>
     </form>
 
-    <ul class="list-group">
+    <div ng-if="model.users.length === 0" class="margin-top">
+        <h3>No results found</h3>
+    </div>
+    <ul class="list-group margin-top">
         <li ng-repeat="user in model.users" class="list-group-item">
             <a href="#!/profile/{{user._id}}">
                 {{user.username}}

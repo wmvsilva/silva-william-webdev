@@ -146,7 +146,7 @@
             .then(function (user) {
                 if (user === '0') {
                     deferred.reject();
-                    $location.url("/login");
+                    $location.url("/login?ref=auth");
                 } else {
                     deferred.resolve(user);
                 }

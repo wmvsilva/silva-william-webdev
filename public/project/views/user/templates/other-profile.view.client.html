@@ -6,39 +6,73 @@
 
         <h3 class="btn btn-info" ng-if="model.user._id === model.otherUser._id">This is your profile</h3>
 
-        <h3>Viewing user '{{model.otherUser.username}}'</h3>
+        <h2>{{model.otherUser.username}}'s Profile</h2>
 
-        <h4>Follows</h4>
-        <ul>
-            <li ng-repeat="user in model.otherUser.following">
-                <a href="#!/profile/{{user._id}}">
-                    {{user.username}}
-                </a>
-            </li>
-        </ul>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>Follows</h2>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li ng-repeat="user in model.otherUser.following" class="list-group-item">
+                        <a href="#!/profile/{{user._id}}">
+                            {{user.username}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-        <h4>Is Followed By</h4>
-        <ul>
-            <li ng-repeat="user in model.followedBy">
-                <a href="#!/profile/{{user._id}}">
-                    {{user.username}}
-                </a>
-            </li>
-        </ul>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>Is Followed By</h2>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li ng-repeat="user in model.followedBy" class="list-group-item">
+                        <a href="#!/profile/{{user._id}}">
+                            {{user.username}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-        <h4>Liked Movies</h4>
-        <ul>
-            <li ng-repeat="movie in model.otherUser.likedMovies">
-                <a href="#!/details/{{movie.id}}">
-                    {{movie.title}}
-                </a>
-            </li>
-        </ul>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>Liked Movies</h2>
+            </div>
+            <div class="panel-body">
+                <div class="mi-horizontal-scroll">
+                    <div ng-repeat="movie in model.otherUser.likedMovies" class="hvr-curl-top-left">
+                        <a href="#!/details/{{movie.id}}">
+                            <img ng-src="https://image.tmdb.org/t/p/w154{{movie.poster_path}}"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <h4>Reviews</h4>
-        <div ng-repeat="review in model.reviews" class="wvs-widget-list-item">
-            "{{review.text}}" for Movie {{review._movieId.title}} <span ng-if="review.isRecommended" class="glyphicon glyphicon-ok"></span>
-            <span ng-if="!review.isRecommended" class="glyphicon glyphicon-remove"></span>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>Reviews</h2>
+            </div>
+            <div class="panel-body">
+                <div ng-repeat="review in model.reviews" class="mi-movie-detail-review">
+                    <div class="container-fluid">
+                        <h6>{{review._movieId.title}}</h6>
+                        <div class="btn btn-success" ng-if="review.isRecommended">
+                            <i class="fa fa-check" aria-hidden="true"></i> Recommended
+                        </div>
+                        <div class="btn btn-danger" ng-if="!review.isRecommended">
+                            <i class="fa fa-times" aria-hidden="true"></i> Not Recommended
+                        </div>
+                        <div>
+                            "{{review.text}}"
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <a ng-if="!model.isUserFollowing(model.user, model.otherUserId)"

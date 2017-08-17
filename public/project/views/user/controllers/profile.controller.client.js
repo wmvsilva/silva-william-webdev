@@ -27,7 +27,6 @@
                 .findReviewsByUserIdPopulated(model.userId)
                 .then(function (response) {
                     model.reviews = response.data;
-                    console.log(model.reviews);
                 });
 
             ProductService

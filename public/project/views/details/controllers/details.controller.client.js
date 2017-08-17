@@ -50,7 +50,6 @@
 
         function renderMovie(movie) {
             model.movie = movie;
-            console.log(model.movie)
         }
 
         function renderActors(actors) {
@@ -123,7 +122,6 @@
             if (!model.user) {
                 $location.url("/login");
             }
-            console.log("Buying " +productId);
             $location.url("/product/" + productId);
         }
     }

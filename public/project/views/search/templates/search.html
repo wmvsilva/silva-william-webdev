@@ -13,19 +13,6 @@
         </button>
     </form>
 
-    <!--<table class="table">-->
-        <!--<tr ng-repeat="movie in model.movies.results">-->
-            <!--<td>-->
-                <!--<a href="#!/details/{{movie.id}}">-->
-                    <!--<h3>{{movie.title}}</h3>-->
-                <!--</a>-->
-            <!--</td>-->
-            <!--<td>-->
-                <!--<img ng-src="https://image.tmdb.org/t/p/w185{{movie.poster_path}}"/>-->
-            <!--</td>-->
-        <!--</tr>-->
-    <!--</table>-->
-
     <ul class="item-list">
         <li ng-repeat="movie in model.movies.results">
             <a href="#!/details/{{movie.id}}" class="hvr-shrink movie-search-result">

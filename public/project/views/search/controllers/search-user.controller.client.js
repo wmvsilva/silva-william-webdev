@@ -3,15 +3,17 @@
         .module("tmdbApp")
         .controller("SearchUserController", SearchUserController);
 
-    function SearchUserController(UserService, $routeParams, user, InitializeService) {
+    function SearchUserController(UserService, $routeParams, user, InitializeService, $location) {
         var model = this;
         InitializeService.initialize(model, SearchUserController, arguments);
 
         model.searchUserByName = searchUserByName;
 
         function init() {
-            if (user) {
-                model.userId = user._id;
+            model.usernameParam = $routeParams.username;
+            if (model.usernameParam) {
+                model.username = model.usernameParam;
+                searchUserByName(model.usernameParam);
             }
         }
 
@@ -23,6 +25,7 @@
                 .then(function (response) {
                     model.users = response.data;
                 });
+            $location.url("/search-user?username=" + username);
         }
     }
 })();
