@@ -8,11 +8,16 @@ var userSchema = mongoose.Schema({
         lastName: String,
         email: String,
         likedMovies: [{type: Number, ref: 'ProjectMovieModel'}],
-    following: [{type: mongoose.Schema.Types.ObjectId, ref: 'ProjectUserModel'}],
-    google: {
+        following: [{type: mongoose.Schema.Types.ObjectId, ref: 'ProjectUserModel'}],
+        google: {
             id: String,
-        token: String
-    }
+            token: String
+        },
+        facebook: {
+            id: String,
+            token: String
+        }
+
     },
     {collection: "project-user"});
 

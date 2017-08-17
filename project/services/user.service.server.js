@@ -8,6 +8,8 @@ module.exports = function (app) {
 
     var LocalStrategy = require('passport-local').Strategy;
     var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+    var FacebookStrategy = require('passport-facebook').Strategy;
+
 
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
@@ -15,7 +17,7 @@ module.exports = function (app) {
 
 
     app.post("/project-api/login", passport.authenticate('local'), login);
-    app.post  ('/project-api/logout',         logout);
+    app.post('/project-api/logout', logout);
 
     app.post("/project-api/register", register);
     app.post("/project-api/user", registerUser);
@@ -34,23 +36,31 @@ module.exports = function (app) {
 
     app.get("/project-api/checkLogin", checkLogin);
 
-    app.get("/project-api/auth/google", passport.authenticate('google', { scope : ['profile', 'email'] }));
+    app.get("/project-api/auth/google", passport.authenticate('google', {scope: ['profile', 'email']}));
+
+    app.get('/project-api/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
+
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect: '/project/index.html#!/user',
+            failureRedirect: '/project/index.html#!/login'
+        }));
 
     app.get('/google/oauth/callback',
         passport.authenticate('google', {
-            successRedirect: '/project_prototype/index.html#!/user',
-            failureRedirect: '/project_prototype/index.html#!/login'
+            successRedirect: '/project/index.html#!/user',
+            failureRedirect: '/project/index.html#!/login'
         }));
 
     app.get("/project-api/user-populate/:userId", getUserByIdPopulated);
-    app.get ('/project-api/loggedin', loggedin);
+    app.get('/project-api/loggedin', loggedin);
 
     function loggedin(req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');
     }
 
 
-    function authorized (req, res, next) {
+    function authorized(req, res, next) {
         if (!req.isAuthenticated()) {
             res.send(401);
         } else {
@@ -96,51 +106,60 @@ module.exports = function (app) {
         var user = req.body;
         userModel
             .createUser(user)
-            .then(function(user){
+            .then(function (user) {
                 console.log(user);
-                    if(user){
-                        req.login(user, function(err) {
-                            if(err) {
-                                res.status(400).send(err);
-                            } else {
-                                res.json(user);
-                            }
-                        });
-                    }
-                }, function (err) {
+                if (user) {
+                    req.login(user, function (err) {
+                        if (err) {
+                            res.status(400).send(err);
+                        } else {
+                            res.json(user);
+                        }
+                    });
+                }
+            }, function (err) {
                 res.status(500).send(err);
             });
     }
 
     var googleConfig = {
-        clientID     : process.env.GOOGLE_CLIENT_ID,
-        clientSecret : process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL  : process.env.GOOGLE_CALLBACK_URL
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: process.env.GOOGLE_CALLBACK_URL
     };
+
+    var facebookConfig = {
+        clientID: process.env.FACEBOOK_CLIENT_ID,
+        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL: process.env.FACEBOOK_CALLBACK_URL
+    };
+
 
     passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 
-    function googleStrategy(token, refreshToken, profile, done) {
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
+    function facebookStrategy(token, refreshToken, profile, done) {
         userModel
-            .findUserByGoogleId(profile.id)
+            .findUserByFacebookId(profile.id)
             .then(
                 function(user) {
                     if(user) {
                         return done(null, user);
                     } else {
-                        var email = profile.emails[0].value;
-                        var emailParts = email.split("@");
-                        var newGoogleUser = {
-                            username:  emailParts[0],
-                            firstName: profile.name.givenName,
-                            lastName:  profile.name.familyName,
-                            email:     email,
-                            google: {
+                        var names = profile.displayName.split(" ");
+                        var newFacebookUser = {
+                            username: "FB-" + names[0] + "-" + names[1],
+                            lastName:  names[1],
+                            firstName: names[0],
+                            email:     profile.emails ? profile.emails[0].value: "",
+                            facebook: {
                                 id:    profile.id,
                                 token: token
                             }
                         };
-                        return userModel.createUser(newGoogleUser);
+                        return userModel
+                            .createUser(newFacebookUser);
                     }
                 },
                 function(err) {
@@ -157,6 +176,48 @@ module.exports = function (app) {
             );
     }
 
+
+    function googleStrategy(token, refreshToken, profile, done) {
+        userModel
+            .findUserByGoogleId(profile.id)
+            .then(
+                function (user) {
+                    if (user) {
+                        return done(null, user);
+                    } else {
+                        var email = profile.emails[0].value;
+                        var emailParts = email.split("@");
+                        var newGoogleUser = {
+                            username: emailParts[0],
+                            firstName: profile.name.givenName,
+                            lastName: profile.name.familyName,
+                            email: email,
+                            google: {
+                                id: profile.id,
+                                token: token
+                            }
+                        };
+                        return userModel.createUser(newGoogleUser);
+                    }
+                },
+                function (err) {
+                    if (err) {
+                        return done(err);
+                    }
+                }
+            )
+            .then(
+                function (user) {
+                    return done(null, user);
+                },
+                function (err) {
+                    if (err) {
+                        return done(err);
+                    }
+                }
+            );
+    }
+
     function checkLogin(req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');
     }
@@ -165,13 +226,13 @@ module.exports = function (app) {
         userModel
             .findUserByCredentials(username, password)
             .then(
-                function(user) {
+                function (user) {
                     if (!user) {
                         return done(null, false);
                     }
                     return done(null, user);
                 },
-                function(err) {
+                function (err) {
                     if (err) {
                         return done(err);
                     }
@@ -359,10 +420,10 @@ module.exports = function (app) {
         userModel
             .findUserById(user._id)
             .then(
-                function(user){
+                function (user) {
                     done(null, user);
                 },
-                function(err){
+                function (err) {
                     done(err, null);
                 }
             );

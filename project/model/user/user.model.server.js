@@ -20,8 +20,14 @@ userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.getAllUsers = getAllUsers;
 
 userModel.findUserByIdPopulated = findUserByIdPopulated;
+userModel.findUserByFacebookId = findUserByFacebookId;
 
 module.exports = userModel;
+
+function findUserByFacebookId(facebookId) {
+    return userModel.findOne({'facebook.id': facebookId});
+}
+
 
 function findUserByGoogleId(googleId) {
     return userModel.findOne({'google.id': googleId});
