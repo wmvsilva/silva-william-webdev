@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var movieSchema = mongoose.Schema({
-        id: Number,
+    _id: Number,
         title: String,
         poster_path: String
     },

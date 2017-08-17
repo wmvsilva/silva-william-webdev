@@ -15,17 +15,7 @@
                 .findUserById(model.userId)
                 .then(function (response) {
                     model.user = response.data;
-                    model.user.likedMoviesFull = [];
-                    for (var i = 0; i < model.user.likedMovies.length; i++) {
-                        (function () {
-                            var movieId = model.user.likedMovies[i];
-                            movieService
-                                .searchMovieById(movieId)
-                                .then(function (movie) {
-                                    model.user.likedMoviesFull.push(movie);
-                                });
-                        })();
-                    }
+                    console.log(model.user);
                 });
 
             UserService

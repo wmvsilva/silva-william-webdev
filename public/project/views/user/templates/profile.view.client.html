@@ -1,122 +1,114 @@
-<div class="wvs wvs-profile">
-    <div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
+<div ng-include src="'views/navigation/templates/header.component.client.html'"></div>
 
-    <div class="container-fluid">
+<div class="mi-container container-fluid margin-top">
 
-        <div ng-show="model.updateMessage" class="alert alert-info">
-            {{model.updateMessage }}
-        </div>
-
-        <div ng-show="model.error" class="alert alert-danger">
-            {{model.error }}
-        </div>
-
-        <label for="username">Username</label>
-        <input name="username"
-               ng-model="model.user.username"
-               placeholder="username"
-               type="text"
-               class="form-control"
-               id="username"/>
-
-        <label for="email">Email</label>
-        <input name="email"
-               type="email"
-               ng-model="model.user.email"
-               placeholder="alice@wonderland.com"
-               class="form-control"
-               id="email"/>
-
-        <label for="firstName">First Name</label>
-        <input name="firstName"
-               ng-model="model.user.firstName"
-               placeholder="Alice"
-               type="text"
-               class="form-control"
-               id="firstName"/>
-
-        <label for="lastName">Last Name</label>
-        <input name="lastName"
-               ng-model="model.user.lastName"
-               placeholder="Wonderland"
-               type="text"
-               class="form-control"
-               id="lastName"/>
-
-        <h4>You are following</h4>
-        {{model.user.following}}
-
-        <h4>You are being followed by</h4>
-        <ul>
-            <li ng-repeat="user in model.followedBy">
-                <a href="#!/profile/{{user._id}}">
-                    {{user.username}}
-                </a>
-            </li>
-        </ul>
-
-        <h4>Products Purchased</h4>
-        <ul>
-            <li ng-repeat="product in model.productsPurchased" class="wvs-widget-list-item">
-                <b>For Movie:</b> {{product._movieId}}
-                <b>Category:</b> {{product.category}}
-                <b>Description:</b> {{product.description}}
-                <b>Price:</b> {{product.price}}
-                <b>Image:</b> {{product.imageUrl}}
-                <div>
-                    Sold by {{product._userId}}
-                </div>
-            </li>
-        </ul>
-
-        <h4>Products for sale</h4>
-        <ul>
-            <li ng-repeat="product in model.products" class="wvs-widget-list-item">
-                <b>For Movie:</b> {{product.movieTitle}}
-                <b>Category:</b> {{product.category}}
-                <b>Description:</b> {{product.description}}
-                <b>Price:</b> {{product.price}}
-                <b>Image:</b> {{product.imageUrl}}
-                <div ng-if="product.buyer" class="btn btn-info">
-                    Sold to {{product.buyer}}
-                </div>
-                <div ng-if="!product.buyer" class="btn btn-warning">
-                    Not sold
-                </div>
-            </li>
-        </ul>
-
-        <h4>Liked Movies</h4>
-        <ul>
-            <li ng-repeat="movie in model.user.likedMoviesFull">
-                <a href="#!/details/{{movie.id}}">
-                    {{movie.title}}
-                </a>
-            </li>
-        </ul>
-        {{model.user.likedMovieNames}}
-
-        <h4>Reviews</h4>
-        <div ng-repeat="review in model.reviews" class="wvs-widget-list-item">
-            "{{review.text}}" for Movie {{review.movieTitle}} <span ng-if="review.isRecommended" class="glyphicon glyphicon-ok"></span>
-            <span ng-if="!review.isRecommended" class="glyphicon glyphicon-remove"></span>
-        </div>
-
-        <a ng-click="model.updateUser(model.user._id, model.user)" class="btn btn-info btn-block">
-            Update User
-        </a>
-
-        <a class="btn btn-default btn-danger btn-block"
-           ng-click="model.deleteUser(model.user._id)"
-           role="button">Unregister</a>
+    <div ng-show="model.updateMessage" class="alert alert-info">
+        {{model.updateMessage }}
     </div>
 
-    <nav class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container-fluid">
-            <a href="#!/user/{{model.user._id}}">
-                <span class="pull-right glyphicon glyphicon-user wvs-nav-icon"></span>
-            </a>
-        </div>
-    </nav>
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error }}
+    </div>
 
+    <label for="username">Username</label>
+    <input name="username"
+           ng-model="model.user.username"
+           placeholder="username"
+           type="text"
+           class="form-control"
+           id="username"
+           readonly />
+
+    <label for="email">Email</label>
+    <input name="email"
+           type="email"
+           ng-model="model.user.email"
+           placeholder="alice@wonderland.com"
+           class="form-control"
+           id="email"/>
+
+    <label for="firstName">First Name</label>
+    <input name="firstName"
+           ng-model="model.user.firstName"
+           placeholder="Alice"
+           type="text"
+           class="form-control"
+           id="firstName"/>
+
+    <label for="lastName">Last Name</label>
+    <input name="lastName"
+           ng-model="model.user.lastName"
+           placeholder="Wonderland"
+           type="text"
+           class="form-control"
+           id="lastName"/>
+
+    <h4>You are following</h4>
+    {{model.user.following}}
+
+    <h4>You are being followed by</h4>
+    <ul>
+        <li ng-repeat="user in model.followedBy">
+            <a href="#!/profile/{{user._id}}">
+                {{user.username}}
+            </a>
+        </li>
+    </ul>
+
+    <h4>Products Purchased</h4>
+    <ul>
+        <li ng-repeat="product in model.productsPurchased" class="wvs-widget-list-item">
+            <b>For Movie:</b> {{product._movieId}}
+            <b>Category:</b> {{product.category}}
+            <b>Description:</b> {{product.description}}
+            <b>Price:</b> {{product.price}}
+            <b>Image:</b> {{product.imageUrl}}
+            <div>
+                Sold by {{product._userId}}
+            </div>
+        </li>
+    </ul>
+
+    <h4>Products for sale</h4>
+    <ul>
+        <li ng-repeat="product in model.products" class="wvs-widget-list-item">
+            <b>For Movie:</b> {{product.movieTitle}}
+            <b>Category:</b> {{product.category}}
+            <b>Description:</b> {{product.description}}
+            <b>Price:</b> {{product.price}}
+            <b>Image:</b> {{product.imageUrl}}
+            <div ng-if="product.buyer" class="btn btn-info">
+                Sold to {{product.buyer}}
+            </div>
+            <div ng-if="!product.buyer" class="btn btn-warning">
+                Not sold
+            </div>
+        </li>
+    </ul>
+
+    <h4>Liked Movies</h4>
+    <ul>
+        <li ng-repeat="movie in model.user.likedMovies">
+            <a href="#!/details/{{movie.id}}">
+                {{movie.title}}
+            </a>
+        </li>
+    </ul>
+    {{model.user.likedMovieNames}}
+
+    <h4>Reviews</h4>
+    <div ng-repeat="review in model.reviews" class="wvs-widget-list-item">
+        "{{review.text}}" for Movie {{review.movieTitle}} <span ng-if="review.isRecommended"
+                                                                class="glyphicon glyphicon-ok"></span>
+        <span ng-if="!review.isRecommended" class="glyphicon glyphicon-remove"></span>
+    </div>
+
+    <a ng-click="model.updateUser(model.user._id, model.user)" class="btn btn-info btn-block">
+        Update User
+    </a>
+
+    <a class="btn btn-default btn-danger btn-block"
+       ng-click="model.deleteUser(model.user._id)"
+       role="button">Unregister</a>
 </div>
+

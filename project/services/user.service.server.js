@@ -4,6 +4,7 @@ module.exports = function (app) {
     var passport = require("passport");
     var userModel = require("../model/user/user.model.server");
     var movieModel = require("../model/movie/movie.model.server");
+    var mongoose = require('mongoose');
 
     var LocalStrategy = require('passport-local').Strategy;
     var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
@@ -204,7 +205,7 @@ module.exports = function (app) {
                         function (error, response, body) {
                             var jsonMovie = JSON.parse(body);
                             var abridgedMovie = {
-                                id: jsonMovie.id,
+                                _id: jsonMovie.id,
                                 title: jsonMovie.title,
                                 poster_path: jsonMovie.poster_path
                             };

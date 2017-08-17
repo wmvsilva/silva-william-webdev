@@ -32,7 +32,9 @@ function createUser(user) {
 
 function findUserById(userId) {
     return userModel
-        .findById(userId);
+        .findById(userId)
+        .populate("likedMovies")
+        .exec();
 }
 
 function findUserByUsername(username) {
