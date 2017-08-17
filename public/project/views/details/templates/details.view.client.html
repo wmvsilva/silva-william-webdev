@@ -30,7 +30,7 @@
                                 Liked
                             </a>
                         </div>
-                        <div class="movie-detail-categories">
+                        <div>
                             <span ng-repeat="genre in model.movie.genres">
                                 #{{genre.name}}
                             </span>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <h3>Write Review</h3>
-                <textarea rows="4" cols="50" ng-model="model.review.text"></textarea>
+                <textarea class="review-input" rows="4" cols="50" ng-model="model.review.text"></textarea>
                 <div>
                     Recommended? <input type="checkbox" ng-model="model.review.isRecommended">
                 </div>
@@ -114,7 +114,7 @@
             </div>
             <div class="panel-body">
 
-                <table class="table">
+                <table class="table table-responsive">
                     <thead>
                     <tr>
                         <th>Category</th>
