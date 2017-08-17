@@ -8,6 +8,8 @@ var movieModel = mongoose.model("ProjectMovieModel", movieSchema);
 movieModel.createMovie = createMovie;
 movieModel.findMoviesThatMatchIds = findMoviesThatMatchIds;
 movieModel.addMoviesIfMissing = addMoviesIfMissing;
+movieModel.deleteMovie = deleteMovie;
+movieModel.updateMovie = updateMovie;
 
 module.exports = movieModel;
 
@@ -18,7 +20,7 @@ function createMovie(movie) {
 
 function findMoviesThatMatchIds(ids) {
     return movieModel
-        .find({'_id': { $in: ids }});
+        .find({'_id': {$in: ids}});
 }
 
 function addMoviesIfMissing(potentiallyMissingMovieIds) {
@@ -47,4 +49,20 @@ function addMoviesIfMissing(potentiallyMissingMovieIds) {
                     });
             }
         });
+}
+
+function updateMovie(movieId, movie) {
+    return movieModel
+        .update({_id: movieId}, {$set: movie})
+        .then((function (movie) {
+            return movieModel.findById(movieId);
+        }));
+}
+
+function deleteMovie(movieId) {
+    return movieModel
+        .findById(movieId)
+        .then(function (movie) {
+            movie.remove();
+        })
 }
