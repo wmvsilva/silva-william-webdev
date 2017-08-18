@@ -15,6 +15,14 @@
     justify-content: center;
 }
 
+.sell-mode .mi-nav-container {
+    background-color: #1b6d85;
+}
+
+.sell-mode .bg-inverse {
+    background-color: #1b6d85!important;
+}
+
 .footer {
     background: #eee;
     min-height: 46px;

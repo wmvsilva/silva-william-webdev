@@ -17,6 +17,7 @@
 
             model.logout = logout;
             model.searchMovieNavbar = searchMovieNavbar;
+            model.searchMovieNavbarToSell = searchMovieNavbarToSell;
         }
 
         function logout() {
@@ -29,6 +30,10 @@
 
         function searchMovieNavbar(movieTitle) {
             $location.url("/search?movieTitle=" + movieTitle);
+        }
+
+        function searchMovieNavbarToSell(movieTitle) {
+            $location.url("/sell/search?movieTitle=" + movieTitle);
         }
 
         var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;

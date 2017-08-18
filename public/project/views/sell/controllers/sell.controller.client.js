@@ -14,6 +14,7 @@
         this.updateProduct = updateProduct;
 
         function init() {
+            model.sellMode = true;
             model.movieId = $routeParams.movieId;
             grabProducts();
 
