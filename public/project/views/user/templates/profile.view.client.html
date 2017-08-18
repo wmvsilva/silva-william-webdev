@@ -119,7 +119,7 @@
 
                 <tbody>
                 <tr ng-repeat="product in model.productsPurchased">
-                    <td>{{product._movieId.title}}</td>
+                    <td><a href="#!/details/{{product._movieId._id}}">{{product._movieId.title}}</a></td>
                     <td>{{product.category}}</td>
                     <td>{{product.description}}</td>
                     <td>{{product.price}}</td>
@@ -151,7 +151,7 @@
         <div class="panel-body">
             <div ng-repeat="review in model.reviews" class="mi-movie-detail-review">
                 <div class="container-fluid">
-                    <h6>{{review._movieId.title}}</h6>
+                    <h6><a href="#!/details/{{review._movieId._id}}">{{review._movieId.title}}</a></h6>
                     <div class="btn btn-success" ng-if="review.isRecommended">
                         <i class="fa fa-check" aria-hidden="true"></i> Recommended
                     </div>
