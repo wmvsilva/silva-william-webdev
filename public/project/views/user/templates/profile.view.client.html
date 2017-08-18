@@ -128,7 +128,7 @@
                              ng-src="{{product.imageUrl}}"
                              onerror="if (this.src != 'img/img-404.jpg') this.src = 'img/img-404.jpg';"/>
                     </td>
-                    <td>{{product._userId.username}}</td>
+                    <td><a href="#!/profile/{{product._userId._id}}">{{product._userId.username}}</a></td>
                 </tr>
                 </tbody>
             </table>
